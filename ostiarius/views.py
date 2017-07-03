@@ -7,7 +7,7 @@ from .forms import *
 # Create your views here.
 def index(request):
     if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
     else:
         return render(request, 'ostiarius/index.html')
 
@@ -24,7 +24,7 @@ def login_user(request):
             else:
                 return render(request, 'ostiarius/login.html', {'error_message': 'Your account has been disabled'})
         else:
-            return render(request, 'ostiarius/login.html', {'error_message': 'Invalid login'})
+            return render(request, 'ostiarius/login.html', {'error_message': 'Invalid Username or Password'})
     return render(request, 'ostiarius/login.html')
 
 
@@ -36,8 +36,16 @@ def logout_user(request):
     }
     return render(request, 'ostiarius/login.html', context)
 
+
 def history(request):
     if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
     else:
         return render(request, 'ostiarius/history.html')
+
+
+def control(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
+    else:
+        return render(request, 'ostiarius/control.html')
