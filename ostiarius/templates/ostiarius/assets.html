@@ -1,0 +1,57 @@
+{% extends 'ostiarius/base.html' %}
+{% block body %}
+    <div id="wrapper">
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Assets</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Basic Table
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            {% for items in assets %}
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Asset Number</th>
+                                        <th>Item Name</th>
+                                        <th>Maintenence</th>
+                                        <th>Present</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{{ items.asset_no }}</td>
+                                        <td>{{ items.item_name }}</td>
+                                        <td>
+                                            <input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No">
+                                        </td>
+                                        <td>
+                                            <span class = "label label-success">Yes</span>
+                                            <span class = "label label-danger">No</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            {% endfor %}
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+{% endblock %}

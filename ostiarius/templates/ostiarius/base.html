@@ -14,23 +14,21 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="{% static 'ostiarius/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="{% static 'ostiarius/vendor/metisMenu/metisMenu.min.css' %}" rel="stylesheet">
+    <link href="{% static 'ostiarius/dist/css/bootstrap-toggle.css' %}" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="{% static 'ostiarius/dist/css/sb-admin-2.css' %}" rel="stylesheet">
 
-    <!-- Morris Charts CSS -->
-    <link href="{% static 'ostiarius/vendor/morrisjs/morris.css' %}" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="{% static 'ostiarius/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/github.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
@@ -50,65 +48,6 @@
         <!-- /.navbar-header -->
 
         <ul class="nav navbar-top-links navbar-right">
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-alerts">
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-comment fa-fw"></i> New Comment
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                <span class="pull-right text-muted small">12 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-tasks fa-fw"></i> New Task
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a class="text-center" href="#">
-                            <strong>See All Alerts</strong>
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-alerts -->
-            </li>
             <!-- /.dropdown -->
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -147,24 +86,17 @@
                         <a href="{% url 'ostiarius:index' %}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="{% url 'ostiarius:history' %}"><i class="fa fa-bar-chart-o fa-fw"></i> History<span
-                                class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{% url 'ostiarius:history' %}">Charts</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
+                        <a href="{% url 'ostiarius:assets' %}"><i class="fa fa-desktop fa-fw"></i> Assets</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-gears fa-fw"></i> Maintenance<span
+                        <a href="#"><i class="fa fa-gears fa-fw"></i> Pi Maintenance<span
                                 class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="{% url 'ostiarius:control' %}">Control</a>
                             </li>
                             <li>
-                                <a href="#">Pi Settings</a>
+                                <a href="#">Settings</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -186,12 +118,12 @@
 
 <!-- Metis Menu Plugin JavaScript -->
 <script src="{% static 'ostiarius/vendor/metisMenu/metisMenu.min.js' %}"></script>
-
+<script src="{% static 'ostiarius/dist/js/bootstrap-toggle.js' %}"></script>
+<script src="{% static 'ostiarius/dist/js/script.js' %}"></script>
 <!-- Morris Charts JavaScript -->
 <script src="{% static 'ostiarius/vendor/raphael/raphael.min.js' %}"></script>
 <script src="{% static 'ostiarius/vendor/morrisjs/morris.min.js' %}"></script>
 <script src="{% static 'ostiarius/data/morris-data.js' %}"></script>
-
 <!-- Custom Theme JavaScript -->
 <script src="{% static 'ostiarius/dist/js/sb-admin-2.js' %}"></script>
 </body>
