@@ -28,13 +28,16 @@ def index(request):
         })
 
 
-def detail(request, alert_id):
+def present(request, present_id):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html')
     else:
-        details = get_object_or_404(Alert, pk=alert_id)
-        return render(request, 'ostiarius/details.html', {'details': details})
-
+        item_present = Item.objects.filter(present=0)
+        details = get_object_or_404(Alert, pk=present_id)
+        return render(request, 'ostiarius/present.html', {
+            'details': details,
+            'item_present': item_present,
+        })
 
 def login_user(request):
     if request.method == "POST":
@@ -72,6 +75,20 @@ def assets(request):
     return render(request, 'ostiarius/assets.html', {'assets': assets})
 
 
+def update_table(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
+    else:
+        item = request.POST.get('')
+
+
+def control(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
+    else:
+        return render(request, 'ostiarius/control.html')
+
+
 @api_view(['GET', 'POST'])
 def asset_list(request):
     if request.method == 'GET':
@@ -86,10 +103,3 @@ def asset_list(request):
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-def control(request):
-    if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
-    else:
-        return render(request, 'ostiarius/control.html')

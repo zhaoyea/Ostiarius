@@ -22,7 +22,7 @@
                                     <i class="fa fa-bell fa-5x"></i>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="{% url 'ostiarius:present' alert.id %}">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -36,13 +36,13 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-9 text-left">
-                                        <div class="huge">{{ item_stolen }} items</div>
+                                        <div class="huge">{{ alerts.count }} items</div>
                                         <div> Bought out today</div>
                                     </div>
                                     <i class="fa fa-desktop fa-5x"></i>
                                 </div>
                             </div>
-                            <a href="{% url 'ostiarius:detail' alert.id %}">
+                            <a href="#">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

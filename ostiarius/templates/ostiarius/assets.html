@@ -16,37 +16,46 @@
                         Basic Table
                     </div>
                     <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            {% for items in assets %}
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>Asset Number</th>
-                                        <th>Item Name</th>
-                                        <th>Maintenence</th>
-                                        <th>Present</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Asset Number</th>
+                                    <th>Item Name</th>
+                                    <th>Maintenence</th>
+                                    <th>Present</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for items in assets %}
                                     <tr>
                                         <td>{{ items.asset_no }}</td>
                                         <td>{{ items.item_name }}</td>
                                         <td>
-                                            <input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No">
+                                            {% if items.maintenance %}
+                                                <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
+                                                       data-off="No"/>
+                                            {% else %}
+                                                <input type="checkbox" unchecked data-toggle="toggle" data-on="Yes"
+                                                       data-off="No"/>
+                                            {% endif %}
                                         </td>
                                         <td>
-                                            <span class = "label label-success">Yes</span>
-                                            <span class = "label label-danger">No</span>
+                                            {% if items.present %}
+                                                <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
+                                                       data-off="No"/>
+                                            {% else %}
+                                                <input type="checkbox" unchecked data-toggle="toggle" data-on="Yes"
+                                                       data-off="No"/>
+                                            {% endif %}
                                         </td>
                                     </tr>
-                                    </tbody>
-                                </table>
-                            {% endfor %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
-                        <!-- /.table-responsive -->
                     </div>
-                    <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->
             </div>
