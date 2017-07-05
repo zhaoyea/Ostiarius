@@ -1,81 +1,79 @@
-{% extends 'ostiarius/base.html' %}
-{% block body %}
-    <div id="wrapper">
-        <!-- Page Content -->
-        <div id="page-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">Details</h1>
-                    </div>
-                    <!-- /.col-lg-12 -->
+{% include 'ostiarius/base.html' %}
+<div id="wrapper">
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Details</h1>
                 </div>
-                <!-- /.row -->
-                {% for item in item_present %}
-                    <div class="col-lg-3" style="text-align: center">
-                        <div class="panel panel-danger">
-                            <div class="panel-heading">
-                                {{ item.item_name }}
-                            </div>
-                            <div class="panel-body">
-                                <img src="{{ item.photo }}" width="300" height="300">
-                            </div>
-                            <div class="panel-footer">
-                                <p>Date & Time: <span
-                                        class="label label-warning">{{ details.date }} {{ details.time }}</span></p>
-                                <p>Missing since: </p>
-                                <small>Asset Number: <span
-                                        class="label label-primary">{{ details.item.asset_no }}</span>
-                                </small>
-                            </div>
-                        </div>
-                        <!-- /.panel-heading -->
-                    </div>
-                {% endfor %}
-                {% for item in item_stolen %}
-                    <div class="col-lg-3" style="text-align: center">
-                        <div class="panel panel-danger">
-                            <div class="panel-heading">
-                                {{ item.item_name }}
-                            </div>
-                            <div class="panel-body">
-                                <img src="{{ item.photo }}" width="300" height="300">
-                            </div>
-                            <div class="panel-footer">
-                                <p>Date & Time: <span
-                                        class="label label-warning">{{ details.date }} {{ details.time }}</span></p>
-                                <p>Missing since: </p>
-                                <small>Asset Number: <span
-                                        class="label label-primary">{{ details.item.asset_no }}</span>
-                                </small>
-                            </div>
-                        </div>
-                        <!-- /.panel-heading -->
-                    </div>
-                {% endfor %}
-                {% for item in not_return %}
-                    <div class="col-lg-3" style="text-align: center">
-                        <div class="panel panel-danger">
-                            <div class="panel-heading">
-                                {{ item.asset_no.item_name }}
-                            </div>
-                            <div class="panel-body">
-                                <img src="{{ item.asset_no.photo }}" width="300" height="300">
-                            </div>
-                            <div class="panel-footer">
-                                <p>Date & Time: <span
-                                        class="label label-warning">{{ details.date }} {{ details.time }}</span></p>
-                                <p>Missing since: </p>
-                                <small>Asset Number: <span
-                                        class="label label-primary">{{ details.item.asset_no }}</span>
-                                </small>
-                            </div>
-                        </div>
-                        <!-- /.panel-heading -->
-                    </div>
-                {% endfor %}
+                <!-- /.col-lg-12 -->
             </div>
-            <!-- /#page-wrapper -->
+            <!-- /.row -->
+            {% for item in item_present %}
+                <div class="col-lg-3" style="text-align: center">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            {{ item.item_name }}
+                        </div>
+                        <div class="panel-body">
+                            <img src="{{ item.photo }}" width="300" height="300">
+                        </div>
+                        <div class="panel-footer">
+                            <p>Date & Time: <span
+                                    class="label label-warning">{{ details.date }} {{ details.time }}</span></p>
+                            <p>Missing since: </p>
+                            <small>Asset Number: <span
+                                    class="label label-primary">{{ details.item.asset_no }}</span>
+                            </small>
+                        </div>
+                    </div>
+                    <!-- /.panel-heading -->
+                </div>
+            {% endfor %}
+            {% for item in item_stolen %}
+                <div class="col-lg-3" style="text-align: center">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            {{ item.item_name }}
+                        </div>
+                        <div class="panel-body">
+                            <img src="{{ item.photo }}" width="300" height="300">
+                        </div>
+                        <div class="panel-footer">
+                            <p>Date & Time: <span
+                                    class="label label-warning">{{ details.date }} {{ details.time }}</span></p>
+                            <p>Missing since: </p>
+                            <small>Asset Number: <span
+                                    class="label label-primary">{{ details.item.asset_no }}</span>
+                            </small>
+                        </div>
+                    </div>
+                    <!-- /.panel-heading -->
+                </div>
+            {% endfor %}
+            {% for item in not_return %}
+                <div class="col-lg-3" style="text-align: center">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            {{ item.asset_no.item_name }}
+                        </div>
+                        <div class="panel-body">
+                            <img src="{{ item.asset_no.photo }}" width="300" height="300">
+                        </div>
+                        <div class="panel-footer">
+                            <p>Date & Time: <span
+                                    class="label label-warning">{{ details.date }} {{ details.time }}</span></p>
+                            <p>Missing since: </p>
+                            <small>Asset Number: <span
+                                    class="label label-primary">{{ details.item.asset_no }}</span>
+                            </small>
+                        </div>
+                    </div>
+                    <!-- /.panel-heading -->
+                </div>
+            {% endfor %}
         </div>
+        <!-- /#page-wrapper -->
     </div>
-{% endblock %}
+</div>

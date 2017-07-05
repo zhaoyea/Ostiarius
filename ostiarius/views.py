@@ -41,6 +41,8 @@ def assets(request):
         'maintenance' : maintenance,
     })
 
+def blank_table(request):
+    return render (request, 'ostiarius/blank-tables.html')
 
 def present(request, present_id):
     if not request.user.is_authenticated():

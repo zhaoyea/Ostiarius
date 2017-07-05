@@ -1,137 +1,95 @@
 {% include 'ostiarius/base.html' %}
 {% load staticfiles %}
+<link href="{% static 'ostiarius/tables/css/bootstrap.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'ostiarius/tables/css/bootstrap-table.css' %}">
+<link rel="stylesheet"
+      href="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css">
+<script src="{% static 'ostiarius/tables/js/bootstrap-table.js' %}"></script>
+<script src="{% static 'ostiarius/tables/js/bootstrap-table-editable.js' %}"></script>
+<script src="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
 
-<link href="{% static 'ostiarius/dist/css/bootstrap-table.css' %}" rel="stylesheet">
-<link href="{% static 'ostiarius/dist/css/bootstrap-table.min.css' %}" rel="stylesheet">
-{% block body %}
-    <div id="wrapper">
-        <!-- Page Content -->
-        <div id="page-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">Assets</h1>
-                    </div>
-                    <!-- /.col-lg-12 -->
+<div id="wrapper">
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Assets</h1>
                 </div>
-                <!-- /.row -->
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Basic Table
+                </div>
+                <!-- /.panel-heading -->
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Basic Table
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <table class="table">
-                                <thead>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Asset Number</th>
+                                <th>Item Name</th>
+                                <th>Item</th>
+                                <th>Maintenence</th>
+                                <th>Present</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in items %}
                                 <tr>
-                                    <th>Asset Number</th>
-                                    <th>Item Name</th>
-                                    <th>Item</th>
-                                    <th>Maintenence</th>
-                                    <th>Present</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for item in items %}
-                                    <tr>
-                                        <td>{{ item.asset_no }}</td>
-                                        <td>{{ item.item_name }}</td>
-                                        <td><img src="{{ item.photo }}" class="img-responsive"
-                                                 style="width: 60px; height: 60px"/></td>
-                                        <td>
-                                            {% for maintain in maintenance %}
-                                                {% if item.id == maintain.asset_no_id %}
-                                                    <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
-                                                           data-off="No"/>
-                                                {% else %}
-                                                    <input type="checkbox" unchecked data-toggle="toggle" data-on="Yes"
-                                                           data-off="No"/>
-                                                {% endif %}
-                                            {% endfor %}
-
-                                        </td>
-                                        <td>
-                                            {% if item.present %}
+                                    <td>{{ item.asset_no }}</td>
+                                    <td>{{ item.item_name }}</td>
+                                    <td><img src="{{ item.photo }}" class="img-responsive"
+                                             style="width: 60px; height: 60px"/></td>
+                                    <td>
+                                        {% for maintain in maintenance %}
+                                            {% if item.id == maintain.asset_no_id %}
                                                 <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
                                                        data-off="No"/>
                                             {% else %}
                                                 <input type="checkbox" unchecked data-toggle="toggle" data-on="Yes"
                                                        data-off="No"/>
                                             {% endif %}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+                                        {% endfor %}
+
+                                    </td>
+                                    <td>
+                                        {% if item.present %}
+                                            <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
+                                                   data-off="No"/>
+                                        {% else %}
+                                            <input type="checkbox" unchecked data-toggle="toggle" data-on="Yes"
+                                                   data-off="No"/>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <!-- /.panel -->
             </div>
-            <!-- /.container-fluid -->
-            <div class="container">
-        <h1>getOptions</h1>
-        <p>
-            Return the options object: <code>$table.bootstrapTable('getOptions');</code>
-        </p>
-        <div id="toolbar">
-            <button id="button" class="btn btn-default">getOptions</button>
+            <!-- /.panel -->
         </div>
-        <table id="table">
+        <!-- /.container-fluid -->
+        <div class="container">
+    <h1>From data</h1>
+    <table id="table"
+               data-toggle="table"
+               data-pagination="true"
+               data-show-export="true"
+               data-url="{% static 'ostiarius/data.json' %}">
             <thead>
             <tr>
                 <th data-field="id">ID</th>
-                <th data-field="name">Item Name</th>
-                <th data-field="price">Item Price</th>
+                <th data-field="name" data-editable="true">Item Name</th>
+                <th data-field="price" data-editable="true">Item Price</th>
             </tr>
             </thead>
         </table>
+</div>
     </div>
-        </div>
-        <!-- /#page-wrapper -->
-    </div>
-{% endblock %}
-
-<script>
-
-       var $table = $('#table');
-    $(function () {
-        var data = [
-            {
-                "id": 0,
-                "name": "Item 0",
-                "price": "$0"
-            },
-            {
-                "id": 1,
-                "name": "Item 1",
-                "price": "$1"
-            },
-            {
-                "id": 2,
-                "name": "Item 2",
-                "price": "$2"
-            },
-            {
-                "id": 3,
-                "name": "Item 3",
-                "price": "$3"
-            },
-            {
-                "id": 4,
-                "name": "Item 4",
-                "price": "$4"
-            },
-            {
-                "id": 5,
-                "name": "Item 5",
-                "price": "$5"
-            }
-        ];
-        $table.bootstrapTable({data: data});
-    });
-</script>
-<script src="{% static 'ostiarius/dist/js/bootstrap-table.js' %}"></script>
-<script src="{% static 'ostiarius/dist/js/bootstrap-table-locale-all.js' %}"></script>
-<script src="{% static 'ostiarius/dist/js/bootstrap-table-locale-all.min.js' %}"></script>
+    <!-- /#page-wrapper -->
+</div>

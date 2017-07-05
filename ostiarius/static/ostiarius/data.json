@@ -1,0 +1,457 @@
+{  
+   "Items":[  
+      {  
+         "asset_no":"100655",
+         "item_name":"LG 55LW5700 55'' FULL HD S3D LED SMART TV IN PASSV MODE W/ STD",
+         "item_sn":"1",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"140825",
+         "item_name":"METAL SHUTTER CABINETS(BLACK)",
+         "item_sn":"2",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"140865",
+         "item_name":"WIRE STUNT VEST HARNESS",
+         "item_sn":"3",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"38116",
+         "item_name":"24 TRACK AUDIO MIXER MACKIE SR24-4",
+         "item_sn":"4",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"38155",
+         "item_name":"MATTHEWS DOORWAY DOLLY",
+         "item_sn":"5",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"38776",
+         "item_name":"TRACK ST CURVED 20'' D, DOLLY HEAVY WALL",
+         "item_sn":"6",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"38777",
+         "item_name":"JIB LITE ITH CABLE DRIVE-6FT",
+         "item_sn":"7",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"49723",
+         "item_name":"HP BUSINESS DESKTOP DC7100 UPGRADE FROM INTEL P4 3.0GHZ TO 3.2GHZ",
+         "item_sn":"8",
+         "map_status":"1",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"56335",
+         "item_name":"REMOTE HEAD CTRL KIT, LANC CONTROLLER, DOLLY WITH ROAD WHEEL",
+         "item_sn":"9",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"56455",
+         "item_name":"ALUMINIUM SUPPORT T BAR",
+         "item_sn":"10",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"56925",
+         "item_name":"WIDESTUDIO DRAPE - 5M X 3M",
+         "item_sn":"11",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"56995",
+         "item_name":"VIEWCAST STREAMING MEDIA ENCODING SYSTEM (NIAGARA MAX 6969)",
+         "item_sn":"12",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"58210",
+         "item_name":"TH-50PY800H PANASONIC 50'' PLASMA TV",
+         "item_sn":"13",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"58890 ",
+         "item_name":"TELEPROMPTER, VISION 11 (3442), ENG STUDIO @T1931",
+         "item_sn":"14",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"61618",
+         "item_name":"CAMERA CRANE/JIB",
+         "item_sn":"15",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"65795",
+         "item_name":"FLATBED TREADMILL WITHOUT HANDLE ",
+         "item_sn":"16",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"99710",
+         "item_name":"SONY 46'' 3D HD LED TV W/ 2 3D ACTIVE GLASS",
+         "item_sn":"17",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"99713",
+         "item_name":"SONY DFS-900M HD SWITCHER W/ MULTI-VIEW",
+         "item_sn":"18",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"99714",
+         "item_name":"SONY DFS-900M - CTRL PANEL W/ 2 CH ANALOG OUTPUT BOARD",
+         "item_sn":"19",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"99716",
+         "item_name":"SONY 47'' FULL HD LCD DISPLAY W/ HD-SDI ADAPTER",
+         "item_sn":"20",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"99717",
+         "item_name":"GENUS HURRICANE 3D RIG ",
+         "item_sn":"21",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"99718",
+         "item_name":"TELEX BTR-24 W/ 3 WIRELESS HEADPHONES",
+         "item_sn":"22",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"99719",
+         "item_name":"BLACKMAGIC DESIGN HDLINK PRO 3D",
+         "item_sn":"23",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"99720",
+         "item_name":"SYSTEM 20 TRIPOD (SACHTLER)",
+         "item_sn":"24",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"99721 ",
+         "item_name":"CONVERGENT DESIGN CD-NF3D NANO3D",
+         "item_sn":"25",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"99722",
+         "item_name":"SONY 47'' 3D LCD MONITOR W/ 3G/HD/SD-SDI INPUT ADAPTOR",
+         "item_sn":"26",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT/00004",
+         "item_name":"CURTAINS AND BACKDROP",
+         "item_sn":"27",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT01/00123",
+         "item_name":"KINOFLO STORAGE CASE",
+         "item_sn":"28",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT01/00124",
+         "item_name":"KINOFLO STORAGE CASE",
+         "item_sn":"29",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT01/00125",
+         "item_name":"FIBERGLASS 8 FEET STEPLADDER",
+         "item_sn":"30",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT01/00126",
+         "item_name":"FIBERGLASS 8 FEET STEPLADDER",
+         "item_sn":"31",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT02/00150",
+         "item_name":"FLOURESCENT LIGHT UNIT",
+         "item_sn":"32",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT02/00151",
+         "item_name":"FLOURESCENT LIGHT UNIT",
+         "item_sn":"33",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT02/00152",
+         "item_name":"FLOURESCENT LIGHT UNIT",
+         "item_sn":"34",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT02/00153",
+         "item_name":"FLOURESCENT LIGHT UNIT",
+         "item_sn":"35",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT02/00283",
+         "item_name":"FIBERGLASS 8 FEET PLATFORM TYPE ",
+         "item_sn":"36",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT02/00752",
+         "item_name":"STUDIO MONITORS - JAPAN YAMAHA MSP 5",
+         "item_sn":"37",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT02/00753",
+         "item_name":"STUDIO MONITORS - JAPAN YAMAHA MSP 5",
+         "item_sn":"38",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT02/00754",
+         "item_name":"SONY DVP-NS700V DVD PLAYER",
+         "item_sn":"39",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT02/00755",
+         "item_name":"SONIFEX RB-BL2 UNBALANCED TO BALANCED BI-DIRECTIONAL CONVERTER",
+         "item_sn":"40",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT02/00757",
+         "item_name":"SONIFEX RB-DA6 AUDIO DISTRIBUTION",
+         "item_sn":"41",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT02/00764",
+         "item_name":"24x2 AUDIO PATCH PANEL WITH PATCH CORD (AVP AM-A-224EL)",
+         "item_sn":"42",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT02/00765",
+         "item_name":"24x2 VIDEO PATCH PANEL WITH PATCH CORD (AVP AV-C224-EIASN7 5)",
+         "item_sn":"43",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT03/00621",
+         "item_name":"MOVOTIX Network AND ISDN-Camera 32 MBYTE DUAL-OPTIC",
+         "item_sn":"44",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT06/00117",
+         "item_name":"24 CHANNEL COMPACT LIGHYING CONSOLE (MODEL = NOVA 24)",
+         "item_sn":"45",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT08/00532",
+         "item_name":"PANASONIC DMR-EH67 DVD RECORDER (250GB HD BUILT-IN & SD SLOT)",
+         "item_sn":"46",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT08/00593",
+         "item_name":"DYNACOLOR DG79094 4-CHANNEL NETWORK DVR TRIPLEX MULTIPLEXER 100 FPS MOTION",
+         "item_sn":"47",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT11/00259",
+         "item_name":"SONY PLAYSTATION CONSOLE - 320GB",
+         "item_sn":"48",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT11/00266",
+         "item_name":"TYCO TOUCHSCREEN ",
+         "item_sn":"49",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"IT11/00267",
+         "item_name":"FLIGHT CASE",
+         "item_sn":"50",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"SVA1260",
+         "item_name":"DO-110 1 CHANNEL CABLE PROTECTOR",
+         "item_sn":"51",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"SVA1422",
+         "item_name":"NEUTRIX XLR CABLE WITH DRUM",
+         "item_sn":"52",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"SVA1423",
+         "item_name":"NEUTRIX XLR CABLE WITH DRUM",
+         "present":"1"
+      },
+      {  
+         "asset_no":"SVA1424",
+         "item_name":"NEUTRIX XLR CABLE WITH DRUM",
+         "item_sn":"54",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"SVA1425",
+         "item_name":"NEUTRIX XLR CABLE WITH DRUM",
+         "item_sn":"55",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"SVA1426",
+         "item_name":"NEUTRIX XLR CABLE WITH DRUM",
+         "item_sn":"56",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      },
+      {  
+         "asset_no":"SVA1427",
+         "item_name":"NEUTRIX XLR CABLE WITH DRUM",
+         "item_sn":"57",
+         "map_status":"0",
+         "maintenance_mode":"0",
+         "present":"1"
+      }
+   ]
+}

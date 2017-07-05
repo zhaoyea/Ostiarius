@@ -1,0 +1,24 @@
+{% include 'ostiarius/base.html' %}
+{% load staticfiles %}
+<link href="{% static 'ostiarius/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'ostiarius/tables/css/bootstrap-table.css' %}">
+<script src="{% static 'ostiarius/tables/js/bootstrap-table.js' %}"></script>
+<link rel="stylesheet" href="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css">
+<script src="{% static 'ostiarius/tables/js/bootstrap-table-editable.js' %}"></script>
+<script src="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
+<div class="container">
+    <h1>From data</h1>
+    <table id="table"
+               data-toggle="table"
+               data-pagination="true"
+               data-show-export="true"
+               data-url="{% static 'ostiarius/data.json' %}">
+            <thead>
+            <tr>
+                <th data-field="id">ID</th>
+                <th data-field="name" data-editable="true">Item Name</th>
+                <th data-field="price" data-editable="true">Item Price</th>
+            </tr>
+            </thead>
+        </table>
+</div>
