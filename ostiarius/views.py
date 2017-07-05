@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from rest_framework.decorators import api_view
@@ -15,17 +15,31 @@ def index(request):
         return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
     else:
         alerts = Alert.objects.all()
-        items = Item.objects.all()
         item_stolen = Alert.objects.all().count()
         item_present = Item.objects.filter(present=0).count()
-        item_maintenance = Item.objects.filter(maintenance=1).count()
+        not_return = Maintenance.objects.filter(returnDate=None).count()
         return render(request, 'ostiarius/index.html', {
             'alerts': alerts,
-            'items': items,
+            'maintenance': maintenance,
             'item_stolen': item_stolen,
             'item_present': item_present,
-            'item_maintenance': item_maintenance,
+            'not_return': not_return,
         })
+
+
+def assets(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
+    else:
+        # asset_ids = []
+        # for items in Item.objects.all():
+        #     asset_ids.append(items.pk)
+        items = Item.objects.all()
+        maintenance = Maintenance.objects.all()
+    return render(request, 'ostiarius/assets.html', {
+        'items': items,
+        'maintenance' : maintenance,
+    })
 
 
 def present(request, present_id):
@@ -34,10 +48,35 @@ def present(request, present_id):
     else:
         item_present = Item.objects.filter(present=0)
         details = get_object_or_404(Alert, pk=present_id)
-        return render(request, 'ostiarius/present.html', {
+        return render(request, 'ostiarius/detail.html', {
             'details': details,
             'item_present': item_present,
         })
+
+
+def alert(request, alert_id):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html')
+    else:
+        item_stolen = Alert.objects.all()
+        details = get_object_or_404(Alert, pk=alert_id)
+        return render(request, 'ostiarius/detail.html', {
+            'details': details,
+            'item_stolen': item_stolen,
+        })
+
+
+def maintenance(request, maintenance_id):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html')
+    else:
+        not_return = Maintenance.objects.filter(returnDate=None)
+        details = get_object_or_404(Alert, pk=maintenance_id)
+        return render(request, 'ostiarius/detail.html', {
+            'details': details,
+            'not_return': not_return,
+        })
+
 
 def login_user(request):
     if request.method == "POST":
@@ -47,7 +86,7 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'ostiarius/index.html')
+                return redirect('ostiarius:index')
             else:
                 return render(request, 'ostiarius/login.html', {'error_message': 'Your account has been disabled'})
         else:
@@ -62,31 +101,6 @@ def logout_user(request):
         "form": form,
     }
     return render(request, 'ostiarius/login.html', context)
-
-
-def assets(request):
-    if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
-    else:
-        asset_ids = []
-        for items in Item.objects.all():
-            asset_ids.append(items.pk)
-        assets = Item.objects.filter(pk__in=asset_ids)
-    return render(request, 'ostiarius/assets.html', {'assets': assets})
-
-
-def update_table(request):
-    if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
-    else:
-        item = request.POST.get('')
-
-
-def control(request):
-    if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
-    else:
-        return render(request, 'ostiarius/control.html')
 
 
 @api_view(['GET', 'POST'])

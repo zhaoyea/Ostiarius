@@ -5,9 +5,8 @@ from datetime import datetime
 class Item(models.Model):
     asset_no = models.CharField(max_length=10)
     item_name = models.CharField(max_length=1000)
-    maintenance = models.BooleanField(default=False)
     present = models.BooleanField(default=True)
-    photo = models.CharField(max_length=1000)
+    photo = models.CharField(max_length=1000, default=None)
 
     def __str__(self):
         return self.asset_no + ' - ' + self.item_name
@@ -21,3 +20,11 @@ class Alert(models.Model):
 
     def __str__(self):
         return self.item.asset_no
+
+class Maintenance(models.Model):
+    asset_no = models.ForeignKey(Item, on_delete=models.CASCADE)
+    date = models.DateField()
+    returnDate = models.DateField(default=None, blank=True, null=True)
+
+    def __str__(self):
+        return self.asset_no.asset_no

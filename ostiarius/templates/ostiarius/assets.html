@@ -1,4 +1,8 @@
-{% extends 'ostiarius/base.html' %}
+{% include 'ostiarius/base.html' %}
+{% load staticfiles %}
+
+<link href="{% static 'ostiarius/dist/css/bootstrap-table.css' %}" rel="stylesheet">
+<link href="{% static 'ostiarius/dist/css/bootstrap-table.min.css' %}" rel="stylesheet">
 {% block body %}
     <div id="wrapper">
         <!-- Page Content -->
@@ -23,26 +27,32 @@
                                 <tr>
                                     <th>Asset Number</th>
                                     <th>Item Name</th>
+                                    <th>Item</th>
                                     <th>Maintenence</th>
                                     <th>Present</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for items in assets %}
+                                {% for item in items %}
                                     <tr>
-                                        <td>{{ items.asset_no }}</td>
-                                        <td>{{ items.item_name }}</td>
+                                        <td>{{ item.asset_no }}</td>
+                                        <td>{{ item.item_name }}</td>
+                                        <td><img src="{{ item.photo }}" class="img-responsive"
+                                                 style="width: 60px; height: 60px"/></td>
                                         <td>
-                                            {% if items.maintenance %}
-                                                <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
-                                                       data-off="No"/>
-                                            {% else %}
-                                                <input type="checkbox" unchecked data-toggle="toggle" data-on="Yes"
-                                                       data-off="No"/>
-                                            {% endif %}
+                                            {% for maintain in maintenance %}
+                                                {% if item.id == maintain.asset_no_id %}
+                                                    <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
+                                                           data-off="No"/>
+                                                {% else %}
+                                                    <input type="checkbox" unchecked data-toggle="toggle" data-on="Yes"
+                                                           data-off="No"/>
+                                                {% endif %}
+                                            {% endfor %}
+
                                         </td>
                                         <td>
-                                            {% if items.present %}
+                                            {% if item.present %}
                                                 <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
                                                        data-off="No"/>
                                             {% else %}
@@ -60,7 +70,68 @@
                 <!-- /.panel -->
             </div>
             <!-- /.container-fluid -->
+            <div class="container">
+        <h1>getOptions</h1>
+        <p>
+            Return the options object: <code>$table.bootstrapTable('getOptions');</code>
+        </p>
+        <div id="toolbar">
+            <button id="button" class="btn btn-default">getOptions</button>
+        </div>
+        <table id="table">
+            <thead>
+            <tr>
+                <th data-field="id">ID</th>
+                <th data-field="name">Item Name</th>
+                <th data-field="price">Item Price</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
         </div>
         <!-- /#page-wrapper -->
     </div>
 {% endblock %}
+
+<script>
+
+       var $table = $('#table');
+    $(function () {
+        var data = [
+            {
+                "id": 0,
+                "name": "Item 0",
+                "price": "$0"
+            },
+            {
+                "id": 1,
+                "name": "Item 1",
+                "price": "$1"
+            },
+            {
+                "id": 2,
+                "name": "Item 2",
+                "price": "$2"
+            },
+            {
+                "id": 3,
+                "name": "Item 3",
+                "price": "$3"
+            },
+            {
+                "id": 4,
+                "name": "Item 4",
+                "price": "$4"
+            },
+            {
+                "id": 5,
+                "name": "Item 5",
+                "price": "$5"
+            }
+        ];
+        $table.bootstrapTable({data: data});
+    });
+</script>
+<script src="{% static 'ostiarius/dist/js/bootstrap-table.js' %}"></script>
+<script src="{% static 'ostiarius/dist/js/bootstrap-table-locale-all.js' %}"></script>
+<script src="{% static 'ostiarius/dist/js/bootstrap-table-locale-all.min.js' %}"></script>
