@@ -1,12 +1,7 @@
 {% include 'ostiarius/base.html' %}
 {% load staticfiles %}
-<link href="{% static 'ostiarius/tables/css/bootstrap.min.css' %}" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'ostiarius/tables/css/bootstrap-table.css' %}">
-<link rel="stylesheet"
-      href="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css">
 <script src="{% static 'ostiarius/tables/js/bootstrap-table.js' %}"></script>
-<script src="{% static 'ostiarius/tables/js/bootstrap-table-editable.js' %}"></script>
-<script src="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
 
 <div id="wrapper">
     <!-- Page Content -->
@@ -19,77 +14,108 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Basic Table
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Asset Number</th>
-                                <th>Item Name</th>
-                                <th>Item</th>
-                                <th>Maintenence</th>
-                                <th>Present</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for item in items %}
-                                <tr>
-                                    <td>{{ item.asset_no }}</td>
-                                    <td>{{ item.item_name }}</td>
-                                    <td><img src="{{ item.photo }}" class="img-responsive"
-                                             style="width: 60px; height: 60px"/></td>
-                                    <td>
-                                        {% for maintain in maintenance %}
-                                            {% if item.id == maintain.asset_no_id %}
-                                                <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
-                                                       data-off="No"/>
-                                            {% else %}
-                                                <input type="checkbox" unchecked data-toggle="toggle" data-on="Yes"
-                                                       data-off="No"/>
-                                            {% endif %}
-                                        {% endfor %}
-
-                                    </td>
-                                    <td>
-                                        {% if item.present %}
-                                            <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
-                                                   data-off="No"/>
-                                        {% else %}
-                                            <input type="checkbox" unchecked data-toggle="toggle" data-on="Yes"
-                                                   data-off="No"/>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- /.panel -->
         </div>
         <!-- /.container-fluid -->
-        <div class="container">
-    <h1>From data</h1>
-    <table id="table"
-               data-toggle="table"
-               data-pagination="true"
-               data-show-export="true"
-               data-url="{% static 'ostiarius/data.json' %}">
-            <thead>
-            <tr>
-                <th data-field="id">ID</th>
-                <th data-field="name" data-editable="true">Item Name</th>
-                <th data-field="price" data-editable="true">Item Price</th>
-            </tr>
-            </thead>
-        </table>
-</div>
+
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <table id="table" data-show-refresh="true" class="table">
+                <thead>
+                <tr>
+                    <th>Asset Number</th>
+                    <th>Item Name</th>
+                    <th>Item</th>
+                    <th>Maintenence</th>
+                    <th>Present</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.asset_no }}</td>
+                        <td>{{ item.item_name }}</td>
+                        <td><img src="{{ item.photo }}" class="img-responsive"
+                                 style="width: 60px; height: 60px"/></td>
+                        <td>
+                            {% for maintain in maintenance %}
+                                {% if item.id == maintain.asset_no_id %}
+                                    <span class="label label-warning">Yes</span>
+                                {% else %}
+                                    <span class="label label-success">No</span>
+                                {% endif %}
+                            {% endfor %}
+
+                        </td>
+                        <td>
+                            {% if item.present %}
+                                <span class="label label-danger">No</span>
+                            {% else %}
+                                <span class="label label-success">Yes</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <button class="btn btn-outline btn-primary" data-toggle="modal" data-target="#edit_{{ item.asset_no }}">Edit
+                            </button>
+                            <div class="modal fade" id="edit_{{ item.asset_no }}" tabindex="-1" role="dialog"
+                                 aria-labelledby="editLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="panel-body">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">&times;
+                                                </button>
+                                                <h4 class="modal-title" id="editLabel">Edit</h4>
+                                            </div>
+                                            <p></p>
+                                            <form action="#" method="post">
+
+                                                <div class="form-group">
+                                                    <label>Asset Number</label>
+                                                    <input class="form-control" value="{{ item.asset_no }}">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Item Name</label>
+                                                    <input class="form-control" value="{{ item.item_name }}">
+                                                </div>
+                                                <div class="form-group">
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Upload Asset Photo</label>
+                                                    <input type="file">
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button"
+                                                    class="btn btn-default"
+                                                    data-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="button"
+                                                    class="btn btn-primary">Save changes
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-    <!-- /#page-wrapper -->
 </div>
+<!-- /.panel -->
+
+<script>
+    $('table').bootstrapTable();
+</script>

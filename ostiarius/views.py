@@ -4,6 +4,8 @@ from django.contrib.auth import logout
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+import urllib
+import json
 from .forms import *
 from .models import *
 from .serializers import ItemSerializer
@@ -119,3 +121,4 @@ def asset_list(request):
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
