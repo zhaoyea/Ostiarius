@@ -1,9 +1,0 @@
-[
-    {
-        "id": 0,
-        "name": "Item 0",
-        "price": "$0"
-	   "action": "<button class=\"btn btn-outline btn-warning\" data-toggle=\"modal\" data-target="\#edit\">Edit
-</button>"
-    },
-]

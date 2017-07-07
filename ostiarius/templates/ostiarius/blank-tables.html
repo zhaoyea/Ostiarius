@@ -3,24 +3,34 @@
 <link href="{% static 'ostiarius/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'ostiarius/tables/css/bootstrap-table.css' %}">
 <script src="{% static 'ostiarius/tables/js/bootstrap-table.js' %}"></script>
-<div class="container">
-    <h1>From data</h1>
-    <p></p>
-    <table id="table"
-           data-toggle="table"
-           data-pagination="true"
-           data-show-refresh="true"
-           data-url="{% static 'ostiarius/demo.json' %}">
-        <thead>
-        <tr>
-            <th data-field="id">ID</th>
-            <th data-field="name">Item Name</th>
-            <th data-field="price">Item Price</th>
-            <th data-field="action">Action</th>
-        </tr>
-        </thead>
-    </table>
-</div>
+ <div class="container">
+        <h1>getData</h1>
+        <p>Get the loaded data of table: <code>$table.bootstrapTable('getData');</code></p>
+        <div id="toolbar">
+            <button id="button" class="btn btn-default">getData</button>
+        </div>
+        <table id="table"
+               data-toggle="table"
+               data-toolbar="#toolbar"
+               data-height="460"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-url="{% static 'ostiarius/data1.json' %}">
+            <thead>
+            <tr>
+                <th data-field="id">ID</th>
+                <th data-field="name">Item Name</th>
+                <th data-field="price">Item Price</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
 <script>
-    $('table').bootstrapTable();
+    var $table = $('#table'),
+        $button = $('#button');
+    $(function () {
+        $button.click(function () {
+            alert(JSON.stringify($table.bootstrapTable('getData')));
+        });
+    });
 </script>

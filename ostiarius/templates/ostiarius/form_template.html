@@ -1,0 +1,67 @@
+<div class="modal fade" id="edit_{{ item.asset_no }}" tabindex="-1" role="dialog"
+     aria-labelledby="editLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="panel-body">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;
+                    </button>
+                    <h4 class="modal-title" id="editLabel">Edit</h4>
+                </div>
+                <p></p>
+                <div class="form-group">
+                    <label>Asset Number</label>
+                    <p>{{ item.asset_no }}</p>
+                    <input name="item_id" type="hidden" value="{{ item.id }}">
+                </div>
+
+                <div class="form-group">
+                    <label>Item Name</label>
+                    <input name="item_name" class="form-control" value="{{ item.item_name }}">
+                </div>
+                <div class="form-group">
+                    <label>Maintenance</label>
+                    <p></p>
+                    {% for maintain in maintenance %}
+                        {% if item.id == maintain.asset_no_id %}
+                            <input name="maintenance" type="radio" value="True" checked> Yes
+                            <input name="maintenance" type="radio" value="False" unchecked> No
+                        {% else %}
+                            <input name="maintenance" type="radio" value="True" unchecked> Yes
+                            <input name="maintenance" type="radio" value="False" checked> No
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label>Present</label>
+                    <p></p>
+                    {% if item.present %}
+                        <input name="present" type="radio" value="True" checked> Yes
+                        <input name="present" type="radio" value="False" unchecked> No
+                    {% else %}
+                        <input name="present" type="radio" value="True" unchecked> Yes
+                        <input name="present" type="radio" value="False" checked> No
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label>Upload Asset Photo</label>
+                    <input type="hidden" value="http://imgur.com/3Ac9tOE.png">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal">
+                    Close
+                </button>
+                <button type="submit"
+                        class="btn btn-primary">Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->

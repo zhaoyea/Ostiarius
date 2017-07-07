@@ -4,9 +4,9 @@ from django.contrib.auth import logout
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-import urllib
-import json
+from datetime import date
 from .forms import *
+import json
 from .models import *
 from .serializers import ItemSerializer
 
@@ -33,18 +33,17 @@ def assets(request):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
     else:
-        # asset_ids = []
-        # for items in Item.objects.all():
-        #     asset_ids.append(items.pk)
         items = Item.objects.all()
         maintenance = Maintenance.objects.all()
     return render(request, 'ostiarius/assets.html', {
         'items': items,
-        'maintenance' : maintenance,
+        'maintenance': maintenance,
     })
 
+
 def blank_table(request):
-    return render (request, 'ostiarius/blank-tables.html')
+    return render(request, 'ostiarius/blank-tables.html')
+
 
 def present(request, present_id):
     if not request.user.is_authenticated():
@@ -104,7 +103,23 @@ def logout_user(request):
     context = {
         "form": form,
     }
-    return render(request, 'ostiarius/login.html', context)
+    return render(request, 'music/login.html', context)
+
+
+def update_table(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html')
+    else:
+
+        item_id = request.POST['item_id']
+        new_item = Item.objects.get(id=item_id)
+        new_item_name = request.POST['item_name']
+        new_present = request.POST['present']
+        new_item.present = new_present
+        new_item.item_name = new_item_name
+        new_item.save()
+        # request.session['msg'] = "Updated to " + new_item_name
+        return redirect('ostiarius:assets')
 
 
 @api_view(['GET', 'POST'])
@@ -121,4 +136,3 @@ def asset_list(request):
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
