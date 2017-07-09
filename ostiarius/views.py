@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from rest_framework.decorators import api_view
@@ -20,11 +19,13 @@ def index(request):
         alerts = Alert.objects.all()
         item_stolen = Alert.objects.all().count()
         item_present = Item.objects.filter(present=0).count()
+        item_maintenance = Item.objects.filter(maintenance_mode=1).count()
         return render(request, 'ostiarius/index.html', {
             'alerts': alerts,
             'maintenance': maintenance,
             'item_stolen': item_stolen,
             'item_present': item_present,
+            'item_maintenance': item_maintenance,
         })
 
 
@@ -33,8 +34,10 @@ def assets(request):
         return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
     else:
         items = Item.objects.all()
+        maintenance = Maintenance.objects.all()
         return render(request, 'ostiarius/assets.html', {
             'items': items,
+            'maintenance': maintenance,
         })
 
 
@@ -98,7 +101,7 @@ def maintenance(request, maintenance_id):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html')
     else:
-        not_return = Maintenance.objects.filter(returnDate=None)
+        not_return = Maintenance.objects.filter(status=0)
         details = get_object_or_404(Alert, pk=maintenance_id)
         return render(request, 'ostiarius/detail.html', {
             'details': details,
@@ -138,11 +141,16 @@ def update_items(request):
         item_id = request.POST['item_id']
         new_item = Item.objects.get(id=item_id)
         new_item_name = request.POST['item_name']
-        new_present = request.POST['present']
-        new_item.present = new_present
-        new_item.item_name = new_item_name
-        new_item.save()
-        return redirect('ostiarius:assets')
+        if not new_item_name:
+            error_msg = "Item name cannot be null"
+            print(error_msg)
+            return redirect('ostiarius:assets')
+        else:
+            new_item.item_name = new_item_name
+            new_item.save()
+            success_msg = "Item name change to " + new_item_name
+            print(success_msg)
+            return redirect('ostiarius:assets')
 
 
 def update_maintenance(request):
@@ -150,10 +158,30 @@ def update_maintenance(request):
         return render(request, 'ostiarius/login.html')
     else:
         maintain_item_id = request.POST['maintain_item_id']
-        if Maintenance.objects.get(item_id=maintain_item_id):
-            return render(request, 'ostiarius/assets.html', {'msg': "Item already under maintenance"})
-        maintainDate = request.POST['maintainDate']
-        return redirect('ostiarius:assets')
+        new_maintain = Maintenance.objects.get(item_id=maintain_item_id)
+        maintain_asset_no = request.POST['maintain_asset_no']
+        maintain_status = request.POST['maintain_status']
+        maintain_staff_name = request.POST['staff_name']
+        maintain_date = request.POST['maintainDate']
+        if new_maintain:
+            new_maintain.status = maintain_status
+            new_maintain.lecturer = maintain_staff_name
+            new_maintain.date = maintain_date
+            new_maintain.save()
+            print("Maintenance table updated")
+            return redirect('ostiarius:maintenancePage')
+        else:
+            print("Item already under maintenance")
+            return redirect('ostiarius:maintenancePage')
+
+        maintain = Maintenance()
+        maintain.asset_no = maintain_asset_no
+        maintain.lecturer = maintain_staff_name
+        maintain.status = maintain_status
+        maintain.date = maintain_date
+        maintain.save()
+        print("Maintenance table updated")
+        return redirect('ostiarius:maintenancePage')
 
 
 @api_view(['GET', 'POST'])

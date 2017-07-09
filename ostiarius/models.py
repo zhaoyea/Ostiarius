@@ -5,6 +5,7 @@ from datetime import datetime
 class Item(models.Model):
     asset_no = models.CharField(max_length=10)
     item_name = models.CharField(max_length=1000)
+    maintenance_mode = models.BooleanField(default=False)
     present = models.BooleanField(default=True)
     map_status = models.BooleanField(default=False)
 
@@ -27,7 +28,7 @@ class Maintenance(models.Model):
     asset_no = models.CharField(max_length=10)
     lecturer = models.CharField(max_length=100)
     date = models.DateField()
-    status = models.BooleanField(default=False)
+    status = models.BooleanField(default=True)
 
     def __str__(self):
         return self.asset_no

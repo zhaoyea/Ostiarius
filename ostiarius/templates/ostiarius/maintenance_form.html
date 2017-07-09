@@ -16,28 +16,39 @@
                     <label>Asset Number</label>
                     <p>{{ maintain.asset_no }}</p>
                     <input name="maintain_item_id" type="hidden" value="{{ maintain.item.id }}">
+                    <input name="maintain_asset_no" type="hidden" value="{{ maintain.asset_no }}">
                 </div>
 
                 <div class="form-group">
                     <label>Item Name</label>
-                    <input name="item_name" class="form-control" value="{{ maintain.item.item_name }}">
+                    <p>{{ maintain.item.item_name }}</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+                    <p></p>
+                    {% if maintain.status %}
+                        <input type="radio" name="maintain_status" value="True" checked> Under Maintenance
+                        <p></p>
+                        <input type="radio" name="maintain_status" value="False" unchecked> Done
+                    {% else %}
+                        <input type="radio" name="maintain_status" value="True" unchecked> Under Maintenance
+                        <p></p>
+                        <input type="radio" name="maintain_status" value="False" checked> Done
+                    {% endif %}
                 </div>
 
                 <div class="form-group">
                     <label>Staff Name</label>
-                    <input name="staff_name" class="form-control" value="{{ maintain.lecturer }}">
+                    <input name="staff_name" class="form-control" value="{{ maintain.lecturer }}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="example-date-input" class="col-2 col-form-label">Maintenance Date</label>
                     <input name="maintainDate" class="form-control" type="date" value="{{ maintain.date|date:"Y-m-d" }}"
-                           id="example-date-input">
+                           id="example-date-input" required>
                 </div>
-                <div class="form-group">
-                    <label>Status</label>
-                    <p></p>
 
-                </div>
             </div>
             <div class="modal-footer">
                 <button type="button"

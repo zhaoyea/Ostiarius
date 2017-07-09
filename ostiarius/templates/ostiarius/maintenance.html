@@ -24,9 +24,9 @@
                     <tr>
                         <th>Asset Number</th>
                         <th>Item Name</th>
+                        <th>Status</th>
                         <th>Staff Name</th>
                         <th>Maintenance Date</th>
-                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -35,15 +35,15 @@
                         <tr>
                             <td>{{ maintain.item.asset_no }}</td>
                             <td>{{ maintain.item.item_name }}</td>
-                            <td>{{ maintain.lecturer }}</td>
-                            <td>{{ maintain.date }}</td>
                             <td>
                                 {% if maintain.status %}
-                                    <span class="label label-primary">Done</span>
-                                {% else %}
                                     <span class="label label-warning">Under Maintenance</span>
+                                {% else %}
+                                    <span class="label label-primary">Maintenance Done</span>
                                 {% endif %}
                             </td>
+                            <td>{{ maintain.lecturer }}</td>
+                            <td>{{ maintain.date }}</td>
                             <td>
                                 <button class="btn btn-outline btn-warning" data-toggle="modal"
                                         data-target="#maintain_{{ maintain.asset_no }}">Edit
