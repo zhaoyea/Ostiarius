@@ -8,70 +8,70 @@
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        {% for alert in alerts %}
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-9 text-left">
-                                    <div class="huge">{{ item_present }} items</div>
-                                    <div> Not in the lab</div>
-                                </div>
-                                <i class="fa fa-desktop fa-5x"></i>
-                            </div>
-                        </div>
-                        <a href="{% url 'ostiarius:present' alert.id %}">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-danger">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-9 text-left">
-                                    <div class="huge">{{ alerts.count }} items</div>
-                                    <div> Bought out today</div>
-                                </div>
-                                <i class="fa fa-bell fa-5x"></i>
-                            </div>
-                        </div>
-                        <a href="{% url 'ostiarius:alert' alert.id %}">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-9 text-left">
-                                    <div class="huge">{{ not_return }} items</div>
-                                    <div> On Maintainence today</div>
-                                </div>
-                                <i class="fa fa-wrench fa-5x"></i>
-                            </div>
-                        </div>
-                        <a href="{% url 'ostiarius:maintenance' alert.id %}">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+{#        {% for alert in alerts %}#}
+{#            <div class="row">#}
+{#                <div class="col-lg-3 col-md-6">#}
+{#                    <div class="panel panel-red">#}
+{#                        <div class="panel-heading">#}
+{#                            <div class="row">#}
+{#                                <div class="col-xs-9 text-left">#}
+{#                                    <div class="huge">{{ item_present }} items</div>#}
+{#                                    <div> Not in the lab</div>#}
+{#                                </div>#}
+{#                                <i class="fa fa-desktop fa-5x"></i>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <a href="{% url 'ostiarius:present' alert.id %}">#}
+{#                            <div class="panel-footer">#}
+{#                                <span class="pull-left">View Details</span>#}
+{#                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>#}
+{#                                <div class="clearfix"></div>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-lg-3 col-md-6">#}
+{#                    <div class="panel panel-danger">#}
+{#                        <div class="panel-heading">#}
+{#                            <div class="row">#}
+{#                                <div class="col-xs-9 text-left">#}
+{#                                    <div class="huge">{{ alerts.count }} items</div>#}
+{#                                    <div> Bought out today</div>#}
+{#                                </div>#}
+{#                                <i class="fa fa-bell fa-5x"></i>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <a href="{% url 'ostiarius:alert' alert.id %}">#}
+{#                            <div class="panel-footer">#}
+{#                                <span class="pull-left">View Details</span>#}
+{#                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>#}
+{#                                <div class="clearfix"></div>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-lg-3 col-md-6">#}
+{#                    <div class="panel panel-yellow">#}
+{#                        <div class="panel-heading">#}
+{#                            <div class="row">#}
+{#                                <div class="col-xs-9 text-left">#}
+{#                                    <div class="huge"> items</div>#}
+{#                                    <div> On Maintainence today</div>#}
+{#                                </div>#}
+{#                                <i class="fa fa-wrench fa-5x"></i>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <a href="{% url 'ostiarius:maintenance' alert.id %}">#}
+{#                            <div class="panel-footer">#}
+{#                                <span class="pull-left">View Details</span>#}
+{#                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>#}
+{#                                <div class="clearfix"></div>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endfor %}#}
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-8">

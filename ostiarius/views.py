@@ -1,14 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from datetime import date
 from .forms import *
 import json
 from .models import *
-from .serializers import ItemSerializer
+from .serializers import *
+from rest_framework.renderers import JSONRenderer
 
 
 # Create your views here.
@@ -19,13 +20,11 @@ def index(request):
         alerts = Alert.objects.all()
         item_stolen = Alert.objects.all().count()
         item_present = Item.objects.filter(present=0).count()
-        not_return = Maintenance.objects.filter(returnDate=None).count()
         return render(request, 'ostiarius/index.html', {
             'alerts': alerts,
             'maintenance': maintenance,
             'item_stolen': item_stolen,
             'item_present': item_present,
-            'not_return': not_return,
         })
 
 
@@ -34,15 +33,41 @@ def assets(request):
         return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
     else:
         items = Item.objects.all()
+        return render(request, 'ostiarius/assets.html', {
+            'items': items,
+        })
+
+
+def maintenancePage(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
+    else:
+        items = Item.objects.all()
         maintenance = Maintenance.objects.all()
-    return render(request, 'ostiarius/assets.html', {
-        'items': items,
-        'maintenance': maintenance,
-    })
+        return render(request, 'ostiarius/maintenance.html', {
+            'items': items,
+            'maintenance': maintenance,
+        })
+
+
+def alertPage(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
+    else:
+        items = Item.objects.all()
+        alerts = Alert.objects.all()
+        return render(request, 'ostiarius/alert.html', {
+            'items': items,
+            'alerts': alerts,
+        })
 
 
 def blank_table(request):
-    return render(request, 'ostiarius/blank-tables.html')
+    asset = Item.objects.all()
+    serializer = ItemSerializer(asset, many=True)
+    data = JSONRenderer().render(serializer.data)
+    output = json.dumps(json.loads(data), indent=4)
+    return render(request, 'ostiarius/blank-tables.html', {'output': output})
 
 
 def present(request, present_id):
@@ -106,11 +131,10 @@ def logout_user(request):
     return render(request, 'music/login.html', context)
 
 
-def update_table(request):
+def update_items(request):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html')
     else:
-
         item_id = request.POST['item_id']
         new_item = Item.objects.get(id=item_id)
         new_item_name = request.POST['item_name']
@@ -118,7 +142,17 @@ def update_table(request):
         new_item.present = new_present
         new_item.item_name = new_item_name
         new_item.save()
-        # request.session['msg'] = "Updated to " + new_item_name
+        return redirect('ostiarius:assets')
+
+
+def update_maintenance(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html')
+    else:
+        maintain_item_id = request.POST['maintain_item_id']
+        if Maintenance.objects.get(item_id=maintain_item_id):
+            return render(request, 'ostiarius/assets.html', {'msg': "Item already under maintenance"})
+        maintainDate = request.POST['maintainDate']
         return redirect('ostiarius:assets')
 
 

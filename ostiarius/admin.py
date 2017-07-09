@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Alert)
 admin.site.register(Item)
 admin.site.register(Maintenance)
+admin.site.register(Mapping)

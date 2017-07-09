@@ -1,0 +1,51 @@
+{% include 'ostiarius/base.html' %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'ostiarius/tables/css/bootstrap-table.css' %}">
+<script src="{% static 'ostiarius/tables/js/bootstrap-table.js' %}"></script>
+<div id="wrapper">
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Alerts</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Alert Table
+            </div>
+            <div class="panel-body">
+                <table id="table" data-show-refresh="true" class="table">
+                    <thead>
+                    <tr>
+                        <th>Asset Number</th>
+                        <th>Asset Name</th>
+                        <th>Alert Date</th>
+                        <th>Alert Time</th>
+                        <th>Culprit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for alert in alerts %}
+                        <tr>
+                            <td>{{ alert.item.asset_no }}</td>
+                            <td>{{ alert.item.item_name }}</td>
+                            <td>{{ alert.date }}</td>
+                            <td>{{ alert.time }}</td>
+                            <td><img src="{{ alert.photo }}" class="img-responsive"
+                                 style="width: 60px; height: 60px" alt="{{ alert.photo }}" /></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('table').bootstrapTable();
+</script>
