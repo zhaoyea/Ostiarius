@@ -22,7 +22,6 @@ def index(request):
         item_maintenance = Item.objects.filter(maintenance_mode=1).count()
         return render(request, 'ostiarius/index.html', {
             'alerts': alerts,
-            'maintenance': maintenance,
             'item_stolen': item_stolen,
             'item_present': item_present,
             'item_maintenance': item_maintenance,
@@ -73,39 +72,33 @@ def blank_table(request):
     return render(request, 'ostiarius/blank-tables.html', {'output': output})
 
 
-def present(request, present_id):
+def present(request):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html')
     else:
         item_present = Item.objects.filter(present=0)
-        details = get_object_or_404(Alert, pk=present_id)
         return render(request, 'ostiarius/detail.html', {
-            'details': details,
             'item_present': item_present,
         })
 
 
-def alert(request, alert_id):
+def alert(request):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html')
     else:
-        item_stolen = Alert.objects.all()
-        details = get_object_or_404(Alert, pk=alert_id)
+        alerts = Alert.objects.all()
         return render(request, 'ostiarius/detail.html', {
-            'details': details,
-            'item_stolen': item_stolen,
+            'alerts': alerts,
         })
 
 
-def maintenance(request, maintenance_id):
+def maintenance(request):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html')
     else:
-        not_return = Maintenance.objects.filter(status=0)
-        details = get_object_or_404(Alert, pk=maintenance_id)
+        maintenance = Maintenance.objects.filter(status=1)
         return render(request, 'ostiarius/detail.html', {
-            'details': details,
-            'not_return': not_return,
+            'maintenance': maintenance,
         })
 
 
@@ -158,6 +151,7 @@ def update_maintenance(request):
         return render(request, 'ostiarius/login.html')
     else:
         maintain_item_id = request.POST['maintain_item_id']
+        new_item = Item.objects.get(id=maintain_item_id)
         new_maintain = Maintenance.objects.get(item_id=maintain_item_id)
         maintain_asset_no = request.POST['maintain_asset_no']
         maintain_status = request.POST['maintain_status']
@@ -165,9 +159,11 @@ def update_maintenance(request):
         maintain_date = request.POST['maintainDate']
         if new_maintain:
             new_maintain.status = maintain_status
+            new_item.maintenance_mode = maintain_status
             new_maintain.lecturer = maintain_staff_name
             new_maintain.date = maintain_date
             new_maintain.save()
+            new_item.save()
             print("Maintenance table updated")
             return redirect('ostiarius:maintenancePage')
         else:

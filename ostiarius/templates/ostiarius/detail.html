@@ -31,42 +31,41 @@
                     <!-- /.panel-heading -->
                 </div>
             {% endfor %}
-            {% for item in item_stolen %}
+            {% for alert in alerts %}
                 <div class="col-lg-3" style="text-align: center">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
-                            {{ item.item_name }}
+                            {{ alert.item.item_name }}
                         </div>
                         <div class="panel-body">
-                            <img src="{{ item.photo }}" width="300" height="300">
+                            <img src="{{ alert.photo }}" width="300" height="300">
                         </div>
                         <div class="panel-footer">
                             <p>Date & Time: <span
-                                    class="label label-warning">{{ details.date }} {{ details.time }}</span></p>
-                            <p>Missing since: </p>
+                                    class="label label-warning">{{ alert.date }} {{ alert.time }}</span></p>
                             <small>Asset Number: <span
-                                    class="label label-primary">{{ details.item.asset_no }}</span>
+                                    class="label label-primary">{{ alert.item.asset_no }}</span>
                             </small>
                         </div>
                     </div>
                     <!-- /.panel-heading -->
                 </div>
             {% endfor %}
-            {% for item in not_return %}
+            {% for maintain in maintenance %}
                 <div class="col-lg-3" style="text-align: center">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
-                            {{ item.asset_no.item_name }}
+                            {{ maintain.item.item_name }}
                         </div>
                         <div class="panel-body">
-                            <img src="{{ item.asset_no.photo }}" width="300" height="300">
+                            <img src="" width="300" height="300">
                         </div>
                         <div class="panel-footer">
-                            <p>Date & Time: <span
-                                    class="label label-warning">{{ details.date }} {{ details.time }}</span></p>
-                            <p>Missing since: </p>
+                            <p>Maintenance Date: <span
+                                    class="label label-warning">{{ maintain.date }}</span></p>
+                            <p>Staff in Charge: <span class="label label-primary">{{ maintain.lecturer }}</span></p>
                             <small>Asset Number: <span
-                                    class="label label-primary">{{ details.item.asset_no }}</span>
+                                    class="label label-default">{{ maintain.item.asset_no }}</span>
                             </small>
                         </div>
                     </div>
