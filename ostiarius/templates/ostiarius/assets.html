@@ -26,8 +26,18 @@
             <div class="panel-heading">
                 Items Table
             </div>
+
             <div class="panel-body">
-                <table id="table" data-show-refresh="true" class="table">
+                <button class="btn btn-outline btn-primary" data-toggle="modal"
+                        data-target="#addNewItem"><span class="fa fa-plus"> Add New Item</span>
+                </button>
+                <form role="form" action="{% url 'ostiarius:add_items' %}" method="post"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% include 'ostiarius/insert_assets_form.html' %}
+                </form>
+                <p></p>
+                <table id="table" class="table">
                     <thead>
                     <tr>
                         <th>Asset Number</th>
@@ -74,14 +84,23 @@
                                 {% endif %}
                             </td>
                             <td>
-                                <button class="btn btn-outline btn-primary" data-toggle="modal"
-                                        data-target="#edit_{{ item.asset_no }}">Edit
-                                </button>
+                                <p>
+                                    <button class="btn btn-outline btn-primary btn-circle" data-toggle="modal"
+                                            data-target="#edit_{{ item.asset_no }}"><i class="fa fa-edit"></i>
+                                    </button>
                                 <form role="form" action="{% url 'ostiarius:update_items' %}" method="post"
                                       enctype="multipart/form-data">
                                     {% csrf_token %}
-                                    {% include 'ostiarius/items_form.html' %}
+                                    {% include 'ostiarius/update_assets_form.html' %}
                                 </form>
+                                </p>
+                                <p>
+                                <form action="{% url 'ostiarius:delete_items' item.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-outline btn-danger btn-circle"><i class="fa fa-times"></i>
+                                    </button>
+                                </form>
+                                </p>
                             </td>
                         </tr>
                     {% endfor %}

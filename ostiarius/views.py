@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -64,13 +65,13 @@ def alertPage(request):
         })
 
 
-def blank_table(request):
+def jsonData(request):
     asset = Item.objects.all()
     serializer = ItemSerializer(asset, many=True)
-    data = JSONRenderer().render(serializer.data)
-    output = json.dumps(json.loads(data), indent=4)
-    return render(request, 'ostiarius/blank-tables.html', {'output': output})
+    return JsonResponse(serializer.data, safe=False)
 
+def blankTable(request):
+    return render(request, 'ostiarius/blank-tables.html')
 
 def present(request):
     if not request.user.is_authenticated():
@@ -127,6 +128,26 @@ def logout_user(request):
     return render(request, 'music/login.html', context)
 
 
+def add_items(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html')
+    else:
+        new_asset_no = request.POST['new_asset_no']
+        new_item_name = request.POST['new_item_name']
+        new_item = Item()
+        new_item.asset_no = new_asset_no
+        new_item.item_name = new_item_name
+        new_item.save()
+        print("New Asset:" + new_asset_no + " - " + new_item_name + " added to Asset Table")
+        return redirect('ostiarius:assets')
+
+
+def delete_items(request, item_id):
+    item = Item.objects.get(pk=item_id)
+    item.delete()
+    return redirect('ostiarius:assets')
+
+
 def update_items(request):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html')
@@ -153,7 +174,6 @@ def update_maintenance(request):
         maintain_item_id = request.POST['maintain_item_id']
         new_item = Item.objects.get(id=maintain_item_id)
         new_maintain = Maintenance.objects.get(item_id=maintain_item_id)
-        maintain_asset_no = request.POST['maintain_asset_no']
         maintain_status = request.POST['maintain_status']
         maintain_staff_name = request.POST['staff_name']
         maintain_date = request.POST['maintainDate']
@@ -166,17 +186,7 @@ def update_maintenance(request):
             new_item.save()
             print("Maintenance table updated")
             return redirect('ostiarius:maintenancePage')
-        else:
-            print("Item already under maintenance")
-            return redirect('ostiarius:maintenancePage')
-
-        maintain = Maintenance()
-        maintain.asset_no = maintain_asset_no
-        maintain.lecturer = maintain_staff_name
-        maintain.status = maintain_status
-        maintain.date = maintain_date
-        maintain.save()
-        print("Maintenance table updated")
+        print("Item already under maintenance")
         return redirect('ostiarius:maintenancePage')
 
 

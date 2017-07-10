@@ -6,7 +6,7 @@ from .models import *
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['asset_no', 'item_name', 'present', 'map_status']
+        fields = ['asset_no', 'item_name']
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)

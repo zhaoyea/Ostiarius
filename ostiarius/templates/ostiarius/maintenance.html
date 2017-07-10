@@ -45,13 +45,13 @@
                             <td>{{ maintain.lecturer }}</td>
                             <td>{{ maintain.date }}</td>
                             <td>
-                                <button class="btn btn-outline btn-warning" data-toggle="modal"
-                                        data-target="#maintain_{{ maintain.asset_no }}">Edit
+                                <button class="btn btn-outline btn-warning btn-circle" data-toggle="modal"
+                                        data-target="#maintain_{{ maintain.asset_no }}"><i class="fa fa-edit"></i>
                                 </button>
                                 <form role="form" action="{% url 'ostiarius:update_maintenance' %}" method="post"
                                       enctype="multipart/form-data">
                                     {% csrf_token %}
-                                    {% include 'ostiarius/maintenance_form.html' %}
+                                    {% include 'ostiarius/update_maintenance_form.html' %}
                                 </form>
                             </td>
                         </tr>

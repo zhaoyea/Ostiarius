@@ -14,7 +14,10 @@ urlpatterns = [
     url(r'^maintenance/$', views.maintenancePage, name='maintenancePage'),
     url(r'^alert/$', views.alertPage, name='alertPage'),
     url(r'^assets/updateItems$', views.update_items, name='update_items'),
+    url(r'^assets/addItems$', views.add_items, name='add_items'),
+    url(r'^assets/delete/(?P<item_id>[0-9]+)/$', views.delete_items, name='delete_items'),
     url(r'^maintenance/updateMaintenance$', views.update_maintenance, name='update_maintenance'),
-    url(r'^blank_table/$', views.blank_table, name='blank_table'),
+    url(r'^jsonData/$', views.jsonData, name='jsonData'),
+    url(r'^jsonData/blankTable$', views.blankTable, name='blankTable'),
     url(r'^asset_list/$', views.asset_list, name='asset_list'),
 ]

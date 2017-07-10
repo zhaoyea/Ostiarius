@@ -1,29 +1,46 @@
-{% include 'ostiarius/base.html' %}
 {% load staticfiles %}
 <link href="{% static 'ostiarius/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'ostiarius/tables/css/bootstrap-table.css' %}">
+<script src="{% static 'ostiarius/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'ostiarius/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'ostiarius/tables/js/bootstrap-table.js' %}"></script>
+
 <div class="container">
-    <h1>From data</h1>
-    <p></p>
-    <table id="table">
-        <thead>
-        <tr>
-            <th data-field="id">Item ID</th>
-            <th data-field="asset_no">Asset Number</th>
-            <th data-field="item_name">Item Name</th>
-            <th data-field="present">Present</th>
-            <th data-field="map_status">Map Status</th>
-        </tr>
-        </thead>
-    </table>
-    {{ output }}
+    <h1>getData</h1>
+    <p>Get the loaded data of table: <code>$table.bootstrapTable('getData');</code></p>
+
+    <table id="table" data-show-refresh="true" data-show-columns="true" data-search="true"></table>
+    <script>
+        $.getJSON("{% url 'ostiarius:jsonData' %}", function (jsonFromFile) {
+            $(document).ready(function () {
+                $('#table').bootstrapTable({
+                    data: jsonFromFile,
+                    columns: [
+                        {
+                            field: 'asset_no',
+                            title: 'Asset Number',
+                        },
+                        {
+                            field: 'item_name',
+                            title: 'Item Name',
+                        },
+                        {
+                            field: 'present',
+                            title: 'Present',
+                            formatter: 'LinkFormatter',
+                        },
+                    ]
+                })
+            })
+        });
+
+        function LinkFormatter(value, row, index) {
+            if (value == true) {
+                return "<span class='label label-success'>In T1933</span>";
+            }
+            else {
+                return "<span class='label label-danger'>Not in T1933</span>";
+            }
+        }
+    </script>
 </div>
-<script>
-    var $table = $('#table');
-    $(function () {
-        var data = {{ output }};
-        var json=JSON.stringify(data);
-        $table.bootstrapTable({data: json});
-    });
-</script>
