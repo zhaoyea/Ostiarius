@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .forms import *
 import re, base64
+from datetime import date
 from .models import *
 from .serializers import *
 import requests
@@ -29,6 +30,9 @@ def index(request):
         })
 
 
+def settings(request):
+    return render(request, 'ostiarius/settings.html')
+
 def assets(request):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
@@ -47,9 +51,21 @@ def maintenancePage(request):
     else:
         items = Item.objects.all()
         maintenance = Maintenance.objects.all()
+        today = date.today()
         return render(request, 'ostiarius/maintenance.html', {
             'items': items,
             'maintenance': maintenance,
+            'today': today,
+        })
+
+
+def present(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html')
+    else:
+        item_present = Item.objects.filter(present=0)
+        return render(request, 'ostiarius/detail.html', {
+            'item_present': item_present,
         })
 
 
@@ -65,30 +81,15 @@ def alertPage(request):
         })
 
 
-def present(request):
-    if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html')
-    else:
-        item_present = Item.objects.filter(present=0)
-        return render(request, 'ostiarius/detail.html', {
-            'item_present': item_present,
-        })
-
-
 def alert(request):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html')
     else:
         alerts = Alert.objects.all()
-        for alert in alerts:
-            image_decode = decode(alert.photo)
         return render(request, 'ostiarius/detail.html', {
             'alerts': alerts,
-            'image_decode': image_decode,
         })
 
-def decode(image_encode):
-    return base64.decodebytes(image_encode)
 
 def maintenance(request):
     if not request.user.is_authenticated():
@@ -131,9 +132,7 @@ def add_items(request):
     else:
         new_asset_no = request.POST['new_asset_no']
         new_item_name = request.POST['new_item_name']
-        new_item = Item()
-        new_item.asset_no = new_asset_no
-        new_item.item_name = new_item_name
+        new_item = Item(asset_no=new_asset_no, item_name=new_item_name)
         new_item.save()
         print("New Asset:" + new_asset_no + " - " + new_item_name + " added to Asset Table")
         return redirect('ostiarius:assets')
@@ -173,19 +172,29 @@ def new_maintenance(request):
         item = Item.objects.get(asset_no=maintain_asset_no)
         staff_name = request.POST['staff_name']
         maintainDate = request.POST['maintainDate']
+        returnDate = request.POST['returnDate']
+        print(returnDate)
         if Maintenance.objects.filter(asset_no=maintain_asset_no) and Maintenance.objects.filter(status=1):
             print("Item already under maintenance")
             return redirect('ostiarius:maintenancePage')
         else:
-            maintain = Maintenance()
-            maintain.asset_no = maintain_asset_no
-            maintain.staff_name = staff_name
-            maintain.date = maintainDate
-            maintain.item_id = item.id
-            item.maintenance_mode = True
-            item.save()
-            maintain.save()
-            return redirect('ostiarius:maintenancePage')
+            if returnDate is None:
+                maintain = Maintenance(asset_no=maintain_asset_no, staff_name=staff_name, date=maintainDate,
+                                       item_id=item.id)
+                maintain.save()
+                item.maintenance_mode = True
+                item.present = False
+                item.save()
+                return redirect('ostiarius:maintenancePage')
+            else:
+                maintain = Maintenance(asset_no=maintain_asset_no, staff_name=staff_name, date=maintainDate,
+                                       return_date=returnDate,
+                                       item_id=item.id)
+                maintain.save()
+                item.maintenance_mode = True
+                item.present = False
+                item.save()
+                return redirect('ostiarius:maintenancePage')
 
 
 def update_maintenance(request):
@@ -207,8 +216,9 @@ def update_maintenance(request):
             new_item.save()
             print("Maintenance table updated")
             return redirect('ostiarius:maintenancePage')
-        print("Item already under maintenance")
-        return redirect('ostiarius:maintenancePage')
+        else:
+            print("Item already under maintenance")
+            return redirect('ostiarius:maintenancePage')
 
 
 @api_view(['GET', 'POST'])

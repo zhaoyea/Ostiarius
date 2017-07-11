@@ -12,20 +12,25 @@
             <!-- /.row -->
             {% for item in item_present %}
                 <div class="col-lg-3" style="text-align: center">
-                    <div class="panel panel-danger">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
-                            {{ item.item_name }}
+                            {{ item.asset_no }}
                         </div>
                         <div class="panel-body">
-                            <img src="{{ item.photo }}" width="300" height="300">
+                            {{ item.item_name }}
                         </div>
                         <div class="panel-footer">
-                            <p>Date & Time: <span
-                                    class="label label-warning">{{ details.date }} {{ details.time }}</span></p>
-                            <p>Missing since: </p>
-                            <small>Asset Number: <span
-                                    class="label label-primary">{{ details.item.asset_no }}</span>
-                            </small>
+                            {% if item.maintenance_mode %}
+                                <p>Status: <span class="label label-warning">Under Maintenance</span></p>
+                                {% for maintain in item.maintenance_set.all %}
+                                    Maintenance Date: <span
+                                        class="label label-default">{{ maintain.date }}</span></p>
+                                    Staff in Charge: <span class="label label-primary">{{ maintain.staff_name }}</span>
+                                {% endfor %}
+                            {% else %}
+                                <p>Status: <span class="label label-danger">Not in T1933</span></p>
+                                Click <a href="{% url 'ostiarius:alert' %}">here</a> for more information.
+                            {% endif %}
                         </div>
                     </div>
                     <!-- /.panel-heading -->
@@ -38,7 +43,7 @@
                             {{ alert.item.item_name }}
                         </div>
                         <div class="panel-body">
-                            <img src="{{ image_decode }}" width="300" height="300">
+                            <img src="data:image/png;base64,{{ alert.photo }}" width="300" height="300">
                         </div>
                         <div class="panel-footer">
                             <p>Date & Time: <span
@@ -53,20 +58,17 @@
             {% endfor %}
             {% for maintain in maintenance %}
                 <div class="col-lg-3" style="text-align: center">
-                    <div class="panel panel-danger">
+                    <div class="panel panel-yellow">
                         <div class="panel-heading">
-                            {{ maintain.item.item_name }}
+                            [{{ maintain.item.asset_no }}]
                         </div>
                         <div class="panel-body">
-                            <img src="" width="300" height="300">
+                            {{ maintain.item.item_name }}
                         </div>
                         <div class="panel-footer">
                             <p>Maintenance Date: <span
                                     class="label label-warning">{{ maintain.date }}</span></p>
-                            <p>Staff in Charge: <span class="label label-primary">{{ maintain.lecturer }}</span></p>
-                            <small>Asset Number: <span
-                                    class="label label-default">{{ maintain.item.asset_no }}</span>
-                            </small>
+                            <p>Staff in Charge: <span class="label label-primary">{{ maintain.staff_name }}</span></p>
                         </div>
                     </div>
                     <!-- /.panel-heading -->

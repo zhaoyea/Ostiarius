@@ -18,10 +18,11 @@ urlpatterns = [
     url(r'^assets/delete/(?P<item_id>[0-9]+)/$', views.delete_items, name='delete_items'),
     url(r'^maintenance/insertMaintenance$', views.new_maintenance, name='new_maintenance'),
     url(r'^maintenance/updateMaintenance$', views.update_maintenance, name='update_maintenance'),
+    url(r'^settings/$', views.settings, name='settings'),
+
     url(r'^jsonData/$', views.jsonData, name='jsonData'),
     url(r'^GETrequest/$', views.GETrequest, name='GETrequest'),
     url(r'^POSTassets/$', views.POSTassets, name='POSTassets'),
-    # url(r'^POSTalerts/$', views.POSTalerts, name='POSTalerts'),
     url(r'^jsonData/blankTable$', views.blankTable, name='blankTable'),
     url(r'^asset_list/$', views.asset_list, name='asset_list'),
 ]

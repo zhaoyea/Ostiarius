@@ -14,59 +14,68 @@
             </div>
             <!-- /.row -->
         </div>
-        <div class="panel-body">
-            <button class="btn btn-outline btn-warning" data-toggle="modal"
-                    data-target="#addNewMaintenance"><span class="fa fa-plus"> New Maintenance</span>
-            </button>
-            <form role="form" action="{% url 'ostiarius:new_maintenance' %}" method="post"
-                  enctype="multipart/form-data">
-                {% csrf_token %}
-                {% include 'ostiarius/maintenance_insert_form.html' %}
-            </form>
-            <table id="table" data-show-refresh="true" data-show-columns="true" data-search="true"
-                   data-page-number="true" data-pagination="true" data-toggle="table" class="table">
-                <thead>
-                <tr>
-                    <th>Asset Number</th>
-                    <th>Item Name</th>
-                    <th>Status</th>
-                    <th>Staff Name</th>
-                    <th>Maintenance Date</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for maintain in maintenance %}
+        <div class="container">
+            <div class="panel-body">
+                <button class="btn btn-outline btn-warning" data-toggle="modal"
+                        data-target="#addNewMaintenance"><span class="fa fa-plus"> New Maintenance</span>
+                </button>
+                <form role="form" action="{% url 'ostiarius:new_maintenance' %}" method="post"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% include 'ostiarius/maintenance_insert_form.html' %}
+                </form>
+                <table id="table" data-show-refresh="true" data-show-columns="true" data-search="true"
+                       data-page-number="true" data-pagination="true" data-toggle="table" class="table">
+                    <thead>
                     <tr>
-                        <td>{{ maintain.item.asset_no }}</td>
-                        <td>{{ maintain.item.item_name }}</td>
-                        <td>
-                            {% if maintain.status %}
-                                <span class="label label-warning">Under Maintenance</span>
-                            {% else %}
-                                <span class="label label-primary">Maintenance Done</span>
-                            {% endif %}
-                        </td>
-                        <td>{{ maintain.staff_name }}</td>
-                        <td>{{ maintain.date }}</td>
-                        <td>
-                            <button class="btn btn-outline btn-warning btn-circle" data-toggle="modal"
-                                    data-target="#maintain_{{ maintain.asset_no }}"><i class="fa fa-edit"></i>
-                            </button>
-                            <form role="form" action="{% url 'ostiarius:update_maintenance' %}" method="post"
-                                  enctype="multipart/form-data">
-                                {% csrf_token %}
-                                {% include 'ostiarius/maintenance_update_form.html' %}
-                            </form>
-                        </td>
+                        <th>Asset Number</th>
+                        <th>Item Name</th>
+                        <th>Status</th>
+                        <th>Staff Name</th>
+                        <th>Maintenance Date</th>
+                        <th>Return Done</th>
+                        <th>Action</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for maintain in maintenance %}
+                        <tr>
+                            <td>{{ maintain.item.asset_no }}</td>
+                            <td>{{ maintain.item.item_name }}</td>
+                            <td>
+                                {% if maintain.status %}
+                                    <span class="label label-warning">Under Maintenance</span>
+                                {% else %}
+                                    <span class="label label-primary">Maintenance Done</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ maintain.staff_name }}</td>
+                            <td>{{ maintain.date }}</td>
+                            <td>
+                                {% if maintain.return_date is None %}
+                                    -
+                                {% else %}
+                                    {{ maintain.return_date}}
+                                {% endif %}
+                            </td>
+                            <td>
+                                <button class="btn btn-outline btn-warning btn-circle" data-toggle="modal"
+                                        data-target="#maintain_{{ maintain.asset_no }}"><i class="fa fa-edit"></i>
+                                </button>
+                                <form role="form" action="{% url 'ostiarius:update_maintenance' %}" method="post"
+                                      enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {% include 'ostiarius/maintenance_update_form.html' %}
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-
 <script>
     $('table').bootstrapTable();
 </script>
