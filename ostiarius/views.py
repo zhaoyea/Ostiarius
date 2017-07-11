@@ -6,10 +6,10 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .forms import *
-import json
+import re, base64
 from .models import *
 from .serializers import *
-from rest_framework.renderers import JSONRenderer
+import requests
 
 
 # Create your views here.
@@ -65,14 +65,6 @@ def alertPage(request):
         })
 
 
-def jsonData(request):
-    asset = Item.objects.all()
-    serializer = ItemSerializer(asset, many=True)
-    return JsonResponse(serializer.data, safe=False)
-
-def blankTable(request):
-    return render(request, 'ostiarius/blank-tables.html')
-
 def present(request):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html')
@@ -88,10 +80,15 @@ def alert(request):
         return render(request, 'ostiarius/login.html')
     else:
         alerts = Alert.objects.all()
+        for alert in alerts:
+            image_decode = decode(alert.photo)
         return render(request, 'ostiarius/detail.html', {
             'alerts': alerts,
+            'image_decode': image_decode,
         })
 
+def decode(image_encode):
+    return base64.decodebytes(image_encode)
 
 def maintenance(request):
     if not request.user.is_authenticated():
@@ -167,6 +164,30 @@ def update_items(request):
             return redirect('ostiarius:assets')
 
 
+def new_maintenance(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html')
+    else:
+        itemStr = request.POST['maintain_asset_no']
+        maintain_asset_no = re.search('(\d+).+', itemStr).group(1)
+        item = Item.objects.get(asset_no=maintain_asset_no)
+        staff_name = request.POST['staff_name']
+        maintainDate = request.POST['maintainDate']
+        if Maintenance.objects.filter(asset_no=maintain_asset_no) and Maintenance.objects.filter(status=1):
+            print("Item already under maintenance")
+            return redirect('ostiarius:maintenancePage')
+        else:
+            maintain = Maintenance()
+            maintain.asset_no = maintain_asset_no
+            maintain.staff_name = staff_name
+            maintain.date = maintainDate
+            maintain.item_id = item.id
+            item.maintenance_mode = True
+            item.save()
+            maintain.save()
+            return redirect('ostiarius:maintenancePage')
+
+
 def update_maintenance(request):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html')
@@ -180,7 +201,7 @@ def update_maintenance(request):
         if new_maintain:
             new_maintain.status = maintain_status
             new_item.maintenance_mode = maintain_status
-            new_maintain.lecturer = maintain_staff_name
+            new_maintain.staff_name = maintain_staff_name
             new_maintain.date = maintain_date
             new_maintain.save()
             new_item.save()
@@ -204,3 +225,49 @@ def asset_list(request):
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+def jsonData(request):
+    asset = Item.objects.all()
+    serializer = ItemSerializer(asset, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+
+def GETrequest(request):
+    res = requests.get("http://128.199.75.229/items.php")
+    return JsonResponse(res.json(), safe=False)
+
+
+def POSTassets(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html')
+    else:
+        res = requests.get("http://128.199.75.229/items.php")
+        data = res.json()
+        for key, value in data.items():
+            for item in value:
+                if not Item.objects.filter(asset_no=item['asset_no']):
+                    serializer = ItemSerializer(data=item)
+                    if serializer.is_valid():
+                        serializer.save()
+
+    return redirect('ostiarius:assets')
+
+
+# def POSTalerts(request):
+#     if not request.user.is_authenticated():
+#         return render(request, 'ostiarius/login.html')
+#     else:
+#         res = requests.get("http://128.199.75.229/alertspost.php")
+#         data = res.json()
+#         for key, value in data.items():
+#             for alert in value:
+#                 serializer = AlertSerializer(data=alert)
+#                 if serializer.is_valid():
+#                     serializer.save()
+#
+#     return redirect('ostiarius:alertPage')
+
+
+def blankTable(request):
+    return render(request, 'ostiarius/blank-tables.html')

@@ -2,42 +2,32 @@
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static 'ostiarius/tables/css/bootstrap-table.css' %}">
 <script src="{% static 'ostiarius/tables/js/bootstrap-table.js' %}"></script>
+
 <div id="wrapper">
     <!-- Page Content -->
     <div id="page-wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">All Assets</h1>
+                    <h1 class="page-header"><i class="fa fa-codepen fa-fw"></i> All Assets</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
         </div>
-
-        {% if success_msg %}
-            <div class="alert alert-success alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{ success_msg }}
-            </div>
-        {% endif %}
-        <!-- /.panel-heading -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Items Table
-            </div>
-
+        <div class="container">
             <div class="panel-body">
                 <button class="btn btn-outline btn-primary" data-toggle="modal"
-                        data-target="#addNewItem"><span class="fa fa-plus"> Add New Item</span>
+                        data-target="#addNewItem"><span class="fa fa-plus"> New Item</span>
                 </button>
                 <form role="form" action="{% url 'ostiarius:add_items' %}" method="post"
                       enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% include 'ostiarius/insert_assets_form.html' %}
+                    {% include 'ostiarius/assets_insert_form.html' %}
                 </form>
                 <p></p>
-                <table id="table" class="table">
+                <table id="table" class="table" data-show-refresh="true" data-show-columns="true" data-search="true"
+                       data-page-number="true" data-pagination="true" data-toggle="table">
                     <thead>
                     <tr>
                         <th>Asset Number</th>
@@ -65,7 +55,7 @@
                                         {% if maintain.status %}
                                             <p>Status: <span class="label label-warning">Under Maintenance</span></p>
                                             <p>Staff in Charge:
-                                                <span class="label label-primary">{{ maintain.lecturer }}</span>
+                                                <span class="label label-primary">{{ maintain.staff_name }}</span>
                                             </p>
                                             <p>
                                                 <small>Under Maintenance since: {{ maintain.date }}</small>
@@ -91,14 +81,16 @@
                                 <form role="form" action="{% url 'ostiarius:update_items' %}" method="post"
                                       enctype="multipart/form-data">
                                     {% csrf_token %}
-                                    {% include 'ostiarius/update_assets_form.html' %}
+                                    {% include 'ostiarius/assets_update_form.html' %}
                                 </form>
                                 </p>
                                 <p>
+                                    <button data-toggle="modal" data-target="#delete_{{ item.asset_no }}"
+                                            class="btn btn-outline btn-danger btn-circle"><i class="fa fa-times"></i>
+                                    </button>
                                 <form action="{% url 'ostiarius:delete_items' item.id %}" method="post">
                                     {% csrf_token %}
-                                    <button class="btn btn-outline btn-danger btn-circle"><i class="fa fa-times"></i>
-                                    </button>
+                                    {% include 'ostiarius/assets_delete_form.html' %}
                                 </form>
                                 </p>
                             </td>

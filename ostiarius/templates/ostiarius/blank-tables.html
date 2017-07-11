@@ -8,7 +8,6 @@
 <div class="container">
     <h1>getData</h1>
     <p>Get the loaded data of table: <code>$table.bootstrapTable('getData');</code></p>
-
     <table id="table" data-show-refresh="true" data-show-columns="true" data-search="true"></table>
     <script>
         $.getJSON("{% url 'ostiarius:jsonData' %}", function (jsonFromFile) {
@@ -21,25 +20,46 @@
                             title: 'Asset Number',
                         },
                         {
+                          field: 'S_N',
+                          title: 'S/N'
+                        },
+                        {
                             field: 'item_name',
                             title: 'Item Name',
                         },
                         {
                             field: 'present',
                             title: 'Present',
+                            formatter: 'PresentFormatter',
+                        },
+                        {
+                            field: 'map_status',
+                            title: 'Map Status',
                             formatter: 'LinkFormatter',
+                        },
+                        {
+                            field: 'maintenance_mode',
+                            title: 'Maintenance Status',
                         },
                     ]
                 })
             })
         });
 
-        function LinkFormatter(value, row, index) {
+        function PresentFormatter(value, row, index) {
             if (value == true) {
                 return "<span class='label label-success'>In T1933</span>";
             }
             else {
                 return "<span class='label label-danger'>Not in T1933</span>";
+            }
+        }
+        function LinkFormatter(value, row, index) {
+            if (value == true) {
+                return "<span class='label label-success'>Yes</span>";
+            }
+            else {
+                return "<span class='label label-danger'>No</span>";
             }
         }
     </script>

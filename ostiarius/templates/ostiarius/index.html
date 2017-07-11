@@ -3,7 +3,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Dashboard</h1>
+                <h1 class="page-header"><i class="fa fa-dashboard fa-fw"></i> Dashboard</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -36,9 +36,9 @@
                             <div class="row">
                                 <div class="col-xs-9 text-left">
                                     <div class="huge">{{ alerts.count }} items</div>
-                                    <div> Bought out today</div>
+                                    <div> Got Alerted today</div>
                                 </div>
-                                <i class="fa fa-bell fa-5x"></i>
+                                <i class="fa fa-exclamation-circle fa-5x"></i>
                             </div>
                         </div>
                         <a href="{% url 'ostiarius:alert' %}">

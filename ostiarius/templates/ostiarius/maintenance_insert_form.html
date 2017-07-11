@@ -1,0 +1,54 @@
+<div class="modal fade" id="addNewMaintenance" tabindex="-1" role="dialog"
+     aria-labelledby="maintainLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="panel-body">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;
+                    </button>
+                    <h4 class="modal-title" id="maintainLabel">Add New Maintenance</h4>
+                </div>
+                <p></p>
+                <div class="form-group">
+                    <label>Asset Number</label>
+                    <select name="maintain_asset_no" class="form-control" required>
+                        <option></option>
+                        {% for item in items %}
+                            <option>{{ item.asset_no }} - {{ item.item_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Staff Name</label>
+                    <select name="staff_name" class="form-control" required>
+                        <option></option>
+                        <option>Mr Tan</option>
+                        <option>Mr Lim</option>
+                        <option>Mr Quek</option>
+                        <option>Mr Lee</option>
+                        <option>Mr Song</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="example-date-input" class="col-2 col-form-label">Maintenance Date</label>
+                    <input name="maintainDate" class="form-control" type="date" id="example-date-input" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal">
+                    Close
+                </button>
+                <button type="submit"
+                        class="btn btn-warning">Add
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
