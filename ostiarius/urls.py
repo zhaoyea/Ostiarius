@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^assets/delete/(?P<item_id>[0-9]+)/$', views.delete_items, name='delete_items'),
     url(r'^maintenance/insertMaintenance$', views.new_maintenance, name='new_maintenance'),
     url(r'^maintenance/updateMaintenance$', views.update_maintenance, name='update_maintenance'),
-    url(r'^settings/$', views.settings, name='settings'),
+    url(r'^console/$', views.console, name='console'),
 
     url(r'^jsonData/$', views.jsonData, name='jsonData'),
     url(r'^GETrequest/$', views.GETrequest, name='GETrequest'),

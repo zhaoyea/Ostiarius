@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .forms import *
-import re, base64
+import re
 from datetime import date
 from .models import *
 from .serializers import *
@@ -30,8 +30,12 @@ def index(request):
         })
 
 
-def settings(request):
-    return render(request, 'ostiarius/settings.html')
+def console(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
+    else:
+        return render(request, 'ostiarius/console.html')
+
 
 def assets(request):
     if not request.user.is_authenticated():
@@ -61,7 +65,7 @@ def maintenancePage(request):
 
 def present(request):
     if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
     else:
         item_present = Item.objects.filter(present=0)
         return render(request, 'ostiarius/detail.html', {
@@ -93,7 +97,7 @@ def alert(request):
 
 def maintenance(request):
     if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
     else:
         maintenance = Maintenance.objects.filter(status=1)
         return render(request, 'ostiarius/detail.html', {
@@ -128,7 +132,7 @@ def logout_user(request):
 
 def add_items(request):
     if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
     else:
         new_asset_no = request.POST['new_asset_no']
         new_item_name = request.POST['new_item_name']
@@ -139,14 +143,17 @@ def add_items(request):
 
 
 def delete_items(request, item_id):
-    item = Item.objects.get(pk=item_id)
-    item.delete()
-    return redirect('ostiarius:assets')
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
+    else:
+        item = Item.objects.get(pk=item_id)
+        item.delete()
+        return redirect('ostiarius:assets')
 
 
 def update_items(request):
     if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
     else:
         item_id = request.POST['item_id']
         new_item = Item.objects.get(id=item_id)
@@ -165,7 +172,7 @@ def update_items(request):
 
 def new_maintenance(request):
     if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
     else:
         itemStr = request.POST['maintain_asset_no']
         maintain_asset_no = re.search('(\d+).+', itemStr).group(1)
@@ -173,7 +180,7 @@ def new_maintenance(request):
         staff_name = request.POST['staff_name']
         maintainDate = request.POST['maintainDate']
         returnDate = request.POST['returnDate']
-        print(returnDate)
+
         if Maintenance.objects.filter(asset_no=maintain_asset_no) and Maintenance.objects.filter(status=1):
             print("Item already under maintenance")
             return redirect('ostiarius:maintenancePage')
@@ -199,7 +206,7 @@ def new_maintenance(request):
 
 def update_maintenance(request):
     if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
     else:
         maintain_item_id = request.POST['maintain_item_id']
         new_item = Item.objects.get(id=maintain_item_id)
