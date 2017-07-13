@@ -8,6 +8,10 @@
 <div class="container">
     <h1>getData</h1>
     <p>Get the loaded data of table: <code>$table.bootstrapTable('getData');</code></p>
+    <div id="loading" style="text-align: center;">
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        Loading
+    </div>
     <table id="table" data-show-refresh="true" data-show-columns="true" data-search="true"></table>
     <script>
         $.getJSON("{% url 'ostiarius:jsonData' %}", function (jsonFromFile) {
@@ -20,8 +24,8 @@
                             title: 'Asset Number',
                         },
                         {
-                          field: 'S_N',
-                          title: 'S/N'
+                            field: 'S_N',
+                            title: 'S/N'
                         },
                         {
                             field: 'item_name',
@@ -43,9 +47,9 @@
                         },
                     ]
                 })
+                $('#loading').hide()
             })
         });
-
         function PresentFormatter(value, row, index) {
             if (value == true) {
                 return "<span class='label label-success'>In T1933</span>";

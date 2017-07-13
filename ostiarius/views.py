@@ -37,6 +37,13 @@ def console(request):
         return render(request, 'ostiarius/console.html')
 
 
+def settings(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
+    else:
+        return render(request, 'ostiarius/settings.html')
+
+
 def assets(request):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
@@ -175,33 +182,25 @@ def new_maintenance(request):
         return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
     else:
         itemStr = request.POST['maintain_asset_no']
-        maintain_asset_no = re.search('(\d+).+', itemStr).group(1)
+        maintain_asset_no = re.search('(.+)[\s?][\^-].+', itemStr).group(1)
+        print("Maintenance Asset No ---" + maintain_asset_no)
         item = Item.objects.get(asset_no=maintain_asset_no)
         staff_name = request.POST['staff_name']
-        maintainDate = request.POST['maintainDate']
-        returnDate = request.POST['returnDate']
+        maintain_date = request.POST['maintain_date']
+        return_date = request.POST['return_date']
 
         if Maintenance.objects.filter(asset_no=maintain_asset_no) and Maintenance.objects.filter(status=1):
             print("Item already under maintenance")
             return redirect('ostiarius:maintenancePage')
+
         else:
-            if returnDate is None:
-                maintain = Maintenance(asset_no=maintain_asset_no, staff_name=staff_name, date=maintainDate,
-                                       item_id=item.id)
-                maintain.save()
-                item.maintenance_mode = True
-                item.present = False
-                item.save()
-                return redirect('ostiarius:maintenancePage')
-            else:
-                maintain = Maintenance(asset_no=maintain_asset_no, staff_name=staff_name, date=maintainDate,
-                                       return_date=returnDate,
-                                       item_id=item.id)
-                maintain.save()
-                item.maintenance_mode = True
-                item.present = False
-                item.save()
-                return redirect('ostiarius:maintenancePage')
+            maintain = Maintenance(asset_no=maintain_asset_no, staff_name=staff_name, date=maintain_date,
+                                   return_date=return_date, item_id=item.id)
+            maintain.save()
+            item.maintenance_mode = True
+            item.present = False
+            item.save()
+            return redirect('ostiarius:maintenancePage')
 
 
 def update_maintenance(request):
@@ -214,17 +213,26 @@ def update_maintenance(request):
         maintain_status = request.POST['maintain_status']
         maintain_staff_name = request.POST['staff_name']
         maintain_date = request.POST['maintainDate']
-        if new_maintain:
+
+        if new_maintain.status:
             new_maintain.status = maintain_status
-            new_item.maintenance_mode = maintain_status
             new_maintain.staff_name = maintain_staff_name
             new_maintain.date = maintain_date
             new_maintain.save()
+            new_item.maintenance_mode = maintain_status
+            new_item.present = True
             new_item.save()
             print("Maintenance table updated")
             return redirect('ostiarius:maintenancePage')
         else:
-            print("Item already under maintenance")
+            new_maintain.status = maintain_status
+            new_maintain.staff_name = maintain_staff_name
+            new_maintain.date = maintain_date
+            new_maintain.save()
+            new_item.maintenance_mode = maintain_status
+            new_item.present = False
+            new_item.save()
+            print("Maintenance table updated")
             return redirect('ostiarius:maintenancePage')
 
 
@@ -250,6 +258,11 @@ def jsonData(request):
     return JsonResponse(serializer.data, safe=False)
 
 
+def piGET(request):
+    res = requests.get("http://128.199.75.229/status.php")
+    return JsonResponse(res.json(), safe=False)
+
+
 def GETrequest(request):
     res = requests.get("http://128.199.75.229/items.php")
     return JsonResponse(res.json(), safe=False)
@@ -271,20 +284,5 @@ def POSTassets(request):
     return redirect('ostiarius:assets')
 
 
-# def POSTalerts(request):
-#     if not request.user.is_authenticated():
-#         return render(request, 'ostiarius/login.html')
-#     else:
-#         res = requests.get("http://128.199.75.229/alertspost.php")
-#         data = res.json()
-#         for key, value in data.items():
-#             for alert in value:
-#                 serializer = AlertSerializer(data=alert)
-#                 if serializer.is_valid():
-#                     serializer.save()
-#
-#     return redirect('ostiarius:alertPage')
-
-
-def blankTable(request):
+def blank_table(request):
     return render(request, 'ostiarius/blank-tables.html')

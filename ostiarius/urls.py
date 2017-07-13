@@ -19,10 +19,12 @@ urlpatterns = [
     url(r'^maintenance/insertMaintenance$', views.new_maintenance, name='new_maintenance'),
     url(r'^maintenance/updateMaintenance$', views.update_maintenance, name='update_maintenance'),
     url(r'^console/$', views.console, name='console'),
+    url(r'^settings/$', views.settings, name='settings'),
 
     url(r'^jsonData/$', views.jsonData, name='jsonData'),
+    url(r'^piGET/$', views.piGET, name='piGET'),
+    url(r'^jsonData/blankTable$', views.blank_table, name='blank_table'),
     url(r'^GETrequest/$', views.GETrequest, name='GETrequest'),
     url(r'^POSTassets/$', views.POSTassets, name='POSTassets'),
-    url(r'^jsonData/blankTable$', views.blankTable, name='blankTable'),
     url(r'^asset_list/$', views.asset_list, name='asset_list'),
 ]

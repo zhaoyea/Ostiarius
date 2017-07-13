@@ -1,4 +1,11 @@
 {% include 'ostiarius/base.html' %}
+{% load staticfiles %}
+<link href="{% static 'ostiarius/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'ostiarius/tables/css/bootstrap-table.css' %}">
+<script src="{% static 'ostiarius/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'ostiarius/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'ostiarius/tables/js/bootstrap-table.js' %}"></script>
+
 <div id="wrapper">
     <div id="page-wrapper">
         <div class="row">
@@ -7,5 +14,66 @@
             </div>
         </div>
         {# Start Inserting here #}
+        <div class="container">
+            <div class=".col-md-4">
+                {# Start Inserting here #}
+                <h2>System Diagnostic</h2>
+                <p>This will generate a report of the status of the Pi Setup.</p>
+                <button id="show" class="btn btn-primary">
+                    Generate Report
+                </button>
+
+                <div id="loading" style="text-align: center;">
+                    <i class="fa fa-circle-o-notch fa-spin"></i>
+                    Loading
+                </div>
+
+                <div id="table1">
+                    <table id="table" data-show-refresh="true" data-search="true">
+                    </table>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
+<script>
+    $.getJSON("{% url 'ostiarius:piGET' %}", function (jsonFromFile) {
+        $(document).ready(function () {
+            $("#table1").hide();
+            $("#show").click(function () {
+                $("#table1").show();
+                $('#table').bootstrapTable({
+                    data: jsonFromFile,
+                    columns: [
+                        {
+                            field: 'temp_status',
+                            title: 'Temperature',
+                        },
+                        {
+                            field: 'camera_status',
+                            title: 'Camera',
+                            formatter: 'CameraFormatter',
+                        },
+                        {
+                            field: 'arm_usage',
+                            title: 'Arm Usage',
+                        },
+                        {
+                            field: 'gpu_usage',
+                            title: 'Gpu Usage',
+                        },
+                    ]
+                })
+            })
+        });
+    });
+    function CameraFormatter(value, row, index) {
+        if (value == true) {
+            return "<span class='label label-success'>Working</span>";
+        }
+        else {
+            return "<span class='label label-danger'>Not Working</span>";
+        }
+    }
+</script>

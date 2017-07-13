@@ -31,7 +31,7 @@ class Maintenance(models.Model):
     asset_no = models.CharField(max_length=10)
     staff_name = models.CharField(max_length=100)
     date = models.DateField()
-    return_date = models.DateField(default=None, blank=True, null=True)
+    return_date = models.DateField(blank=True, null=True)
     status = models.BooleanField(default=True)
 
     def __str__(self):
@@ -46,5 +46,9 @@ class Mapping(models.Model):
     def __str__(self):
         return self.uid + '-' + self.asset_no
 
+
 class Staff(models.Model):
     staff_name = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.staff_name

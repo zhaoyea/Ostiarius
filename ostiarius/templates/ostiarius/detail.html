@@ -11,7 +11,7 @@
             </div>
             <!-- /.row -->
             {% for item in item_present %}
-                <div class="col-lg-3" style="text-align: center">
+                <div class="col-lg-4" style="text-align: center">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             {{ item.asset_no }}
@@ -25,7 +25,8 @@
                                 {% for maintain in item.maintenance_set.all %}
                                     Maintenance Date: <span
                                         class="label label-default">{{ maintain.date }}</span></p>
-                                    Staff in Charge: <span class="label label-primary">{{ maintain.staff_name }}</span>
+                                    Staff in Charge:
+                                    <span class="label label-primary">{{ maintain.staff_name }}</span>
                                 {% endfor %}
                             {% else %}
                                 <p>Status: <span class="label label-danger">Not in T1933</span></p>
