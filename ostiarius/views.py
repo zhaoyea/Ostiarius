@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.http import JsonResponse
@@ -18,7 +18,7 @@ def index(request):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
     else:
-        alerts = Alert.objects.all()
+        alerts = Alert.objects.filter(date=date.today())
         item_stolen = Alert.objects.all().count()
         item_present = Item.objects.filter(present=0).count()
         item_maintenance = Item.objects.filter(maintenance_mode=1).count()
@@ -96,7 +96,7 @@ def alert(request):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/login.html')
     else:
-        alerts = Alert.objects.all()
+        alerts = Alert.objects.filter(date=date.today())
         return render(request, 'ostiarius/detail.html', {
             'alerts': alerts,
         })
@@ -134,7 +134,7 @@ def logout_user(request):
     context = {
         "form": form,
     }
-    return render(request, 'music/login.html', context)
+    return render(request, 'ostiarius/login.html', context)
 
 
 def add_items(request):
@@ -286,3 +286,9 @@ def POSTassets(request):
 
 def blank_table(request):
     return render(request, 'ostiarius/blank-tables.html')
+
+
+def line(request):
+    res = requests.get("http://128.199.75.229/alertspost.php")
+    # return JsonResponse(res.json(), safe=False)
+    return render(request, 'ostiarius/line.html')

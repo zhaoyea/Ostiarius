@@ -16,6 +16,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="website" />
     <orderEntry type="module" module-name="RESTFUL_API" />
+    <orderEntry type="module" module-name="chartit-master" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />

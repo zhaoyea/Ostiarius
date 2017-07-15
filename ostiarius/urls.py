@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^console/$', views.console, name='console'),
     url(r'^settings/$', views.settings, name='settings'),
 
+    url(r'^line/$', views.line, name='line'),
     url(r'^jsonData/$', views.jsonData, name='jsonData'),
     url(r'^piGET/$', views.piGET, name='piGET'),
     url(r'^jsonData/blankTable$', views.blank_table, name='blank_table'),
