@@ -1,4 +1,6 @@
-from django.shortcuts import render, get_object_or_404, redirect, render_to_response
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import View
+from rest_framework.views import APIView
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.http import JsonResponse
@@ -6,7 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .forms import *
-import re
+import re, json
 from datetime import date
 from .models import *
 from .serializers import *
@@ -22,26 +24,14 @@ def index(request):
         item_stolen = Alert.objects.all().count()
         item_present = Item.objects.filter(present=0).count()
         item_maintenance = Item.objects.filter(maintenance_mode=1).count()
+        maintain_overdue = Maintenance.objects.filter(return_date__lt=date.today())
         return render(request, 'ostiarius/index.html', {
             'alerts': alerts,
             'item_stolen': item_stolen,
             'item_present': item_present,
             'item_maintenance': item_maintenance,
+            'maintain_overdue': maintain_overdue,
         })
-
-
-def console(request):
-    if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
-    else:
-        return render(request, 'ostiarius/console.html')
-
-
-def settings(request):
-    if not request.user.is_authenticated():
-        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
-    else:
-        return render(request, 'ostiarius/settings.html')
 
 
 def assets(request):
@@ -135,6 +125,20 @@ def logout_user(request):
         "form": form,
     }
     return render(request, 'ostiarius/login.html', context)
+
+
+def console(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
+    else:
+        return render(request, 'ostiarius/console.html')
+
+
+def settings(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/login.html', {'error_message': 'Please login first'})
+    else:
+        return render(request, 'ostiarius/settings.html')
 
 
 def add_items(request):
@@ -289,6 +293,22 @@ def blank_table(request):
 
 
 def line(request):
-    res = requests.get("http://128.199.75.229/alertspost.php")
-    # return JsonResponse(res.json(), safe=False)
-    return render(request, 'ostiarius/line.html')
+    jan = Alert.objects.filter(date__month='01')
+    feb = Alert.objects.filter(date__month='02')
+    mar = Alert.objects.filter(date__month='03')
+    april = Alert.objects.filter(date__month='04')
+    may = Alert.objects.filter(date__month='05')
+    june = Alert.objects.filter(date__month='06')
+    july = Alert.objects.filter(date__month='07')
+    aug = Alert.objects.filter(date__month='08')
+    sep = Alert.objects.filter(date__month='09')
+    oct = Alert.objects.filter(date__month='10')
+    nov = Alert.objects.filter(date__month='11')
+    dec = Alert.objects.filter(date__month='12')
+
+    alert_data = [jan, feb, mar, april, may, june, july, aug, sep, oct, nov, dec]
+
+    data = {
+        'alert_data': alert_data,
+    }
+    return render(request, 'ostiarius/line.html', data)

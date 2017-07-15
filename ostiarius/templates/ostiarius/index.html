@@ -1,4 +1,6 @@
 {% include 'ostiarius/base.html' %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
 <div id="wrapper">
     <div id="page-wrapper">
         <div class="row">
@@ -54,9 +56,29 @@
                         <div class="row">
                             <div class="col-xs-9 text-left">
                                 <div class="huge">{{ item_maintenance }} items</div>
-                                <div> On Maintainence today</div>
+                                <div> On Maintainence</div>
                             </div>
                             <i class="fa fa-wrench fa-5x"></i>
+                        </div>
+                    </div>
+                    <a href="{% url 'ostiarius:maintenance' %}">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-9 text-left">
+                                <div class="huge">{{ maintain_overdue.count }} items</div>
+                                <div>Overdue Items</div>
+                            </div>
+                            <i class="fa fa-clock-o fa-5x"></i>
                         </div>
                     </div>
                     <a href="{% url 'ostiarius:maintenance' %}">
@@ -75,31 +97,11 @@
             <div class="col-lg-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart Example
-                        <div class="pull-right">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-xs dropdown-toggle"
-                                        data-toggle="dropdown">
-                                    Actions
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu pull-right" role="menu">
-                                    <li><a href="#">Action</a>
-                                    </li>
-                                    <li><a href="#">Another action</a>
-                                    </li>
-                                    <li><a href="#">Something else here</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Separated link</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Line Chart
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <div id="linecht"></div>
+                        <canvas id="myLineChart"></canvas>
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -115,8 +117,8 @@
                     <div class="panel-body">
                         <div class="list-group">
                             <a href="#" class="list-group-item">
-                                <i class="fa fa-comment fa-fw"></i> New Comment
-                                <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                                <i class="fa fa-comment fa-fw"></i> {{ alerts.count }} New Alert
+                                <span class="pull-right text-muted small"><em></em>
                                     </span>
                             </a>
                             <a href="#" class="list-group-item">
@@ -174,3 +176,37 @@
     <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
+<script>
+    var labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
+        'December'];
+    var alert_data = [83, 5, 131, 88, 127, 5, 43, 84, 27, 29, 67, 106];
+
+    var ctx = document.getElementById("myLineChart");
+    var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Number of Alerts in a Month',
+                data: alert_data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgb(0,0,255)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+</script>
