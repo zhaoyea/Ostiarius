@@ -25,13 +25,32 @@ def index(request):
         item_present = Item.objects.filter(present=0).count()
         item_maintenance = Item.objects.filter(maintenance_mode=1).count()
         maintain_overdue = Maintenance.objects.filter(return_date__lt=date.today())
-        return render(request, 'ostiarius/index.html', {
+
+        jan = Alert.objects.filter(date__month='01')
+        feb = Alert.objects.filter(date__month='02')
+        mar = Alert.objects.filter(date__month='03')
+        april = Alert.objects.filter(date__month='04')
+        may = Alert.objects.filter(date__month='05')
+        june = Alert.objects.filter(date__month='06')
+        july = Alert.objects.filter(date__month='07')
+        aug = Alert.objects.filter(date__month='08')
+        sep = Alert.objects.filter(date__month='09')
+        oct = Alert.objects.filter(date__month='10')
+        nov = Alert.objects.filter(date__month='11')
+        dec = Alert.objects.filter(date__month='12')
+
+        alert_data = [jan.count(), feb.count(), mar.count(), april.count(), may.count(), june.count(), july.count(),
+                      aug.count(), sep.count(), oct.count(), nov.count(), dec.count()]
+
+        data = {
             'alerts': alerts,
             'item_stolen': item_stolen,
             'item_present': item_present,
             'item_maintenance': item_maintenance,
             'maintain_overdue': maintain_overdue,
-        })
+            'alert_data': alert_data,
+        }
+        return render(request, 'ostiarius/index.html', data)
 
 
 def assets(request):
@@ -290,25 +309,3 @@ def POSTassets(request):
 
 def blank_table(request):
     return render(request, 'ostiarius/blank-tables.html')
-
-
-def line(request):
-    jan = Alert.objects.filter(date__month='01')
-    feb = Alert.objects.filter(date__month='02')
-    mar = Alert.objects.filter(date__month='03')
-    april = Alert.objects.filter(date__month='04')
-    may = Alert.objects.filter(date__month='05')
-    june = Alert.objects.filter(date__month='06')
-    july = Alert.objects.filter(date__month='07')
-    aug = Alert.objects.filter(date__month='08')
-    sep = Alert.objects.filter(date__month='09')
-    oct = Alert.objects.filter(date__month='10')
-    nov = Alert.objects.filter(date__month='11')
-    dec = Alert.objects.filter(date__month='12')
-
-    alert_data = [jan, feb, mar, april, may, june, july, aug, sep, oct, nov, dec]
-
-    data = {
-        'alert_data': alert_data,
-    }
-    return render(request, 'ostiarius/line.html', data)

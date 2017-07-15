@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                     <label>Return Date</label>
-                    <input name="return_date" class="form-control" type="date" required>
+                    <input name="return_date" class="form-control" type="date" min="{{ today|date:"Y-m-d" }}" required>
                 </div>
             </div>
             <div class="modal-footer">

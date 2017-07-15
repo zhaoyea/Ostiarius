@@ -179,7 +179,7 @@
 <script>
     var labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
         'December'];
-    var alert_data = [83, 5, 131, 88, 127, 5, 43, 84, 27, 29, 67, 106];
+    var alert_data = {{ alert_data | safe }};
 
     var ctx = document.getElementById("myLineChart");
     var myLineChart = new Chart(ctx, {
