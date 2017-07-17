@@ -1,0 +1,94 @@
+{% include 'ostiarius/base.html' %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header"><i class="fa fa-gears fa-fw"></i> Report</h1>
+            </div>
+        </div>
+        {# Start Insert Here #}
+        <div class="container" style="box-shadow: inset 0 0 10px #000000;">
+            <div class="row" style="padding: inherit; padding-top: 15px">
+                <button style="float: right;" type="button" class="btn btn-success btn-circle btn-lg"><i
+                        class="glyphicon glyphicon-export"></i>
+                </button>
+                <img src="http://imgur.com/rNNLjKf.png" width="200" height="200" style="float: left;"/>
+                <h3 style="text-align: center; padding-right: 150px; padding-top: 60px;">Ostiarius Pte Ltd</h3>
+            </div>
+            <div class="row" style="text-align: right; padding: inherit">
+                <h5>Ostiarius Report</h5>
+                <p>[{{ today }}]</p>
+            </div>
+            <hr>
+            <div class="row" style="padding-left: 15px">
+                {#                {% for alert in alerts %}#}
+                <p>Asset Number: {{ alert.item }}</p>
+                <p>Item Name: {{ alert.item.item_name }}</p>
+                <p>Alert Date: {{ alert.date }}</p>
+                <p>Alert Time: {{ alert.time }}</p>
+                <p>Admin Comments: {{ alert.admin_message }}</p>
+                {#                {% endfor %}#}
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-9">
+                    <canvas id="myLineChart"></canvas>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
+
+{% include 'ostiarius/footer.html' %}
+
+<script>
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    var labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
+        'December'];
+
+    var ctx = document.getElementById("myLineChart");
+
+    var myLineChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Number of Alerts',
+                data: {{ alert_data | safe }},
+                backgroundColor: [
+                    {% for foo in alert_data %}
+                        getRandomColor(),
+                    {% endfor %}
+                ],
+                borderColor: [
+                    {% for foo in alert_data %}
+                        getRandomColor(),
+                    {% endfor %}
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+</script>

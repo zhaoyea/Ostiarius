@@ -47,11 +47,19 @@
                     <h3 class="panel-title">Please Sign In</h3>
                 </div>
                 <div class="panel-body">
-                    {% if error_message %}
-                        <div class="alert alert-danger">
-                            {{ error_message }}
+                    {% for message in messages %}
+                        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
                         </div>
-                    {% endif %}
+                    {% endfor %}
+{#                    {% if error_message %}#}
+{#                        <div class="alert alert-danger">#}
+{#                            {{ error_message }}#}
+{#                        </div>#}
+{#                    {% endif %}#}
                     <form class="form-horizontal" role="form" action="{% url 'ostiarius:login_user' %}" method="post"
                           enctype="multipart/form-data">
                         {% csrf_token %}

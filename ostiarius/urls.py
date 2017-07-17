@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^detail/present/$', views.present, name='present'),
     url(r'^detail/alert/$', views.alert, name='alert'),
     url(r'^detail/maintenance/$', views.maintenance, name='maintenance'),
+    url(r'^detail/overdue/$', views.overdue, name='overdue'),
     url(r'^assets/$', views.assets, name='assets'),
     url(r'^maintenance/$', views.maintenancePage, name='maintenancePage'),
     url(r'^alert/$', views.alertPage, name='alertPage'),
@@ -21,10 +22,14 @@ urlpatterns = [
     url(r'^console/$', views.console, name='console'),
     url(r'^settings/$', views.settings, name='settings'),
 
+    url(r'^report/$', views.report, name='report'),
     url(r'^jsonData/$', views.jsonData, name='jsonData'),
     url(r'^piGET/$', views.piGET, name='piGET'),
     url(r'^jsonData/blankTable$', views.blank_table, name='blank_table'),
     url(r'^GETrequest/$', views.GETrequest, name='GETrequest'),
     url(r'^POSTassets/$', views.POSTassets, name='POSTassets'),
     url(r'^asset_list/$', views.asset_list, name='asset_list'),
+    url(r'^push_notifi/$', views.push_notifi, name='push_notifi'),
+    url(r'^push_alert/$', views.push_alert, name='push_alert'),
+
 ]

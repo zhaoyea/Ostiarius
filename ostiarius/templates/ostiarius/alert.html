@@ -16,7 +16,7 @@
         </div>
         <div class="container">
             <div class="panel-body">
-                <table id="table" data-show-refresh="true" data-show-columns="true" data-search="true"
+                <table id="table" data-show-columns="true" data-search="true"
                        data-page-number="true" data-pagination="true" data-toggle="table" class="table">
                     <thead>
                     <tr>
@@ -25,6 +25,7 @@
                         <th>Alert Date</th>
                         <th>Alert Time</th>
                         <th>Culprit</th>
+                        <th>Admin Message</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,7 +36,14 @@
                             <td>{{ alert.date }}</td>
                             <td>{{ alert.time }}</td>
                             <td><img src="data:image/png;base64,{{ alert.photo }}" class="img-responsive"
-                                     style="width: 60px; height: 60px"/></td>
+                                     style="width: 60px; height: 60px"/>
+                            <td>
+                                {% if alert.admin_message is None %}
+                                    -
+                                {% else %}
+                                    {{ alert.admin_message }}
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

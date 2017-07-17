@@ -17,10 +17,11 @@ class Item(models.Model):
 class Alert(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     asset_no = models.CharField(max_length=10)
-    item_name = models.CharField(max_length=1000)
     date = models.DateField()
     time = models.TimeField()
     photo = models.TextField()
+    admin_message = models.CharField(max_length=1000, blank=True, null=True)
+    # notified = models.BooleanField(default=False)
 
     def __str__(self):
         return self.item.asset_no
@@ -49,6 +50,19 @@ class Mapping(models.Model):
 
 class Staff(models.Model):
     staff_name = models.CharField(max_length=1000)
+    email = models.CharField(max_length=1000)
 
     def __str__(self):
         return self.staff_name
+
+class Pilog(models.Model):
+    pi_sn = models.IntegerField()
+    temp_status = models.DecimalField(max_digits=3, decimal_places=1)
+    camera_status = models.BooleanField(default=0)
+    arm_usage = models.IntegerField()
+    gpu_usage = models.IntegerField()
+    logdate = models.DateField()
+    logtime = models.TimeField()
+
+    def __str__(self):
+        return self.pi_sn
