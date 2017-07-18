@@ -8,7 +8,6 @@
                 <h1 class="page-header"><i class="fa fa-dashboard fa-fw"></i> Dashboard</h1>
             </div>
         </div>
-
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="panel panel-red">
@@ -97,7 +96,7 @@
             <div class="col-lg-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> Line Chart
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Bar Chart
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -132,9 +131,9 @@
                         <select>
                             <option></option>
                             {% for alert in all_alerts %}
-{#                                <form action="{% url 'ostiarius:index' alert.id %}">#}
-                                    <option value="{{ alert.asset_no }}">{{ alert.item }}</option>
-{#                                </form>#}
+                                {#                                <form action="{% url 'ostiarius:index' alert.id %}">#}
+                                <option value="{{ alert.asset_no }}">{{ alert.item }}</option>
+                                {#                                </form>#}
                             {% endfor %}
                         </select>
                     </div>
@@ -152,6 +151,13 @@
 </div>
 <!-- /#wrapper -->
 <script>
+{#    $(document).ready(function () {#}
+{#        $("#refresh").load("{% url 'ostiarius:index' %}");#}
+{#        var refreshId = setInterval(function () {#}
+{#            $("#refresh").load("{% url 'ostiarius:index' %}");#}
+{#        }, 600000);#}
+{#        $.ajaxSetup({cache: false});#}
+{#    });#}
 
     function getRandomColor() {
         var letters = '0123456789ABCDEF'.split('');
@@ -216,24 +222,24 @@
         },
     });
 
-{#    var myLineChart = new Chart(ctx, {#}
-{#        type: 'line',#}
-{#        data: {#}
-{#            labels: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],#}
-{#            datasets: [{#}
-{#                label: '{{ line_alert_id.asset_no }} : {{ line_alert_id.item.item_name }}',#}
-{#                data: {{ line_data | safe }},#}
-{#                backgroundColor: "rgba(0,0,0,0)",#}
-{#                borderColor: "rgba(255, 0, 0, 1)",#}
-{#                borderWidth: 1#}
-{#            }]#}
-{#        },#}
-{#        options: {#}
-{#            elements: {#}
-{#                line: {#}
-{#                    tension: 0, // disables bezier curves#}
-{#                }#}
-{#            }#}
-{#        }#}
-{#    });#}
+    {#    var myLineChart = new Chart(ctx, {#}
+    {#        type: 'line',#}
+    {#        data: {#}
+    {#            labels: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],#}
+    {#            datasets: [{#}
+    {#                label: '{{ line_alert_id.asset_no }} : {{ line_alert_id.item.item_name }}',#}
+    {#                data: {{ line_data | safe }},#}
+    {#                backgroundColor: "rgba(0,0,0,0)",#}
+    {#                borderColor: "rgba(255, 0, 0, 1)",#}
+    {#                borderWidth: 1#}
+    {#            }]#}
+    {#        },#}
+    {#        options: {#}
+    {#            elements: {#}
+    {#                line: {#}
+    {#                    tension: 0, // disables bezier curves#}
+    {#                }#}
+    {#            }#}
+    {#        }#}
+    {#    });#}
 </script>

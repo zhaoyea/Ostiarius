@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^console/$', views.console, name='console'),
     url(r'^settings/$', views.settings, name='settings'),
 
-    url(r'^report/(?P<alert_id>[0-9]+)/$', views.report, name='report'),
+    url(r'^alert_report/(?P<alert_id>[0-9]+)/$', views.alert_report, name='alert_report'),
     url(r'^jsonData/$', views.jsonData, name='jsonData'),
     url(r'^piGET/$', views.piGET, name='piGET'),
     url(r'^jsonData/blankTable$', views.blank_table, name='blank_table'),

@@ -26,6 +26,7 @@
                         <th>Alert Time</th>
                         <th>Culprit</th>
                         <th>Admin Message</th>
+                        <th>View Charts</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,6 +45,14 @@
                                     {{ alert.admin_message }}
                                 {% endif %}
                             </td>
+                        <td>
+                            <form action="{% url 'ostiarius:alert_report' alert.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-outline btn-success btn-circle"><i
+                                                class="fa fa-bar-chart-o"></i>
+                                        </button>
+                                    </form>
+                        </td>
                         </tr>
                     {% endfor %}
                     </tbody>

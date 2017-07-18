@@ -27,7 +27,6 @@
                             <th>Asset No</th>
                             <th>Asset Name</th>
                             <th>Information</th>
-                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -58,11 +57,6 @@
                                         <p>Status: <span class="label label-danger">Not in T1933</span></p>
                                     {% endif %}
                                 </td>
-                                <td>
-                                    <button type="submit" class="btn btn-success btn-circle"><i
-                                            class="glyphicon glyphicon-export"></i>
-                                    </button>
-                                </td>
                             </tr>
                         {% endfor %}
 
@@ -83,14 +77,6 @@
                                         <img src="data:image/png;base64,{{ alert.photo }}" class="img-responsive"
                                              style="width: 60px; height: 60px"/>
                                     </p>
-                                </td>
-                                <td>
-                                    <form action="{% url 'ostiarius:report' alert.id %}">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-success btn-circle"><i
-                                                class="glyphicon glyphicon-export"></i>
-                                        </button>
-                                    </form>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -117,11 +103,6 @@
                                         <span class="label label-primary">{{ maintain.staff_name }}</span>
                                     </p>
                                 </td>
-                                <td>
-                                    <button type="button" class="btn btn-success btn-circle"><i
-                                            class="glyphicon glyphicon-export"></i>
-                                    </button>
-                                </td>
                             </tr>
                         {% endfor %}
 
@@ -147,11 +128,6 @@
                                     <p>Staff in Charge:
                                         <span class="label label-primary">{{ due.staff_name }}</span>
                                     </p>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-success btn-circle"><i
-                                            class="glyphicon glyphicon-export"></i>
-                                    </button>
                                 </td>
                             </tr>
                         {% endfor %}

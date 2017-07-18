@@ -34,8 +34,8 @@
                 </div>
                 <div class="form-group">
                     <label>Maintenance Date</label>
-                    <input name="maintain_date" class="form-control" type="date" value="{{ today|date:"Y-d-m" }}"
-                           max="{{ today|date:"Y-d-m" }}" required>
+                    <input name="maintain_date" class="form-control" type="date" value="{{ today|date:"Y-m-d" }}"
+                           min="{{ today|date:"Y-m-d" }}" required>
                 </div>
 
                 <div class="form-group">

@@ -398,7 +398,7 @@ def push_notifi(request):
     return render(request, 'ostiarius/push-notifi.html')
 
 
-def report(request, alert_id):
+def alert_report(request, alert_id):
     if not request.user.is_authenticated():
         messages.error(request, 'Please login first')
         return render(request, 'ostiarius/login.html')
@@ -419,4 +419,4 @@ def report(request, alert_id):
             'today': today,
             'line_data': line_data,
         }
-        return render(request, 'ostiarius/report.html', context)
+        return render(request, 'ostiarius/alert_report.html', context)
