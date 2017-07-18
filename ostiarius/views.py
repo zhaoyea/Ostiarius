@@ -53,6 +53,7 @@ def index(request):
             pie_data.append(value)
 
         data = {
+            'all_alerts': all_alerts,
             'alerts': alerts,
             'item_present': item_present,
             'item_maintenance': item_maintenance,
@@ -62,6 +63,28 @@ def index(request):
             'pie_data': pie_data,
         }
         return render(request, 'ostiarius/index.html', data)
+
+
+# def index_line(request, alert_id):
+#     if not request.user.is_authenticated():
+#         messages.error(request, 'Please login first')
+#         return render(request, 'ostiarius/login.html')
+#     else:
+#         alerts_id = get_object_or_404(Alert, pk=alert_id)
+#         line = {}
+#         line_data = []
+#
+#         for i in range(24):
+#             line[alerts_id.time] = Alert.objects.filter(time__hour=i, asset_no=alerts_id.asset_no).count()
+#             i += 1
+#             for key, value in line.items():
+#                 line_data.append(value)
+#
+#         context = {
+#             'alerts_id': alerts_id,
+#             'line_data': line_data,
+#         }
+#         return render(request, 'ostiarius/index.html', context)
 
 
 def assets(request):

@@ -129,20 +129,14 @@
                 <div class="panel-heading">
                     <i class="fa fa-bar-chart-o fa-fw"></i> Line Chart
                     <div class="pull-right">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-xs dropdown-toggle"
-                                    data-toggle="dropdown">
-                                Assets
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu pull-right" role="menu">
-                                {% for alert in all_alerts %}
-                                    <li>
-                                        <a href="#">{{ alert.asset_no }}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+                        <select>
+                            <option></option>
+                            {% for alert in all_alerts %}
+{#                                <form action="{% url 'ostiarius:index' alert.id %}">#}
+                                    <option value="{{ alert.asset_no }}">{{ alert.item }}</option>
+{#                                </form>#}
+                            {% endfor %}
+                        </select>
                     </div>
                 </div>
                 <!-- /.panel-heading -->
@@ -227,7 +221,7 @@
 {#        data: {#}
 {#            labels: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],#}
 {#            datasets: [{#}
-{#                label: '{{ alerts.asset_no }} : {{ alerts.item.item_name }}',#}
+{#                label: '{{ line_alert_id.asset_no }} : {{ line_alert_id.item.item_name }}',#}
 {#                data: {{ line_data | safe }},#}
 {#                backgroundColor: "rgba(0,0,0,0)",#}
 {#                borderColor: "rgba(255, 0, 0, 1)",#}
