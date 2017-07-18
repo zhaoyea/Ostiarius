@@ -101,7 +101,7 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <canvas id="myLineChart"></canvas>
+                        <canvas id="myBarChart"></canvas>
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -115,7 +115,7 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <canvas id="myPieChart"></canvas>
+                        <canvas id="myDoughnutChart"></canvas>
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -123,7 +123,36 @@
             </div>
             <!-- /.col-lg-4 -->
         </div>
-        <!-- /.row -->
+
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Line Chart
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                                    data-toggle="dropdown">
+                                Assets
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                {% for alert in all_alerts %}
+                                    <li>
+                                        <a href="#">{{ alert.asset_no }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div id="myLineChart"></div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
     </div>
     <!-- /#page-wrapper -->
 </div>
@@ -142,10 +171,11 @@
     var labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
         'December'];
 
-    var ctx = document.getElementById("myLineChart");
-    var ctx2 = document.getElementById("myPieChart");
+    var ctx = document.getElementById("myBarChart");
+    var ctx2 = document.getElementById("myDoughnutChart");
+    var ctx3 = document.getElementById("myLineChart");
 
-    var myLineChart = new Chart(ctx, {
+    var myBarChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
@@ -177,8 +207,8 @@
     });
 
 
-    var myPieChart = new Chart(ctx2, {
-        type: 'pie',
+    var myDoughnutChart = new Chart(ctx2, {
+        type: 'doughnut',
         data: {
             labels: {{ pie_labels | safe }},
             datasets: [{
@@ -191,4 +221,25 @@
             }],
         },
     });
+
+{#    var myLineChart = new Chart(ctx, {#}
+{#        type: 'line',#}
+{#        data: {#}
+{#            labels: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],#}
+{#            datasets: [{#}
+{#                label: '{{ alerts.asset_no }} : {{ alerts.item.item_name }}',#}
+{#                data: {{ line_data | safe }},#}
+{#                backgroundColor: "rgba(0,0,0,0)",#}
+{#                borderColor: "rgba(255, 0, 0, 1)",#}
+{#                borderWidth: 1#}
+{#            }]#}
+{#        },#}
+{#        options: {#}
+{#            elements: {#}
+{#                line: {#}
+{#                    tension: 0, // disables bezier curves#}
+{#                }#}
+{#            }#}
+{#        }#}
+{#    });#}
 </script>

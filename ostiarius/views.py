@@ -2,14 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .forms import *
 import re
 from datetime import date
-from .models import *
 from .serializers import *
 import requests
 
@@ -24,6 +23,11 @@ def index(request):
         item_present = Item.objects.filter(present=0).count()
         item_maintenance = Item.objects.filter(maintenance_mode=1).count()
         maintain_overdue = Maintenance.objects.filter(return_date__lt=date.today())
+        all_alerts = Alert.objects.all()
+
+        pie = {}
+        pie_labels = []
+        pie_data = []
 
         jan = Alert.objects.filter(date__month='01')
         feb = Alert.objects.filter(date__month='02')
@@ -41,11 +45,6 @@ def index(request):
         alert_data = [jan.count(), feb.count(), mar.count(), april.count(), may.count(), june.count(), july.count(),
                       aug.count(), sep.count(), oct.count(), nov.count(), dec.count()]
 
-        all_alerts = Alert.objects.all()
-        pie = {}
-        pie_labels = []
-        pie_data = []
-
         for alert in all_alerts:
             pie[alert.asset_no] = Alert.objects.filter(asset_no=alert.asset_no).count()
 
@@ -60,7 +59,7 @@ def index(request):
             'maintain_overdue': maintain_overdue,
             'alert_data': alert_data,
             'pie_labels': pie_labels,
-            'pie_data': pie_data
+            'pie_data': pie_data,
         }
         return render(request, 'ostiarius/index.html', data)
 
@@ -376,33 +375,25 @@ def push_notifi(request):
     return render(request, 'ostiarius/push-notifi.html')
 
 
-def report(request):
+def report(request, alert_id):
     if not request.user.is_authenticated():
         messages.error(request, 'Please login first')
         return render(request, 'ostiarius/login.html')
     else:
-        alerts = Alert.objects.all()
         today = datetime.today()
+        alerts = get_object_or_404(Alert, pk=alert_id)
+        line = {}
+        line_data = []
 
-        jan = Alert.objects.filter(date__month='01')
-        feb = Alert.objects.filter(date__month='02')
-        mar = Alert.objects.filter(date__month='03')
-        april = Alert.objects.filter(date__month='04')
-        may = Alert.objects.filter(date__month='05')
-        june = Alert.objects.filter(date__month='06')
-        july = Alert.objects.filter(date__month='07')
-        aug = Alert.objects.filter(date__month='08')
-        sep = Alert.objects.filter(date__month='09')
-        oct = Alert.objects.filter(date__month='10')
-        nov = Alert.objects.filter(date__month='11')
-        dec = Alert.objects.filter(date__month='12')
-
-        alert_data = [jan.count(), feb.count(), mar.count(), april.count(), may.count(), june.count(), july.count(),
-                      aug.count(), sep.count(), oct.count(), nov.count(), dec.count()]
+        for i in range(24):
+            line[alerts.time] = Alert.objects.filter(time__hour=i, asset_no=alerts.asset_no).count()
+            i += 1
+            for key, value in line.items():
+                line_data.append(value)
 
         context = {
-            'alerts' : alerts,
-            'today' : today,
-            'alert_data' : alert_data,
+            'alerts': alerts,
+            'today': today,
+            'line_data': line_data,
         }
         return render(request, 'ostiarius/report.html', context)

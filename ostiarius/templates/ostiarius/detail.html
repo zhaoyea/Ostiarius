@@ -59,7 +59,7 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success btn-circle"><i
+                                    <button type="submit" class="btn btn-success btn-circle"><i
                                             class="glyphicon glyphicon-export"></i>
                                     </button>
                                 </td>
@@ -85,9 +85,12 @@
                                     </p>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success btn-circle"><i
-                                            class="glyphicon glyphicon-export"></i>
-                                    </button>
+                                    <form action="{% url 'ostiarius:report' alert.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-success btn-circle"><i
+                                                class="glyphicon glyphicon-export"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -113,6 +116,11 @@
                                         Staff in Charge:
                                         <span class="label label-primary">{{ maintain.staff_name }}</span>
                                     </p>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-circle"><i
+                                            class="glyphicon glyphicon-export"></i>
+                                    </button>
                                 </td>
                             </tr>
                         {% endfor %}
