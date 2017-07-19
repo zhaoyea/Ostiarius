@@ -12,7 +12,7 @@
         <div class="container" style="box-shadow: inset 0 0 10px #000000;">
             <div class="row" style="padding: inherit; padding-top: 15px">
                 <button style="float: right;" type="button" class="btn btn-outline btn-success btn-circle btn-lg"><i
-                        class="glyphicon glyphicon-export"></i>
+                        class="fa fa-download"></i>
                 </button>
                 <img src="http://imgur.com/rNNLjKf.png" width="200" height="200" style="float: left;"/>
                 <h3 style="text-align: center; padding-right: 150px; padding-top: 60px;">Ostiarius Pte Ltd</h3>
@@ -53,35 +53,26 @@
 
 <script>
 
-    function getRandomColor() {
-        var letters = '0123456789ABCDEF'.split('');
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
-
     var ctx = document.getElementById("myLineChart");
 
     var myLineChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],
-                datasets: [{
-                    label: '{{ alerts.asset_no }} : {{ alerts.item.item_name }}',
-                    data: {{ line_data | safe }},
-                    backgroundColor: "rgba(0,0,0,0)",
-                    borderColor:"rgba(255, 0, 0, 1)",
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                elements: {
-                    line: {
-                        tension: 0, // disables bezier curves
-                    }
+        type: 'line',
+        data: {
+            labels: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],
+            datasets: [{
+                label: '{{ alerts.asset_no }} : {{ alerts.item.item_name }}',
+                data: {{ line_data | safe }},
+                backgroundColor: "rgba(0,0,0,0)",
+                borderColor: "rgba(255, 0, 0, 1)",
+                borderWidth: 1
+            }]
+        },
+        options: {
+            elements: {
+                line: {
+                    tension: 0, // disables bezier curves
                 }
             }
-        });
+        }
+    });
 </script>

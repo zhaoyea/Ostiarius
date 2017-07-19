@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .forms import *
-import re
+import re, json
 from datetime import date
 from .serializers import *
 import requests
@@ -24,6 +24,8 @@ def index(request):
         item_maintenance = Item.objects.filter(maintenance_mode=1).count()
         maintain_overdue = Maintenance.objects.filter(return_date__lt=date.today())
         all_alerts = Alert.objects.all()
+        pilog = Pilog.objects.all().latest('id')
+        all_assets = Item.objects.all()
 
         pie = {}
         pie_labels = []
@@ -53,7 +55,6 @@ def index(request):
             pie_data.append(value)
 
         data = {
-            'all_alerts': all_alerts,
             'alerts': alerts,
             'item_present': item_present,
             'item_maintenance': item_maintenance,
@@ -61,30 +62,10 @@ def index(request):
             'alert_data': alert_data,
             'pie_labels': pie_labels,
             'pie_data': pie_data,
+            'pilog':pilog,
+            'all_assets':all_assets,
         }
         return render(request, 'ostiarius/index.html', data)
-
-
-# def index_line(request, alert_id):
-#     if not request.user.is_authenticated():
-#         messages.error(request, 'Please login first')
-#         return render(request, 'ostiarius/login.html')
-#     else:
-#         alerts_id = get_object_or_404(Alert, pk=alert_id)
-#         line = {}
-#         line_data = []
-#
-#         for i in range(24):
-#             line[alerts_id.time] = Alert.objects.filter(time__hour=i, asset_no=alerts_id.asset_no).count()
-#             i += 1
-#             for key, value in line.items():
-#                 line_data.append(value)
-#
-#         context = {
-#             'alerts_id': alerts_id,
-#             'line_data': line_data,
-#         }
-#         return render(request, 'ostiarius/index.html', context)
 
 
 def assets(request):
@@ -133,9 +114,11 @@ def alertPage(request):
     else:
         items = Item.objects.all()
         alerts = Alert.objects.all()
+        today_name = date.today().strftime("%A")
         return render(request, 'ostiarius/alert.html', {
             'items': items,
             'alerts': alerts,
+            'today_name':today_name,
         })
 
 
@@ -212,7 +195,22 @@ def settings(request):
         messages.error(request, 'Please login first')
         return render(request, 'ostiarius/login.html')
     else:
-        return render(request, 'ostiarius/settings.html')
+        pilog = Pilog.objects.all().latest('id')
+        # logs = Pilog.objects.all()
+        #
+        # line = {}
+        # line_data = []
+        #
+        # for i in range(24):
+        #     line[alerts.time] = Alert.objects.filter(time__hour=i, asset_no=alerts.asset_no).count()
+        #     i += 1
+        #     for key, value in line.items():
+        #         line_data.append(value)
+        context = {
+            'pilog': pilog
+        }
+
+        return render(request, 'ostiarius/settings.html', context)
 
 
 def add_items(request):
@@ -357,11 +355,6 @@ def jsonData(request):
     return JsonResponse(serializer.data, safe=False)
 
 
-def piGET(request):
-    res = requests.get("http://128.199.75.229/status.php")
-    return JsonResponse(res.json(), safe=False)
-
-
 def GETrequest(request):
     res = requests.get("http://128.199.75.229/items.php")
     return JsonResponse(res.json(), safe=False)
@@ -410,7 +403,6 @@ def alert_report(request, alert_id):
 
         for i in range(24):
             line[alerts.time] = Alert.objects.filter(time__hour=i, asset_no=alerts.asset_no).count()
-            i += 1
             for key, value in line.items():
                 line_data.append(value)
 
@@ -420,3 +412,22 @@ def alert_report(request, alert_id):
             'line_data': line_data,
         }
         return render(request, 'ostiarius/alert_report.html', context)
+
+
+def indexLineChart(request):
+    dropdown_asset_no = request.GET['name']
+    line_alerts = Alert.objects.filter(asset_no=dropdown_asset_no)[:1]
+    line = {}
+    line_data = []
+
+    for alert in line_alerts:
+        for i in range(24):
+            line[alert.time] = Alert.objects.filter(time__hour=i, asset_no=alert.asset_no).count()
+            for key, value in line.items():
+                line_data.append(value)
+
+    context = {
+        'line_data': line_data,
+    }
+
+    return HttpResponse(json.dumps(context), content_type='application/json')

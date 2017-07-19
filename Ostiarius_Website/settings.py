@@ -76,16 +76,16 @@ WSGI_APPLICATION = 'Ostiarius_Website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ostiarius',
-        # 'NAME': 'ostiarius_merge',
-        'USER': 'root',
-        # 'USER': 'ostiarius',
-        'PASSWORD': 's9837142g',
-        # 'PASSWORD': 'ostiariuspassword',
-        'HOST': 'localhost',
-        # 'HOST': '128.199.75.229',
-        'PORT': '3306',
-        # 'PORT': '',
+        # 'NAME': 'ostiarius',
+        'NAME': 'ostiarius_merge',
+        # 'USER': 'root',
+        'USER': 'ostiarius',
+        # 'PASSWORD': 's9837142g',
+        'PASSWORD': 'ostiariuspassword',
+        # 'HOST': 'localhost',
+        'HOST': '128.199.75.229',
+        # 'PORT': '3306',
+        'PORT': '',
     }
 }
 

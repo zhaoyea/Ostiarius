@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-lg-3 col-md-6">
-                <div class="panel panel-red">
+                <div class="panel panel-danger">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-9 text-left">
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
-                <div class="panel panel-danger">
+                <div class="panel panel-red">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-9 text-left">
@@ -91,6 +91,67 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-red">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-9 text-left">
+                                <div class="huge">{{ pilog.temp_status }} °C</div>
+                                <div> Pi Temperature</div>
+                            </div>
+                            <i class="fa fa-thermometer-half fa-5x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-9 text-left">
+                                <div class="huge">
+                                    {% if not pilog.camera_status %}
+                                        Offline
+                                    {% else %}
+                                        Online
+                                    {% endif %}
+                                </div>
+                                <div> Pi Camera</div>
+                            </div>
+                            <i class="fa fa-video-camera fa-5x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-9 text-left">
+                                <div class="huge">{{ pilog.arm_usage }}</div>
+                                <div> Arm Usage</div>
+                            </div>
+                            <i class="fa fa-signal fa-5x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-9 text-left">
+                                <div class="huge">{{ pilog.gpu_usage }}</div>
+                                <div> GPU Usuage</div>
+                            </div>
+                            <i class="fa fa-signal fa-5x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-8">
@@ -122,43 +183,42 @@
             </div>
             <!-- /.col-lg-4 -->
         </div>
-
         <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-bar-chart-o fa-fw"></i> Line Chart
-                    <div class="pull-right">
-                        <select>
-                            <option></option>
-                            {% for alert in all_alerts %}
-                                {#                                <form action="{% url 'ostiarius:index' alert.id %}">#}
-                                <option value="{{ alert.asset_no }}">{{ alert.item }}</option>
-                                {#                                </form>#}
-                            {% endfor %}
-                        </select>
+            <div class="col-lg-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Line Chart
+                        <div class="pull-right">
+                            <select id="dropdown_line">
+                                <option value=""></option>
+                                {% for item in all_assets %}
+                                    <option value="{{ item.asset_no }}">{{ item }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        Please select from the drop down list.
+                        <canvas id="myLineChart"></canvas>
+                    </div>
+                    <!-- /.panel-body -->
                 </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div id="myLineChart"></div>
-                </div>
-                <!-- /.panel-body -->
+                <!-- /.panel -->
             </div>
-            <!-- /.panel -->
         </div>
     </div>
     <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
 <script>
-{#    $(document).ready(function () {#}
-{#        $("#refresh").load("{% url 'ostiarius:index' %}");#}
-{#        var refreshId = setInterval(function () {#}
-{#            $("#refresh").load("{% url 'ostiarius:index' %}");#}
-{#        }, 600000);#}
-{#        $.ajaxSetup({cache: false});#}
-{#    });#}
-
+    {#    $(document).ready(function () {#}
+    {#        $("#refresh").load("{% url 'ostiarius:index' %}");#}
+    {#        var refreshId = setInterval(function () {#}
+    {#            $("#refresh").load("{% url 'ostiarius:index' %}");#}
+    {#        }, 600000);#}
+    {#        $.ajaxSetup({cache: false});#}
+    {#    });#}
     function getRandomColor() {
         var letters = '0123456789ABCDEF'.split('');
         var color = '#';
@@ -170,7 +230,6 @@
 
     var labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
         'December'];
-
     var ctx = document.getElementById("myBarChart");
     var ctx2 = document.getElementById("myDoughnutChart");
     var ctx3 = document.getElementById("myLineChart");
@@ -205,8 +264,6 @@
             }
         }
     });
-
-
     var myDoughnutChart = new Chart(ctx2, {
         type: 'doughnut',
         data: {
@@ -222,24 +279,39 @@
         },
     });
 
-    {#    var myLineChart = new Chart(ctx, {#}
-    {#        type: 'line',#}
-    {#        data: {#}
-    {#            labels: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],#}
-    {#            datasets: [{#}
-    {#                label: '{{ line_alert_id.asset_no }} : {{ line_alert_id.item.item_name }}',#}
-    {#                data: {{ line_data | safe }},#}
-    {#                backgroundColor: "rgba(0,0,0,0)",#}
-    {#                borderColor: "rgba(255, 0, 0, 1)",#}
-    {#                borderWidth: 1#}
-    {#            }]#}
-    {#        },#}
-    {#        options: {#}
-    {#            elements: {#}
-    {#                line: {#}
-    {#                    tension: 0, // disables bezier curves#}
-    {#                }#}
-    {#            }#}
-    {#        }#}
-    {#    });#}
+    $(document).ready(function () {
+        $("#dropdown_line").on("change", function () {
+            var selectedValue = $('#dropdown_line').val();
+
+            $.ajax({
+                url: "indexLineChart",
+                type: "GET",
+                data: {"name": selectedValue},
+                dataType: "json",
+                success: function (result) {
+                    var data = result.line_data
+                    var myLineChart = new Chart(ctx3, {
+                        type: 'line',
+                        data: {
+                            labels: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],
+                            datasets: [{
+                                label: selectedValue,
+                                data: data,
+                                backgroundColor: "rgba(0,0,0,0)",
+                                borderColor: "rgba(255, 0, 0, 1)",
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            elements: {
+                                line: {
+                                    tension: 0, // disables bezier curves
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    });
 </script>
