@@ -1,70 +1,111 @@
 {% load staticfiles %}
 <link href="{% static 'ostiarius/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'ostiarius/tables/css/bootstrap-table-reorder-rows.css' %}">
 <link rel="stylesheet" href="{% static 'ostiarius/tables/css/bootstrap-table.css' %}">
 <script src="{% static 'ostiarius/vendor/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'ostiarius/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'ostiarius/tables/js/bootstrap-table.js' %}"></script>
+<script src="https://rawgit.com/isocra/TableDnD/master/js/jquery.tablednd.js"></script>
+<script src="{% static 'ostiarius/tables/js/bootstrap-table-reorder-rows.js' %}"></script>
 
 <div class="container">
     <h1>getData</h1>
     <p>Get the loaded data of table: <code>$table.bootstrapTable('getData');</code></p>
-    <div id="loading" style="text-align: center;">
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        Loading
-    </div>
-    <table id="table" data-show-refresh="true" data-show-columns="true" data-search="true"></table>
-    <script>
-        $.getJSON("{% url 'ostiarius:jsonData' %}", function (jsonFromFile) {
-            $(document).ready(function () {
-                $('#table').bootstrapTable({
-                    data: jsonFromFile,
-                    columns: [
-                        {
-                            field: 'asset_no',
-                            title: 'Asset Number',
-                        },
-                        {
-                            field: 'S_N',
-                            title: 'S/N'
-                        },
-                        {
-                            field: 'item_name',
-                            title: 'Item Name',
-                        },
-                        {
-                            field: 'present',
-                            title: 'Present',
-                            formatter: 'PresentFormatter',
-                        },
-                        {
-                            field: 'map_status',
-                            title: 'Map Status',
-                            formatter: 'LinkFormatter',
-                        },
-                        {
-                            field: 'maintenance_mode',
-                            title: 'Maintenance Status',
-                        },
-                    ]
-                })
-                $('#loading').hide()
-            })
-        });
-        function PresentFormatter(value, row, index) {
-            if (value == true) {
-                return "<span class='label label-success'>In T1933</span>";
-            }
-            else {
-                return "<span class='label label-danger'>Not in T1933</span>";
-            }
-        }
-        function LinkFormatter(value, row, index) {
-            if (value == true) {
-                return "<span class='label label-success'>Yes</span>";
-            }
-            else {
-                return "<span class='label label-danger'>No</span>";
-            }
-        }
-    </script>
+
+    <table id="table" data-show-columns="true" data-search="true"
+           data-page-number="true" data-reorderable-rows="true"
+           data-pagination="true" data-toggle="table" class="table">
+        <thead>
+        <tr>
+            <th>Asset Number</th>
+            <th>Asset Name</th>
+            <th data-sortable="true">Alert Date</th>
+            <th data-sortable="true">Alert Time</th>
+            <th>Culprit</th>
+            <th>Admin Message</th>
+            <th>View Charts</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for alert in alerts %}
+            <tr>
+                <td>{{ alert.item.asset_no }}</td>
+                <td>{{ alert.item.item_name }}</td>
+                <td>{{ alert.date }}</td>
+                <td>{{ alert.time }}</td>
+                <td><img src="data:image/png;base64,{{ alert.photo }}" class="img-responsive"
+                         style="width: 60px; height: 60px"/>
+                <td>
+                    {% if alert.admin_message is None %}
+                        -
+                    {% else %}
+                        {{ alert.admin_message }}
+                    {% endif %}
+                </td>
+                <td>
+                    <form action="{% url 'ostiarius:alert_report' alert.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline btn-success btn-circle"><i
+                                class="fa fa-bar-chart-o"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {#    <script>#}
+    {#        $.getJSON("{% url 'ostiarius:jsonData' %}", function (jsonFromFile) {#}
+    {#            $(document).ready(function () {#}
+    {#                $('#table').bootstrapTable({#}
+    {#                    data: jsonFromFile,#}
+    {#                    columns: [#}
+    {#                        {#}
+    {#                            field: 'asset_no',#}
+    {#                            title: 'Asset Number',#}
+    {#                        },#}
+    {#                        {#}
+    {#                            field: 'S_N',#}
+    {#                            title: 'S/N'#}
+    {#                        },#}
+    {#                        {#}
+    {#                            field: 'item_name',#}
+    {#                            title: 'Item Name',#}
+    {#                        },#}
+    {#                        {#}
+    {#                            field: 'present',#}
+    {#                            title: 'Present',#}
+    {#                            formatter: 'PresentFormatter',#}
+    {#                        },#}
+    {#                        {#}
+    {#                            field: 'map_status',#}
+    {#                            title: 'Map Status',#}
+    {#                            formatter: 'LinkFormatter',#}
+    {#                        },#}
+    {#                        {#}
+    {#                            field: 'maintenance_mode',#}
+    {#                            title: 'Maintenance Status',#}
+    {#                        },#}
+    {#                    ]#}
+    {#                })#}
+    {#                $('#loading').hide()#}
+    {#            })#}
+    {#        });#}
+    {#        function PresentFormatter(value, row, index) {#}
+    {#            if (value == true) {#}
+    {#                return "<span class='label label-success'>In T1933</span>";#}
+    {#            }#}
+    {#            else {#}
+    {#                return "<span class='label label-danger'>Not in T1933</span>";#}
+    {#            }#}
+    {#        }#}
+    {#        function LinkFormatter(value, row, index) {#}
+    {#            if (value == true) {#}
+    {#                return "<span class='label label-success'>Yes</span>";#}
+    {#            }#}
+    {#            else {#}
+    {#                return "<span class='label label-danger'>No</span>";#}
+    {#            }#}
+    {#        }#}
+    {#    </script>#}
 </div>

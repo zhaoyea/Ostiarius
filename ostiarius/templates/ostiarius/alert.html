@@ -2,6 +2,7 @@
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static 'ostiarius/tables/css/bootstrap-table.css' %}">
 <script src="{% static 'ostiarius/tables/js/bootstrap-table.js' %}"></script>
+
 <div id="wrapper">
     <!-- Page Content -->
     <div id="page-wrapper">
@@ -17,12 +18,13 @@
         <div class="container">
             <div class="panel-body">
                 <table id="table" data-show-columns="true" data-search="true"
-                       data-page-number="true" data-pagination="true" data-toggle="table" class="table">
+                       data-page-number="true" data-reorderable-rows="true"
+                       data-pagination="true" data-toggle="table" class="table">
                     <thead>
                     <tr>
                         <th>Asset Number</th>
                         <th>Asset Name</th>
-                        <th>Alert Date</th>
+                        <th data-sortable="true">Alert Date</th>
                         <th>Alert Time</th>
                         <th>Culprit</th>
                         <th>Admin Message</th>

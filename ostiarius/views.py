@@ -7,8 +7,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .forms import *
-import re, json
-from datetime import date
+import re, json, time
+from datetime import date, datetime
 from .serializers import *
 import requests
 
@@ -24,13 +24,13 @@ def index(request):
         item_maintenance = Item.objects.filter(maintenance_mode=1).count()
         maintain_overdue = Maintenance.objects.filter(return_date__lt=date.today())
         all_alerts = Alert.objects.all()
-        pilog = Pilog.objects.all().latest('id')
         all_assets = Item.objects.all()
 
         pie = {}
         pie_labels = []
         pie_data = []
 
+        # ====================================== Plotting of Bar Chart ===============================================
         jan = Alert.objects.filter(date__month='01')
         feb = Alert.objects.filter(date__month='02')
         mar = Alert.objects.filter(date__month='03')
@@ -46,13 +46,16 @@ def index(request):
 
         alert_data = [jan.count(), feb.count(), mar.count(), april.count(), may.count(), june.count(), july.count(),
                       aug.count(), sep.count(), oct.count(), nov.count(), dec.count()]
+        # ============================================= END =========================================================
 
+        # ==================================== Plotting of pie chart ================================================
         for alert in all_alerts:
             pie[alert.asset_no] = Alert.objects.filter(asset_no=alert.asset_no).count()
 
         for key, value in pie.items():
             pie_labels.append(key)
             pie_data.append(value)
+        # ============================================= END =========================================================
 
         data = {
             'alerts': alerts,
@@ -62,8 +65,7 @@ def index(request):
             'alert_data': alert_data,
             'pie_labels': pie_labels,
             'pie_data': pie_data,
-            'pilog':pilog,
-            'all_assets':all_assets,
+            'all_assets': all_assets,
         }
         return render(request, 'ostiarius/index.html', data)
 
@@ -118,7 +120,7 @@ def alertPage(request):
         return render(request, 'ostiarius/alert.html', {
             'items': items,
             'alerts': alerts,
-            'today_name':today_name,
+            'today_name': today_name,
         })
 
 
@@ -190,7 +192,7 @@ def console(request):
         return render(request, 'ostiarius/console.html')
 
 
-def settings(request):
+def camera(request):
     if not request.user.is_authenticated():
         messages.error(request, 'Please login first')
         return render(request, 'ostiarius/login.html')
@@ -210,7 +212,7 @@ def settings(request):
             'pilog': pilog
         }
 
-        return render(request, 'ostiarius/settings.html', context)
+        return render(request, 'ostiarius/camera.html', context)
 
 
 def add_items(request):
@@ -384,11 +386,17 @@ def push_alert(request):
 
 
 def blank_table(request):
-    return render(request, 'ostiarius/blank-tables.html')
+    alerts = Alert.objects.all()
+    return render(request, 'ostiarius/blank-tables.html', {'alerts': alerts})
 
 
 def push_notifi(request):
     return render(request, 'ostiarius/push-notifi.html')
+
+
+def piStatus(request):
+    res = requests.get("http://128.199.75.229/status.php")
+    return JsonResponse(res.json(), safe=False)
 
 
 def alert_report(request, alert_id):

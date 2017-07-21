@@ -1,0 +1,28 @@
+{% include 'ostiarius/base.html' %}
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"><i class="glyphicon glyphicon-console"></i> Camera</h1>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <div class="container">
+            <div class=".col-md-4">
+                {# Start Inserting here #}
+                <h2>Live Camera</h2>
+                <p>This will open up a connection to your Raspberry Pi and launch the camera module that allows live view.</p>
+                <button class="btn btn-primary btn-lg" onclick="myFunction()">
+                    Launch Camera
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function myFunction() {
+        window.open("http://10.10.10.65:8081", '_blank', 'width=800,height=800');
+    }
+</script>

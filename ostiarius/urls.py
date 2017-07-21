@@ -20,10 +20,10 @@ urlpatterns = [
     url(r'^maintenance/insertMaintenance$', views.new_maintenance, name='new_maintenance'),
     url(r'^maintenance/updateMaintenance$', views.update_maintenance, name='update_maintenance'),
     url(r'^console/$', views.console, name='console'),
-    url(r'^settings/$', views.settings, name='settings'),
+    url(r'^camera/$', views.camera, name='camera'),
     url(r'^indexLineChart/$', views.indexLineChart, name='indexLineChart'),
-
     url(r'^alert_report/(?P<alert_id>[0-9]+)/$', views.alert_report, name='alert_report'),
+
     url(r'^jsonData/$', views.jsonData, name='jsonData'),
     url(r'^jsonData/blankTable$', views.blank_table, name='blank_table'),
     url(r'^GETrequest/$', views.GETrequest, name='GETrequest'),
@@ -31,5 +31,7 @@ urlpatterns = [
     url(r'^asset_list/$', views.asset_list, name='asset_list'),
     url(r'^push_notifi/$', views.push_notifi, name='push_notifi'),
     url(r'^push_alert/$', views.push_alert, name='push_alert'),
+    url(r'^piStatus/$', views.piStatus, name='piStatus'),
+
 
 ]

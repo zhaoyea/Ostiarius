@@ -97,7 +97,12 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-9 text-left">
-                                <div class="huge">{{ pilog.temp_status }} °C</div>
+                                <div class="huge temp">
+                                    <div id="loading" style="text-align: center;">
+                                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                                        Loading
+                                    </div>
+                                </div>
                                 <div> Pi Temperature</div>
                             </div>
                             <i class="fa fa-thermometer-half fa-5x"></i>
@@ -110,12 +115,11 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-9 text-left">
-                                <div class="huge">
-                                    {% if not pilog.camera_status %}
-                                        Offline
-                                    {% else %}
-                                        Online
-                                    {% endif %}
+                                <div class="huge camera">
+                                    <div id="loading" style="text-align: center;">
+                                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                                        Loading
+                                    </div>
                                 </div>
                                 <div> Pi Camera</div>
                             </div>
@@ -129,7 +133,12 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-9 text-left">
-                                <div class="huge">{{ pilog.arm_usage }}</div>
+                                <div class="huge armUsage">
+                                    <div id="loading" style="text-align: center;">
+                                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                                        Loading
+                                    </div>
+                                </div>
                                 <div> Arm Usage</div>
                             </div>
                             <i class="fa fa-signal fa-5x"></i>
@@ -142,7 +151,12 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-9 text-left">
-                                <div class="huge">{{ pilog.gpu_usage }}</div>
+                                <div class="huge gpuUsage">
+                                    <div id="loading" style="text-align: center;">
+                                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                                        Loading
+                                    </div>
+                                </div>
                                 <div> GPU Usuage</div>
                             </div>
                             <i class="fa fa-signal fa-5x"></i>
@@ -211,14 +225,32 @@
     <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
+
 <script>
+
     {#    $(document).ready(function () {#}
     {#        $("#refresh").load("{% url 'ostiarius:index' %}");#}
     {#        var refreshId = setInterval(function () {#}
     {#            $("#refresh").load("{% url 'ostiarius:index' %}");#}
-    {#        }, 600000);#}
+    {#        }, 60000);#}
     {#        $.ajaxSetup({cache: false});#}
     {#    });#}
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "{% url 'ostiarius:piStatus' %}",
+            type: "GET",
+            success: function (json) {
+                $(".temp").html(json[0]['temp_status'] + "°C")
+                $(".camera").html(json[0]['camera_status'])
+                $(".armUsage").html(json[0]['arm_usage'])
+                $(".gpuUsage").html(json[0]['gpu_usage'])
+                $("#loading").hide()
+            }
+        });
+    });
+
+
     function getRandomColor() {
         var letters = '0123456789ABCDEF'.split('');
         var color = '#';
