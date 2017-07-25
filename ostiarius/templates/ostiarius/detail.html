@@ -6,139 +6,150 @@
 <script src="{% static 'ostiarius/tables/js/bootstrap-table-export.js' %}"></script>
 <script src="http://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
 
-<div id="wrapper">
-    <!-- Page Content -->
-    <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Details</h1>
-                </div>
-                <!-- /.col-lg-12 -->
+<div class="wrapper">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1 class="page-header">Details</h1>
+
+            <div class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li class="active">Here</li>
             </div>
-            <!-- /.row -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content container-fluid">
+
             <div class="container">
-                <div class="panel-body">
-                    <table id="table" data-show-columns="true" data-search="true"
-                           data-page-number="true" data-pagination="true" data-toggle="table" data-show-export="true"
-                           class="table">
-                        <thead>
-                        <tr>
-                            <th>Asset No</th>
-                            <th>Asset Name</th>
-                            <th>Information</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in item_present %}
+                <div class="box">
+                    <div class="box-header">
+                        <h2 class="page-header">Details</h2>
+                    </div>
+                    <div class="box-body">
+                        <table id="table" data-show-columns="true" data-search="true"
+                               data-page-number="true" data-pagination="true" data-toggle="table"
+                               data-show-export="true"
+                               class="table">
+                            <thead>
                             <tr>
-                                <td>{{ item.asset_no }}</td>
-                                <td>{{ item.item_name }}</td>
-                                <td>
-                                    {% if item.maintenance_mode %}
-                                        <p>Status:
-                                            <span class="label label-warning">Under Maintenance</span>
+                                <th>Asset No</th>
+                                <th>Asset Name</th>
+                                <th>Information</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in item_present %}
+                                <tr>
+                                    <td>{{ item.asset_no }}</td>
+                                    <td>{{ item.item_name }}</td>
+                                    <td>
+                                        {% if item.maintenance_mode %}
+                                            <p>Status:
+                                                <span class="label label-warning">Under Maintenance</span>
+                                            </p>
+                                            {% for maintain in item.maintenance_set.all %}
+                                                <p>
+                                                    Maintenance Date:
+                                                    <span class="label label-default">{{ maintain.date }}</span>
+                                                </p>
+                                                <p>
+                                                    Return Date:
+                                                    <span class="label label-info">{{ maintain.return_date }}</span>
+                                                </p>
+                                                <p>
+                                                    Staff in Charge:
+                                                    <span class="label label-primary">{{ maintain.staff_name }}</span>
+                                                </p>
+                                            {% endfor %}
+                                        {% else %}
+                                            <p>Status: <span class="label label-danger">Not in T1933</span></p>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            {% for alert in alerts %}
+                                <tr>
+                                    <td>
+                                        {{ alert.item.asset_no }}
+                                    </td>
+                                    <td>
+                                        {{ alert.item.item_name }}
+                                    </td>
+                                    <td>
+                                        <p>
+                                            Date & Time:
+                                            <span class="label label-danger">{{ alert.date }} {{ alert.time }}</span>
                                         </p>
-                                        {% for maintain in item.maintenance_set.all %}
-                                            <p>
-                                                Maintenance Date:
-                                                <span class="label label-default">{{ maintain.date }}</span>
-                                            </p>
-                                            <p>
-                                                Return Date:
-                                                <span class="label label-info">{{ maintain.return_date }}</span>
-                                            </p>
-                                            <p>
-                                                Staff in Charge:
-                                                <span class="label label-primary">{{ maintain.staff_name }}</span>
-                                            </p>
-                                        {% endfor %}
-                                    {% else %}
-                                        <p>Status: <span class="label label-danger">Not in T1933</span></p>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                        {% endfor %}
+                                        <p>
+                                            <img src="data:image/png;base64,{{ alert.photo }}" class="img-responsive"
+                                                 style="width: 60px; height: 60px"/>
+                                        </p>
+                                    </td>
+                                </tr>
+                            {% endfor %}
 
-                        {% for alert in alerts %}
-                            <tr>
-                                <td>
-                                    {{ alert.item.asset_no }}
-                                </td>
-                                <td>
-                                    {{ alert.item.item_name }}
-                                </td>
-                                <td>
-                                    <p>
-                                        Date & Time:
-                                        <span class="label label-danger">{{ alert.date }} {{ alert.time }}</span>
-                                    </p>
-                                    <p>
-                                        <img src="data:image/png;base64,{{ alert.photo }}" class="img-responsive"
-                                             style="width: 60px; height: 60px"/>
-                                    </p>
-                                </td>
-                            </tr>
-                        {% endfor %}
+                            {% for maintain in maintenance %}
+                                <tr>
+                                    <td>
+                                        {{ maintain.item.asset_no }}
+                                    </td>
+                                    <td>
+                                        {{ maintain.item.item_name }}
+                                    </td>
+                                    <td>
+                                        <p>
+                                            Maintenance Date:
+                                            <span class="label label-warning">{{ maintain.date }}</span>
+                                        </p>
+                                        <p>
+                                            Return Date:
+                                            <span class="label label-info">{{ maintain.return_date }}</span>
+                                        </p>
+                                        <p>
+                                            Staff in Charge:
+                                            <span class="label label-primary">{{ maintain.staff_name }}</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                            {% endfor %}
 
-                        {% for maintain in maintenance %}
-                            <tr>
-                                <td>
-                                    {{ maintain.item.asset_no }}
-                                </td>
-                                <td>
-                                    {{ maintain.item.item_name }}
-                                </td>
-                                <td>
-                                    <p>
-                                        Maintenance Date:
-                                        <span class="label label-warning">{{ maintain.date }}</span>
-                                    </p>
-                                    <p>
-                                        Return Date:
-                                        <span class="label label-info">{{ maintain.return_date }}</span>
-                                    </p>
-                                    <p>
-                                        Staff in Charge:
-                                        <span class="label label-primary">{{ maintain.staff_name }}</span>
-                                    </p>
-                                </td>
-                            </tr>
-                        {% endfor %}
+                            {% for due in overdue %}
+                                <tr>
+                                    <td>
+                                        {{ due.asset_no }}
+                                    </td>
+                                    <td>
+                                        {{ due.item.item_name }}
+                                    </td>
+                                    <td>
+                                        <p>
+                                            Status:
+                                            <span class="label label-danger">Overdue</span>
+                                        </p>
+                                        <p>Maintenance Date:
+                                            <span class="label label-warning">{{ due.date }}</span>
+                                        </p>
+                                        <p>Return Date:
+                                            <span class="label label-info"> {{ due.return_date }} </span>
+                                        </p>
+                                        <p>Staff in Charge:
+                                            <span class="label label-primary">{{ due.staff_name }}</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                            {% endfor %}
 
-                        {% for due in overdue %}
-                            <tr>
-                                <td>
-                                    {{ due.asset_no }}
-                                </td>
-                                <td>
-                                    {{ due.item.item_name }}
-                                </td>
-                                <td>
-                                    <p>
-                                        Status:
-                                        <span class="label label-danger">Overdue</span>
-                                    </p>
-                                    <p>Maintenance Date:
-                                        <span class="label label-warning">{{ due.date }}</span>
-                                    </p>
-                                    <p>Return Date:
-                                        <span class="label label-info"> {{ due.return_date }} </span>
-                                    </p>
-                                    <p>Staff in Charge:
-                                        <span class="label label-primary">{{ due.staff_name }}</span>
-                                    </p>
-                                </td>
-                            </tr>
-                        {% endfor %}
-
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- /#page-wrapper -->
+        </section>
+        <!-- /.content -->
     </div>
+    {% include 'ostiarius/footer.html' %}
 </div>
 
 <script>

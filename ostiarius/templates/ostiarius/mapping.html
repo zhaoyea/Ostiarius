@@ -1,0 +1,57 @@
+{% include 'ostiarius/base.html' %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'ostiarius/tables/css/bootstrap-table.css' %}">
+<script src="{% static 'ostiarius/tables/js/bootstrap-table.js' %}"></script>
+
+<div class="wrapper">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1 class="page-header"><i class="fa fa-codepen fa-fw"></i> Mapping</h1>
+
+            <div class="breadcrumb">
+                <li><a href="{% url 'ostiarius:index' %}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li class="active">Mapping</li>
+            </div>
+        </section>
+
+        <!-- Main content -->
+        <section class="content container-fluid">
+            <div class="container">
+                <div class="box">
+                <div class="box-header">
+                    <h2 class="page-header">Mapping Table</h2>
+                </div>
+                    <div class="box-body">
+                        <table id="table" class="table table-hover" data-show-columns="true" data-search="true"
+                               data-page-number="true" data-pagination="true" data-reorderable-rows="true"
+                               data-toggle="table">
+                            <thead>
+                            <tr>
+                                <th data-sortable="true">UID</th>
+                                <th>Asset No</th>
+                                <th>Item Name</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for map in mapping %}
+                                <tr>
+                                    <td>{{ map.uid }}</td>
+                                    <td>{{ map.asset_no }}</td>
+                                    <td>{{ map.item.item_name }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    {% include 'ostiarius/footer.html' %}
+</div>
+
+<script>
+    $('table').bootstrapTable();
+</script>

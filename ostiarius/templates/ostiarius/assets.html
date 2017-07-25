@@ -3,22 +3,20 @@
 <link rel="stylesheet" href="{% static 'ostiarius/tables/css/bootstrap-table.css' %}">
 <script src="{% static 'ostiarius/tables/js/bootstrap-table.js' %}"></script>
 
-<div id="wrapper">
-    <!-- Page Content -->
-    <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"><i class="fa fa-codepen fa-fw"></i> All Assets</h1>
-                </div>
-                <!-- /.col-lg-12 -->
+<div class="wrapper">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1 class="page-header"><i class="fa fa-codepen fa-fw"></i> All Assets</h1>
+            <div class="breadcrumb">
+                <li><a href="{% url 'ostiarius:index' %}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li class="active">All Assets</li>
             </div>
-            <!-- /.row -->
-        </div>
+        </section>
 
-        <div class="container">
-            <div class="panel-body">
-
+        <!-- Main content -->
+        <section class="content container-fluid">
+            <div class="container">
                 {% for message in messages %}
                     <div class="alert {{ message.tags }} alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -27,94 +25,110 @@
                         {{ message }}
                     </div>
                 {% endfor %}
-
-                <button class="btn btn-outline btn-primary" data-toggle="modal"
-                        data-target="#addNewItem"><span class="fa fa-plus"> New Item</span>
-                </button>
-                <form role="form" action="{% url 'ostiarius:add_items' %}" method="post"
-                      enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {% include 'ostiarius/assets_insert_form.html' %}
-                </form>
-                <p></p>
-                <table id="table" class="table table-striped" data-show-columns="true" data-search="true"
-                       data-page-number="true" data-pagination="true" data-toggle="table">
-                    <thead>
-                    <tr>
-                        <th>S/N</th>
-                        <th>Asset Number</th>
-                        <th>Item Name</th>
-                        <th>Present</th>
-                        <th>Maintenance Status</th>
-                        <th>Map Status</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for item in items %}
-                        <tr>
-                            <td>{{ item.S_N }}</td>
-                            <td>{{ item.asset_no }}</td>
-                            <td>{{ item.item_name }}</td>
-                            <td>
-                                {% if item.present %}
-                                    <span class="label label-success">In T1933</span>
-                                {% else %}
-                                    <span class="label label-danger">Not in T1933</span>
-                                {% endif %}</td>
-                            <td>
-                                {% if item.maintenance_mode %}
-                                    {% for maintain in item.maintenance_set.all %}
-                                        {% if maintain.status %}
-                                            <p>Status: <span class="label label-warning">Under Maintenance</span></p>
-                                            <p>Staff in Charge:
-                                                <span class="label label-primary">{{ maintain.staff_name }}</span>
-                                            </p>
-                                            <p>
-                                                <small>Under Maintenance since: {{ maintain.date }}</small>
-                                            </p>
+                <div class="box">
+                    <div class="box-header">
+                        <h2 class="page-header">Assets Table</h2>
+                        <div style="float: right;">
+                            <button class="btn btn btn-primary" data-toggle="modal"
+                                    data-target="#addNewItem"><span class="fa fa-plus"> New Item</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <form role="form" action="{% url 'ostiarius:add_items' %}" method="post"
+                              enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% include 'ostiarius/assets_insert_form.html' %}
+                        </form>
+                        <p></p>
+                        <table id="table" class="table table-hover" data-show-columns="true" data-search="true"
+                               data-page-number="true" data-pagination="true" data-reorderable-rows="true"
+                               data-toggle="table">
+                            <thead>
+                            <tr>
+                                <th data-sortable="true">S/N</th>
+                                <th>Asset Number</th>
+                                <th>Item Name</th>
+                                <th>Present</th>
+                                <th>Maintenance Status</th>
+                                <th>Map Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in items %}
+                                <tr>
+                                    <td>{{ item.S_N }}</td>
+                                    <td>{{ item.asset_no }}</td>
+                                    <td>{{ item.item_name }}</td>
+                                    <td>
+                                        {% if item.present %}
+                                            <span class="badge bg-green">In T1933</span>
+                                        {% else %}
+                                            <span class="badge bg-red">Not in T1933</span>
+                                        {% endif %}</td>
+                                    <td>
+                                        {% if item.maintenance_mode %}
+                                            {% for maintain in item.maintenance_set.all %}
+                                                {% if maintain.status %}
+                                                    <p>Status: <span
+                                                            class="badge bg-yellow">Under Maintenance</span>
+                                                    </p>
+                                                    <p>Staff in Charge:
+                                                        <span class="badge bg-blue">{{ maintain.staff_name }}</span>
+                                                    </p>
+                                                    <p>
+                                                        <small>Under Maintenance since: {{ maintain.date }}</small>
+                                                    </p>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            -
                                         {% endif %}
-                                    {% endfor %}
-                                {% else %}
-                                    -
-                                {% endif %}
-                            </td>
-                            <td>
-                                {% if item.map_status %}
-                                    <span class="label label-success">Yes</span>
-                                {% else %}
-                                    <span class="label label-danger">No</span>
-                                {% endif %}
-                            </td>
-                            <td>
-                                <p>
-                                    <button class="btn btn-outline btn-primary btn-circle" data-toggle="modal"
-                                            data-target="#edit_{{ item.asset_no }}"><i class="fa fa-edit"></i>
-                                    </button>
-                                <form role="form" action="{% url 'ostiarius:update_items' %}" method="post"
-                                      enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    {% include 'ostiarius/assets_update_form.html' %}
-                                </form>
-                                </p>
-                                <p>
-                                    <button data-toggle="modal" data-target="#delete_{{ item.asset_no }}"
-                                            class="btn btn-outline btn-danger btn-circle"><i class="fa fa-times"></i>
-                                    </button>
-                                <form action="{% url 'ostiarius:delete_items' item.id %}" method="post">
-                                    {% csrf_token %}
-                                    {% include 'ostiarius/assets_delete_form.html' %}
-                                </form>
-                                </p>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                                    </td>
+                                    <td>
+                                        {% if item.map_status %}
+                                            <span class="badge bg-green">Yes</span>
+                                        {% else %}
+                                            <span class="badge bg-red">No</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <p>
+                                            <button class=".btn.btn-app" data-toggle="modal"
+                                                    data-target="#edit_{{ item.asset_no }}"><i class="fa fa-edit"></i>
+                                            </button>
+                                        <form role="form" action="{% url 'ostiarius:update_items' %}" method="post"
+                                              enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            {% include 'ostiarius/assets_update_form.html' %}
+                                        </form>
+                                        </p>
+                                        <p>
+                                            <button data-toggle="modal" data-target="#delete_{{ item.asset_no }}"
+                                                    class=".btn.btn-app"><i
+                                                    class="fa fa-times"></i>
+                                            </button>
+                                        <form action="{% url 'ostiarius:delete_items' item.id %}" method="post">
+                                            {% csrf_token %}
+                                            {% include 'ostiarius/assets_delete_form.html' %}
+                                        </form>
+                                        </p>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+        <!-- /.content -->
     </div>
 </div>
+
+{% include 'ostiarius/footer.html' %}
+
 <script>
     $('table').bootstrapTable();
 </script>

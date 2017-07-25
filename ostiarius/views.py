@@ -90,11 +90,13 @@ def maintenancePage(request):
     else:
         items = Item.objects.all()
         maintenance = Maintenance.objects.all()
+        staffs = Staff.objects.all()
         today = date.today()
         return render(request, 'ostiarius/maintenance.html', {
             'items': items,
             'maintenance': maintenance,
             'today': today,
+            'staffs' : staffs,
         })
 
 
@@ -184,35 +186,44 @@ def logout_user(request):
     return render(request, 'ostiarius/login.html', context)
 
 
-def console(request):
-    if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
-    else:
-        return render(request, 'ostiarius/console.html')
-
-
 def camera(request):
     if not request.user.is_authenticated():
         messages.error(request, 'Please login first')
         return render(request, 'ostiarius/login.html')
     else:
         pilog = Pilog.objects.all().latest('id')
-        # logs = Pilog.objects.all()
-        #
-        # line = {}
-        # line_data = []
-        #
-        # for i in range(24):
-        #     line[alerts.time] = Alert.objects.filter(time__hour=i, asset_no=alerts.asset_no).count()
-        #     i += 1
-        #     for key, value in line.items():
-        #         line_data.append(value)
+
         context = {
             'pilog': pilog
         }
 
         return render(request, 'ostiarius/camera.html', context)
+
+
+def mapping(request):
+    if not request.user.is_authenticated():
+        messages.error(request, 'Please login first')
+        return render(request, 'ostiarius/login.html')
+    else:
+        mapping = Mapping.objects.all()
+
+        context = {
+            'mapping': mapping
+        }
+        return render(request, 'ostiarius/mapping.html', context)
+
+
+def staffs(request):
+    if not request.user.is_authenticated():
+        messages.error(request, 'Please login first')
+        return render(request, 'ostiarius/login.html')
+    else:
+        staffs = Staff.objects.all()
+
+        context = {
+            'staffs': staffs
+        }
+        return render(request, 'ostiarius/staffs.html', context)
 
 
 def add_items(request):
@@ -265,7 +276,7 @@ def update_items(request):
         new_item.item_name = new_item_name
         new_item.save()
         success_msg = "Item name change to " + new_item_name
-        print(success_msg)
+        messages.info(request, success_msg)
         return redirect('ostiarius:assets')
 
 
@@ -276,13 +287,12 @@ def new_maintenance(request):
     else:
         itemStr = request.POST['maintain_asset_no']
         maintain_asset_no = re.search('(.+)[\s?][\^-].+', itemStr).group(1)
-        print("Maintenance Asset No ---" + maintain_asset_no)
         item = Item.objects.get(asset_no=maintain_asset_no)
         staff_name = request.POST['staff_name']
         maintain_date = request.POST['maintain_date']
         return_date = request.POST['return_date']
 
-        if Maintenance.objects.filter(asset_no=maintain_asset_no) and Maintenance.objects.filter(status=1):
+        if Maintenance.objects.filter(asset_no=maintain_asset_no, status=1):
             msg = '[' + maintain_asset_no + ' - ' + item.item_name + ']' + ' is already under maintenance'
             messages.error(request, msg)
             return redirect('ostiarius:maintenancePage')

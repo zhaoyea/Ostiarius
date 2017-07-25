@@ -25,11 +25,9 @@
                     <label>Staff Name</label>
                     <select name="staff_name" class="form-control" required>
                         <option></option>
-                        <option>Mr Tan</option>
-                        <option>Mr Lim</option>
-                        <option>Mr Quek</option>
-                        <option>Mr Lee</option>
-                        <option>Mr Song</option>
+                        {% for staff in staffs %}
+                            <option>{{ staff.staff_name }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="form-group">

@@ -17,6 +17,9 @@
     <orderEntry type="module" module-name="website" />
     <orderEntry type="module" module-name="RESTFUL_API" />
     <orderEntry type="module" module-name="chartit-master" />
+    <orderEntry type="module" module-name="Ostiarius" />
+    <orderEntry type="module" module-name="Ostiarius" />
+    <orderEntry type="module" module-name="Ostiarius" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
