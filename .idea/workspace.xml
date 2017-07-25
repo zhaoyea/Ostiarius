@@ -21,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/ostiarius/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="3222">
-              <caret line="264" column="0" lean-forward="true" selection-start-line="264" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
+              <caret line="264" column="0" lean-forward="false" selection-start-line="264" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -30,8 +30,18 @@
       <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="151" column="38" lean-forward="false" selection-start-line="151" selection-start-column="38" selection-end-line="151" selection-end-column="38" />
+            <state relative-caret-position="221">
+              <caret line="13" column="78" lean-forward="false" selection-start-line="13" selection-start-column="78" selection-end-line="13" selection-end-column="78" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Desktop/website/music/templates/music/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="21" column="104" lean-forward="true" selection-start-line="21" selection-start-column="104" selection-end-line="21" selection-end-column="104" />
               <folding />
             </state>
           </provider>
@@ -102,7 +112,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>menu-toggle</find>
       <find>dis</find>
       <find>id</find>
       <find>dropdown_line</find>
@@ -132,6 +141,7 @@
       <find>Danger Modal</find>
       <find>console</find>
       <find>mailbox</find>
+      <find>favi</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -232,6 +242,66 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="website" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ostiarius_Website" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="website" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="website" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ostiarius_Website" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="website" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="music" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ostiarius_Website" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="website" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="music" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="music" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ostiarius_Website" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Ostiarius_Website" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -308,6 +378,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ostiarius_Website" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ostiarius_Website" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ostiarius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ostiarius" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="img" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -322,17 +418,18 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/SP Year 3/FYP/Coding/Ostiarius_Website/Ostiarius_Website/ostiarius/templates/ostiarius/nav.html" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\SP Year 3\FYP\Coding\Ostiarius_Website\Ostiarius_Website\ostiarius\static\ostiarius\img" />
+      <recent name="D:\SP Year 3\FYP\Coding\Ostiarius\ostiairus_v2" />
+      <recent name="D:\SP Year 3\FYP\Coding\Ostiarius_Website\Ostiarius_Website\ostiarius\static\ostiarius\dist\js" />
+      <recent name="D:\SP Year 3\FYP\Coding\Ostiarius_Website\Ostiarius_Website\ostiarius\templates\ostiarius" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\SP Year 3\FYP\Coding\Ostiarius\ostiairus_v2\static\ostiairus_v2" />
       <recent name="D:\SP Year 3\FYP\Coding\Ostiarius\ostiairus_v2" />
       <recent name="D:\SP Year 3\FYP\Coding\Ostiarius_Website\Ostiarius_Website\ostiarius\static\ostiarius" />
       <recent name="D:\SP Year 3\FYP\Coding\Ostiarius_V2\ostiarius\static\ostiarius" />
       <recent name="D:\SP Year 3\FYP\Coding\Ostiarius_V2\ostiarius" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\SP Year 3\FYP\Coding\Ostiarius\ostiairus_v2" />
-      <recent name="D:\SP Year 3\FYP\Coding\Ostiarius_Website\Ostiarius_Website\ostiarius\static\ostiarius\dist\js" />
-      <recent name="D:\SP Year 3\FYP\Coding\Ostiarius_Website\Ostiarius_Website\ostiarius\templates\ostiarius" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -618,7 +715,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22654584" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -667,8 +764,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../Ostiarius_V2/templates/index.html" />
-    <entry file="file://$PROJECT_DIR$/../../Ostiarius_V2/templates/base.html" />
     <entry file="file://$PROJECT_DIR$/../../Ostiarius_V2/manage.py" />
     <entry file="file://$PROJECT_DIR$/../../Ostiarius_V2/Ostiarius_V2/settings.py" />
     <entry file="file://$PROJECT_DIR$/../../Ostiarius_V2/Ostiarius_V2/urls.py" />
@@ -906,7 +1001,7 @@
     <entry file="file://$PROJECT_DIR$/ostiarius/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3222">
-          <caret line="264" column="0" lean-forward="true" selection-start-line="264" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
+          <caret line="264" column="0" lean-forward="false" selection-start-line="264" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -919,10 +1014,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Desktop/website/music/templates/music/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="34" column="36" lean-forward="false" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/website/music/templates/music/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="21" column="104" lean-forward="true" selection-start-line="21" selection-start-column="104" selection-end-line="21" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="151" column="38" lean-forward="false" selection-start-line="151" selection-start-column="38" selection-end-line="151" selection-end-column="38" />
+        <state relative-caret-position="221">
+          <caret line="13" column="78" lean-forward="false" selection-start-line="13" selection-start-column="78" selection-end-line="13" selection-end-column="78" />
           <folding />
         </state>
       </provider>
