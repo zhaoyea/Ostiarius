@@ -20,3 +20,4 @@ urlpatterns = [
     url(r'^ostiarius/', include('ostiarius.urls')),
     url(r'^admin/', admin.site.urls),
 ]
+

@@ -9,7 +9,7 @@
                 <small>{{ alerts.asset_no }} - {{ alerts.item.item_name }}</small>
             </h1>
             <div class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="{% url 'ostiarius:alertPage' %}"><i class="fa fa-exclamation-circle fa-fw"></i> Alerts</a></li>
                 <li class="active">Here</li>
             </div>
         </section>
@@ -20,10 +20,6 @@
                 <div class="box">
                     <div class="box-body">
                         <div class="row" style="padding: inherit; padding-top: 15px">
-                            <button style="float: right;" type="button"
-                                    class=".btn.btn-app"><i
-                                    class="fa fa-download"></i>
-                            </button>
                             <img src="http://imgur.com/rNNLjKf.png" width="200" height="200" style="float: left;"/>
                             <h3 style="text-align: center; padding-right: 150px; padding-top: 60px;">Ostiarius Pte
                                 Ltd</h3>

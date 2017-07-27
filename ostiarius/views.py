@@ -16,8 +16,7 @@ import requests
 # Create your views here.
 def index(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         alerts = Alert.objects.filter(date=date.today())
         item_present = Item.objects.filter(present=0).count()
@@ -72,8 +71,7 @@ def index(request):
 
 def assets(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         items = Item.objects.all()
         maintenance = Maintenance.objects.all()
@@ -85,8 +83,7 @@ def assets(request):
 
 def maintenancePage(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         items = Item.objects.all()
         maintenance = Maintenance.objects.all()
@@ -102,8 +99,7 @@ def maintenancePage(request):
 
 def present(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         item_present = Item.objects.filter(present=0)
         return render(request, 'ostiarius/detail.html', {
@@ -113,8 +109,7 @@ def present(request):
 
 def alertPage(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         items = Item.objects.all()
         alerts = Alert.objects.all()
@@ -128,8 +123,7 @@ def alertPage(request):
 
 def alert(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         alerts = Alert.objects.filter(date=date.today())
         return render(request, 'ostiarius/detail.html', {
@@ -139,8 +133,7 @@ def alert(request):
 
 def maintenance(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         maintenance = Maintenance.objects.filter(status=1)
         return render(request, 'ostiarius/detail.html', {
@@ -150,8 +143,7 @@ def maintenance(request):
 
 def overdue(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         overdue = Maintenance.objects.filter(return_date__lt=date.today())
         return render(request, 'ostiarius/detail.html', {
@@ -188,8 +180,7 @@ def logout_user(request):
 
 def camera(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         pilog = Pilog.objects.all().latest('id')
 
@@ -202,8 +193,7 @@ def camera(request):
 
 def mapping(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         mapping = Mapping.objects.all()
 
@@ -215,8 +205,7 @@ def mapping(request):
 
 def staffs(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         staffs = Staff.objects.all()
 
@@ -228,8 +217,7 @@ def staffs(request):
 
 def add_items(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         new_S_N = request.POST['new_S_N']
         new_asset_no = request.POST['new_asset_no']
@@ -254,8 +242,7 @@ def add_items(request):
 
 def delete_items(request, item_id):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         item = Item.objects.get(pk=item_id)
         item.delete()
@@ -266,8 +253,7 @@ def delete_items(request, item_id):
 
 def update_items(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         item_id = request.POST['item_id']
         new_item = Item.objects.get(id=item_id)
@@ -282,8 +268,7 @@ def update_items(request):
 
 def new_maintenance(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         itemStr = request.POST['maintain_asset_no']
         maintain_asset_no = re.search('(.+)[\s?][\^-].+', itemStr).group(1)
@@ -311,8 +296,7 @@ def new_maintenance(request):
 
 def update_maintenance(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         maintain_item_id = request.POST['maintain_item_id']
         new_item = Item.objects.get(id=maintain_item_id)
@@ -374,8 +358,7 @@ def GETrequest(request):
 
 def POSTassets(request):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         res = requests.get("http://128.199.75.229/items.php")
         data = res.json()
@@ -411,8 +394,7 @@ def piStatus(request):
 
 def alert_report(request, alert_id):
     if not request.user.is_authenticated():
-        messages.error(request, 'Please login first')
-        return render(request, 'ostiarius/login.html')
+        return render(request, 'ostiarius/500.html')
     else:
         today = datetime.today()
         alerts = get_object_or_404(Alert, pk=alert_id)
