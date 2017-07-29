@@ -246,13 +246,6 @@
     </div>
 </div>
 <script>
-    {#    $(document).ready(function () {#}
-    {#        $("#refresh").load("{% url 'ostiarius:index' %}");#}
-    {#        var refreshId = setInterval(function () {#}
-    {#            $("#refresh").load("{% url 'ostiarius:index' %}");#}
-    {#        }, 60000);#}
-    {#        $.ajaxSetup({cache: false});#}
-    {#    });#}
     $(document).ready(function () {
         $.ajax({
             url: "{% url 'ostiarius:piStatus' %}",
@@ -279,6 +272,7 @@
     var ctx = document.getElementById("myBarChart");
     var ctx2 = document.getElementById("myDoughnutChart");
     var ctx3 = document.getElementById("myLineChart");
+
     var myBarChart = new Chart(ctx, {
         type: 'bar',
         data: {
