@@ -7,8 +7,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .forms import *
-import re, json, time
-from datetime import date, datetime
+import re, json
+from datetime import date
 from .serializers import *
 import requests
 
@@ -16,7 +16,8 @@ import requests
 # Create your views here.
 def index(request):
     if not request.user.is_authenticated():
-        return render(request, 'ostiarius/500.html')
+        messages.info(request, 'Please login first')
+        return render(request, 'ostiarius/login.html')
     else:
         alerts = Alert.objects.filter(date=date.today())
         item_present = Item.objects.filter(present=0).count()
@@ -93,7 +94,7 @@ def maintenancePage(request):
             'items': items,
             'maintenance': maintenance,
             'today': today,
-            'staffs' : staffs,
+            'staffs': staffs,
         })
 
 
