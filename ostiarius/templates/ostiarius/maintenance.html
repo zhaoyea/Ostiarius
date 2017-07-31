@@ -82,9 +82,7 @@
                                                 data-target="#maintain_{{ maintain.asset_no }}"><i
                                                 class="fa fa-edit"></i>
                                         </button>
-                                        <form role="form" action="{% url 'ostiarius:update_maintenance' %}"
-                                              method="post"
-                                              enctype="multipart/form-data">
+                                        <form role="form" action="{% url 'ostiarius:update_maintenance' %}" method="post">
                                             {% csrf_token %}
                                             {% include 'ostiarius/maintenance_update_form.html' %}
                                         </form>
