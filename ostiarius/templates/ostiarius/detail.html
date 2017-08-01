@@ -46,24 +46,26 @@
                                     <td>
                                         {% if item.maintenance_mode %}
                                             <p>Status:
-                                                <span class="label label-warning">Under Maintenance</span>
+                                                <span class="badge bg-yellow">Under Maintenance</span>
                                             </p>
                                             {% for maintain in item.maintenance_set.all %}
-                                                <p>
-                                                    Maintenance Date:
-                                                    <span class="label label-default">{{ maintain.date }}</span>
-                                                </p>
-                                                <p>
-                                                    Return Date:
-                                                    <span class="label label-info">{{ maintain.return_date }}</span>
-                                                </p>
-                                                <p>
-                                                    Staff in Charge:
-                                                    <span class="label label-primary">{{ maintain.staff_name }}</span>
-                                                </p>
+                                                {% if maintain.status %}
+                                                    <p>
+                                                        Maintenance Date:
+                                                        <span class="badge bg-default">{{ maintain.date }}</span>
+                                                    </p>
+                                                    <p>
+                                                        Return Date:
+                                                        <span class="badge bg-blue">{{ maintain.return_date }}</span>
+                                                    </p>
+                                                    <p>
+                                                        Staff in Charge:
+                                                        <span class="badge bg-green">{{ maintain.staff_name }}</span>
+                                                    </p>
+                                                {% endif %}
                                             {% endfor %}
                                         {% else %}
-                                            <p>Status: <span class="label label-danger">Not in T1933</span></p>
+                                            <p>Status: <span class="badge bg-red">Not in T1933</span></p>
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -117,29 +119,29 @@
 
                             {% for due in overdue %}
                                 {% if due.status %}
-                                <tr>
-                                    <td>
-                                        {{ due.asset_no }}
-                                    </td>
-                                    <td>
-                                        {{ due.item.item_name }}
-                                    </td>
-                                    <td>
-                                        <p>
-                                            Status:
-                                            <span class="label label-danger">Overdue</span>
-                                        </p>
-                                        <p>Maintenance Date:
-                                            <span class="label label-warning">{{ due.date }}</span>
-                                        </p>
-                                        <p>Return Date:
-                                            <span class="label label-info"> {{ due.return_date }} </span>
-                                        </p>
-                                        <p>Staff in Charge:
-                                            <span class="label label-primary">{{ due.staff_name }}</span>
-                                        </p>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>
+                                            {{ due.asset_no }}
+                                        </td>
+                                        <td>
+                                            {{ due.item.item_name }}
+                                        </td>
+                                        <td>
+                                            <p>
+                                                Status:
+                                                <span class="label label-danger">Overdue</span>
+                                            </p>
+                                            <p>Maintenance Date:
+                                                <span class="label label-warning">{{ due.date }}</span>
+                                            </p>
+                                            <p>Return Date:
+                                                <span class="label label-info"> {{ due.return_date }} </span>
+                                            </p>
+                                            <p>Staff in Charge:
+                                                <span class="label label-primary">{{ due.staff_name }}</span>
+                                            </p>
+                                        </td>
+                                    </tr>
                                 {% endif %}
                             {% endfor %}
 

@@ -103,6 +103,7 @@ def present(request):
         return render(request, 'ostiarius/500.html')
     else:
         item_present = Item.objects.filter(present=0)
+
         return render(request, 'ostiarius/detail.html', {
             'item_present': item_present,
         })
