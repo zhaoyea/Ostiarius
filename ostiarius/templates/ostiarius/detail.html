@@ -116,6 +116,7 @@
                             {% endfor %}
 
                             {% for due in overdue %}
+                                {% if due.status %}
                                 <tr>
                                     <td>
                                         {{ due.asset_no }}
@@ -139,6 +140,7 @@
                                         </p>
                                     </td>
                                 </tr>
+                                {% endif %}
                             {% endfor %}
 
                             </tbody>

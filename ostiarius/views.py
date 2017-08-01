@@ -22,7 +22,7 @@ def index(request):
         alerts = Alert.objects.filter(date=date.today())
         item_present = Item.objects.filter(present=0).count()
         item_maintenance = Item.objects.filter(maintenance_mode=1).count()
-        maintain_overdue = Maintenance.objects.filter(return_date__lt=date.today())
+        maintain_overdue = Maintenance.objects.filter(return_date__lt=date.today(), status=1)
         all_alerts = Alert.objects.all()
         all_assets = Item.objects.all()
 
