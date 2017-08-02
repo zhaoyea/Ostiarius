@@ -20,6 +20,7 @@
     <orderEntry type="module" module-name="Ostiarius" />
     <orderEntry type="module" module-name="Ostiarius" />
     <orderEntry type="module" module-name="Ostiarius" />
+    <orderEntry type="module" module-name="IOT_CA2" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
