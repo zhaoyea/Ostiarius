@@ -21,7 +21,6 @@ class Alert(models.Model):
     time = models.TimeField()
     photo = models.TextField()
     admin_message = models.CharField(max_length=1000, blank=True, null=True)
-    # notified = models.BooleanField(default=False)
 
     def __str__(self):
         return self.item.asset_no

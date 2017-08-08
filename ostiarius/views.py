@@ -331,64 +331,6 @@ def update_maintenance(request):
             return redirect('ostiarius:maintenancePage')
 
 
-@api_view(['GET', 'POST'])
-def asset_list(request):
-    if request.method == 'GET':
-        asset = Item.objects.all()
-        serializer = ItemSerializer(asset, many=True)
-        return Response(serializer.data)
-    elif request.method == 'POST':
-        serializer = ItemSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(
-                serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-def jsonData(request):
-    asset = Item.objects.all()
-    serializer = ItemSerializer(asset, many=True)
-    return JsonResponse(serializer.data, safe=False)
-
-
-def GETrequest(request):
-    res = requests.get("http://128.199.75.229/items.php")
-    return JsonResponse(res.json(), safe=False)
-
-
-def POSTassets(request):
-    if not request.user.is_authenticated():
-        return render(request, 'ostiarius/500.html')
-    else:
-        res = requests.get("http://128.199.75.229/items.php")
-        data = res.json()
-        for key, value in data.items():
-            for item in value:
-                if not Item.objects.filter(asset_no=item['asset_no']):
-                    serializer = ItemSerializer(data=item)
-                    if serializer.is_valid():
-                        serializer.save()
-
-    return redirect('ostiarius:assets')
-
-
-def push_alert(request):
-    alerts = Alert.objects.filter(notified=0)
-    serliazer = AlertSerializer(alerts, many=True)
-    return JsonResponse(serliazer.data, safe=False)
-
-
-def blank_table(request):
-    alerts = Alert.objects.all()
-    return render(request, 'ostiarius/blank-tables.html', {'alerts': alerts})
-
-
-def push_notifi(request):
-    return render(request, 'ostiarius/push-notifi.html')
-
-
 def piStatus(request):
     res = requests.get("http://128.199.75.229/status.php")
     return JsonResponse(res.json(), safe=False)
@@ -433,3 +375,35 @@ def indexLineChart(request):
     }
 
     return HttpResponse(json.dumps(context), content_type='application/json')
+
+
+@api_view(['GET', 'POST'])
+def asset_list(request):
+    if request.method == 'GET':
+        asset = Item.objects.all()
+        serializer = ItemSerializer(asset, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = ItemSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(
+                serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+def POSTassets(request):
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/500.html')
+    else:
+        res = requests.get("http://128.199.75.229/items.php")
+        data = res.json()
+        for key, value in data.items():
+            for item in value:
+                if not Item.objects.filter(asset_no=item['asset_no']):
+                    serializer = ItemSerializer(data=item)
+                    if serializer.is_valid():
+                        serializer.save()
+
+    return redirect('ostiarius:assets')
