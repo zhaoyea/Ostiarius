@@ -332,8 +332,11 @@ def update_maintenance(request):
 
 
 def piStatus(request):
-    res = requests.get("http://128.199.75.229/status.php")
-    return JsonResponse(res.json(), safe=False)
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/500.html')
+    else:
+        res = requests.get("http://128.199.75.229/status.php")
+        return JsonResponse(res.json(), safe=False)
 
 
 def alert_report(request, alert_id):
@@ -359,38 +362,43 @@ def alert_report(request, alert_id):
 
 
 def indexLineChart(request):
-    dropdown_asset_no = request.GET['name']
-    line_alerts = Alert.objects.filter(asset_no=dropdown_asset_no)[:1]
-    line = {}
-    line_data = []
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/500.html')
+    else:
+        dropdown_asset_no = request.GET['name']
+        line_alerts = Alert.objects.filter(asset_no=dropdown_asset_no)[:1]
+        line = {}
+        line_data = []
 
-    for alert in line_alerts:
-        for i in range(24):
-            line[alert.time] = Alert.objects.filter(time__hour=i, asset_no=alert.asset_no).count()
-            for key, value in line.items():
-                line_data.append(value)
+        for alert in line_alerts:
+            for i in range(24):
+                line[alert.time] = Alert.objects.filter(time__hour=i, asset_no=alert.asset_no).count()
+                for key, value in line.items():
+                    line_data.append(value)
 
-    context = {
-        'line_data': line_data,
-    }
+        context = {
+            'line_data': line_data,
+        }
 
-    return HttpResponse(json.dumps(context), content_type='application/json')
+        return HttpResponse(json.dumps(context), content_type='application/json')
 
 
 @api_view(['GET', 'POST'])
 def asset_list(request):
-    if request.method == 'GET':
-        asset = Item.objects.all()
-        serializer = ItemSerializer(asset, many=True)
-        return Response(serializer.data)
-    elif request.method == 'POST':
-        serializer = ItemSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(
-                serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if not request.user.is_authenticated():
+        return render(request, 'ostiarius/500.html')
+    else:
+        if request.method == 'GET':
+            asset = Item.objects.all()
+            serializer = ItemSerializer(asset, many=True)
+            return Response(serializer.data)
+        elif request.method == 'POST':
+            serializer = ItemSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def POSTassets(request):
