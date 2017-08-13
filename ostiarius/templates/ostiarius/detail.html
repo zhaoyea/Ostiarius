@@ -84,9 +84,20 @@
                                             Date & Time:
                                             <span class="label label-danger">{{ alert.date }} {{ alert.time }}</span>
                                         </p>
+
                                         <p>
                                             <img src="data:image/png;base64,{{ alert.photo }}" class="img-responsive"
-                                                 style="width: 60px; height: 60px"/>
+                                                 style="width: 60px; height: 60px;"/>
+{#                                            <img src="http://imgur.com/0MVUi62.png" class="img-responsive" style="width: 60px; height: 60px;" />#}
+                                        </p>
+
+                                        <p>
+                                        <form action="{% url 'ostiarius:alert_report' alert.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class=".btn.btn-app"><i
+                                                    class="fa fa-bar-chart-o"></i>
+                                            </button>
+                                        </form>
                                         </p>
                                     </td>
                                 </tr>

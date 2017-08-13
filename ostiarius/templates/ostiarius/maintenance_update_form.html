@@ -1,4 +1,4 @@
-<div class="modal fade" id="maintain_{{ maintain.asset_no }}" tabindex="-1" role="dialog"
+<div class="modal fade" id="maintain_{{ maintain.id }}" tabindex="-1" role="dialog"
      aria-labelledby="maintainLabel"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -15,6 +15,7 @@
                 <div class="form-group">
                     <label>Asset Number</label>
                     <p>{{ maintain.asset_no }}</p>
+                    <input name="maintain_id" type="hidden" value="{{ maintain.id }}">
                     <input name="maintain_item_id" type="hidden" value="{{ maintain.item.id }}">
                     <input name="maintain_asset_no" type="hidden" value="{{ maintain.asset_no }}">
                 </div>

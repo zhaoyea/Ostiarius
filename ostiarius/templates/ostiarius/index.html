@@ -7,7 +7,8 @@
         <section class="content-header">
             <h1 class="page-header"><i class="fa fa-dashboard fa-fw"></i> Dashboard</h1>
             <div class="breadcrumb">
-                <li class="active"><a href="{% url 'ostiarius:index' %}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li class="active"><a href="{% url 'ostiarius:index' %}"><i class="fa fa-dashboard"></i> Dashboard</a>
+                </li>
             </div>
         </section>
 
@@ -87,7 +88,7 @@
                         <span class="info-box-icon bg-red"><i class="fa fa-thermometer-half"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Pi Temperature</span>
+                            <span class="info-box-text">RPi 1 Temperature</span>
                             <span class="info-box-number">
                                 <div class="huge temp">
                                         <div id="loading" style="text-align: center;">
@@ -107,7 +108,7 @@
                         <span class="info-box-icon bg-green"><i class="fa fa-video-camera"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Pi Camera</span>
+                            <span class="info-box-text">RPi 1 Camera</span>
                             <span class="info-box-number">
                                     <div class="huge camera">
                                         <div id="loading" style="text-align: center;">
@@ -127,7 +128,7 @@
                         <span class="info-box-icon bg-aqua"><i class="fa fa-signal"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Arm Usage</span>
+                            <span class="info-box-text">RPi 1 Arm Usage</span>
                             <span class="info-box-number">
                                     <div class="huge armUsage">
                                         <div id="loading" style="text-align: center;">
@@ -147,7 +148,7 @@
                         <span class="info-box-icon bg-blue"><i class="fa fa-signal"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">GPU Usuage</span>
+                            <span class="info-box-text">RPi 1 GPU Usuage</span>
                             <span class="info-box-number">
                                     <div class="huge gpuUsage">
                                         <div id="loading" style="text-align: center;">
@@ -259,6 +260,7 @@
             }
         });
     });
+
     function getRandomColor() {
         var letters = '0123456789ABCDEF'.split('');
         var color = '#';
@@ -267,6 +269,7 @@
         }
         return color;
     }
+
     var labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
         'December'];
     var ctx = document.getElementById("myBarChart");

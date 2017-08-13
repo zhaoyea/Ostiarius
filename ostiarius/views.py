@@ -273,7 +273,8 @@ def new_maintenance(request):
         return render(request, 'ostiarius/500.html')
     else:
         itemStr = request.POST['maintain_asset_no']
-        maintain_asset_no = re.search('(.+)[\s?][\^-].+', itemStr).group(1)
+        maintain_asset_no = re.search('^([^-]*)-(.*)', itemStr).group(1)
+        print(maintain_asset_no)
         item = Item.objects.get(asset_no=maintain_asset_no)
         staff_name = request.POST['staff_name']
         maintain_date = request.POST['maintain_date']
@@ -301,8 +302,9 @@ def update_maintenance(request):
         return render(request, 'ostiarius/500.html')
     else:
         maintain_item_id = request.POST['maintain_item_id']
+        maintain_id = request.POST['maintain_id']
         new_item = Item.objects.get(id=maintain_item_id)
-        new_maintain = Maintenance.objects.get(item_id=maintain_item_id)
+        new_maintain = Maintenance.objects.get(id=maintain_id, item_id=maintain_item_id)
         maintain_status = request.POST['maintain_status']
         maintain_staff_name = request.POST['staff_name']
         maintain_date = request.POST['maintainDate']

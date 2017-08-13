@@ -9,8 +9,9 @@
                 <small>{{ alerts.asset_no }} - {{ alerts.item.item_name }}</small>
             </h1>
             <div class="breadcrumb">
-                <li><a href="{% url 'ostiarius:alertPage' %}"><i class="fa fa-exclamation-circle fa-fw"></i> Alerts</a></li>
-                <li class="active">Here</li>
+                <li><a href="{% url 'ostiarius:alertPage' %}"><i class="fa fa-exclamation-circle fa-fw"></i> Alerts</a>
+                </li>
+                <li class="active">Alert Report</li>
             </div>
         </section>
 
@@ -33,15 +34,25 @@
                             <h4 style="float: right; padding-right: 100px">
                                 Culprit <br/><br/>
                                 <img src="data:image/png;base64,{{ alerts.photo }}" class="img-responsive"
-                                     style="width: 200px; height: 200px"/>
+                                     style="width: 300px; height: 200px;"/>
+{#                                <img src="http://imgur.com/0MVUi62.png" class="img-responsive"#}
+{#                                     style="width: 300px; height: 200px;"/>#}
                             </h4>
                             <p>
-                                Asset Number: {{ alerts.item.asset_no }}
+                                Asset Number: <b>{{ alerts.item.asset_no }}</b>
                             </p>
-                            <p>Item Name: {{ alerts.item.item_name }}</p>
-                            <p>Alert Date: {{ alerts.date }}</p>
-                            <p>Alert Time: {{ alerts.time }}</p>
-                            <p>Admin Comments: {{ alerts.admin_message }}</p>
+                            <p>
+                                Item Name: <b>{{ alerts.item.item_name }}</b>
+                            </p>
+                            <p>
+                                Alert Date: <b>{{ alerts.date }}</b>
+                            </p>
+                            <p>
+                                Alert Time: <b>{{ alerts.time }}</b>
+                            </p>
+                            <p>
+                                Admin Comments: <b>{{ alerts.admin_message }}</b>
+                            </p>
                         </div>
 
                         <hr>
