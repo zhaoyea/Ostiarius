@@ -252,11 +252,22 @@
             url: "{% url 'ostiarius:piStatus' %}",
             type: "GET",
             success: function (json) {
-                $(".temp").html(json[0]['temp_status'] + "°C")
-                $(".camera").html(json[0]['camera_status'])
-                $(".armUsage").html(json[0]['arm_usage'])
-                $(".gpuUsage").html(json[0]['gpu_usage'])
-                $("#loading").hide()
+                $(".temp").html(json[0]['temp_status'] + "°C");
+                $(".camera").html(json[0]['camera_status']);
+                $(".armUsage").html(json[0]['arm_usage']);
+                $(".gpuUsage").html(json[0]['gpu_usage']);
+                $("#loading").hide();
+            },
+            complete: function (xhr) {
+                if (xhr.status != 200) {
+                    setTimeout(function () {
+                        $(".temp").html('Not Working');
+                        $(".camera").html('Not Working');
+                        $(".armUsage").html('Not Working');
+                        $(".gpuUsage").html('Not Working');
+                        $("#loading").hide();
+                    }, 2000);
+                }
             }
         });
     });
@@ -316,9 +327,9 @@
                     {% for foo in pie_data %}
                         getRandomColor(),
                     {% endfor %}
-                ],
-            }],
-        },
+                ]
+            }]
+        }
     });
     $(document).ready(function () {
         $("#dropdown_line").on("change", function () {
@@ -329,7 +340,7 @@
                 data: {"name": selectedValue},
                 dataType: "json",
                 success: function (result) {
-                    var data = result.line_data
+                    var data = result.line_data;
                     var myLineChart = new Chart(ctx3, {
                         type: 'line',
                         data: {

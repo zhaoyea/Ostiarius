@@ -42,7 +42,7 @@
                                 <tr>
                                     <td>{{ alert.item.asset_no }}</td>
                                     <td>{{ alert.item.item_name }}</td>
-                                    <td>{{ alert.date }}</td>
+                                    <td>{{ alert.date|date:"Y-m-d" }}</td>
                                     <td>{{ alert.time }}</td>
                                     <td><img src="data:image/png;base64,{{ alert.photo }}" class="img-responsive"
                                              style="width: 60px; height: 60px"/>

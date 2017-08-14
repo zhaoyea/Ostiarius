@@ -337,8 +337,11 @@ def piStatus(request):
     if not request.user.is_authenticated():
         return render(request, 'ostiarius/500.html')
     else:
-        res = requests.get("http://128.199.75.229/status.php")
-        return JsonResponse(res.json(), safe=False)
+        try:
+            res = requests.get("http://128.199.75.229/status.php")
+            return JsonResponse(res.json(), safe=False)
+        except:
+            return HttpResponse(status=404)
 
 
 def alert_report(request, alert_id):
