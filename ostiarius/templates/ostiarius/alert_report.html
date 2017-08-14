@@ -45,7 +45,7 @@
                                 Item Name: <b>{{ alerts.item.item_name }}</b>
                             </p>
                             <p>
-                                Alert Date: <b>{{ alerts.date }}</b>
+                                Alert Date: <b>{{ alerts.date | date:"Y-m-d" }}</b>
                             </p>
                             <p>
                                 Alert Time: <b>{{ alerts.time }}</b>
