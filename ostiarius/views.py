@@ -356,7 +356,7 @@ def alert_report(request, alert_id):
         line_data = []
 
         for i in range(24):
-            line[alerts.time] = Alert.objects.filter(time__hour=i, asset_no=alerts.asset_no).count()
+            line[alerts.time] = Alert.objects.filter(time__hour=i, asset_no=alerts.asset_no, date=alerts.date).count()
             for key, value in line.items():
                 line_data.append(value)
 
