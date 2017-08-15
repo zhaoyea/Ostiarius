@@ -310,9 +310,11 @@ def update_maintenance(request):
         maintain_date = request.POST['maintainDate']
 
         if new_maintain.status:
+            today = datetime.today()
             new_maintain.status = maintain_status
             new_maintain.staff_name = maintain_staff_name
             new_maintain.date = maintain_date
+            new_maintain.return_date = today
             new_maintain.save()
             new_item.maintenance_mode = maintain_status
             new_item.present = True
