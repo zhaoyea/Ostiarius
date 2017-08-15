@@ -50,20 +50,31 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Maintenance Date</label>
-                    <input name="maintainDate" class="form-control" type="date" value="{{ maintain.date|date:"Y-m-d" }}"
-                           max="{{ today|date:"Y-m-d" }}"
-                           required>
+                    <label>Maintenance Date:</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input name="maintainDate" class="form-control" type="date"
+                               value="{{ maintain.date|date:"Y-m-d" }}"
+                               max="{{ today|date:"Y-m-d" }}"
+                               required>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label>Return Date</label>
-                    {% if maintain.return_date is not None %}
-                        <input name="returnDate" class="form-control" type="date"
-                               value="{{ maintain.return_date|date:"Y-m-d" }}"/>
-                    {% else %}
-                        <input name="returnDate" class="form-control" type="date" value="{{ today|date:"Y-m-d" }}"/>
-                    {% endif %}
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        {% if maintain.return_date is not None %}
+                            <input name="returnDate" class="form-control" type="date"
+                                   value="{{ maintain.return_date|date:"Y-m-d" }}"/>
+                        {% else %}
+                            <input name="returnDate" class="form-control" type="date" value="{{ today|date:"Y-m-d" }}" />
+                        {% endif %}
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

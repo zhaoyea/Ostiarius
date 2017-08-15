@@ -31,14 +31,25 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Maintenance Date</label>
-                    <input name="maintain_date" class="form-control" type="date" value="{{ today|date:"Y-m-d" }}"
-                           min="{{ today|date:"Y-m-d" }}" required>
+                    <label>Maintenance Date:</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input name="maintain_date" class="form-control" type="date" value="{{ today|date:"Y-m-d" }}"
+                               min="{{ today|date:"Y-m-d" }}" required>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Return Date</label>
-                    <input name="return_date" class="form-control" type="date" min="{{ today|date:"Y-m-d" }}" required>
+                    <label>Return Date:</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input name="return_date" class="form-control" type="date" min="{{ today|date:"Y-m-d" }}"
+                               required>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
