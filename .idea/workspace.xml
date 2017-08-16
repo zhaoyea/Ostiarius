@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="21a35b72-89ae-476b-814a-084f6b0cc557" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ostiarius/templates/ostiarius/detail.html" afterPath="$PROJECT_DIR$/ostiarius/templates/ostiarius/detail.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ostiarius/templates/ostiarius/camera.html" afterPath="$PROJECT_DIR$/ostiarius/templates/ostiarius/camera.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ostiarius/templates/ostiarius/maintenance.html" afterPath="$PROJECT_DIR$/ostiarius/templates/ostiarius/maintenance.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ostiarius/views.py" afterPath="$PROJECT_DIR$/ostiarius/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,8 +25,48 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="348" column="70" lean-forward="false" selection-start-line="348" selection-start-column="70" selection-end-line="348" selection-end-column="70" />
+            <state relative-caret-position="143">
+              <caret line="54" column="39" lean-forward="false" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="maintenance_update_form.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/maintenance_update_form.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1292">
+              <caret line="76" column="26" lean-forward="true" selection-start-line="76" selection-start-column="26" selection-end-line="76" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="maintenance.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/maintenance.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="302">
+              <caret line="89" column="53" lean-forward="true" selection-start-line="89" selection-start-column="53" selection-end-line="89" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="buttons.html" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Desktop/AdminLTE-2.4.0-rc/pages/UI/buttons.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="449">
+              <caret line="552" column="83" lean-forward="false" selection-start-line="552" selection-start-column="49" selection-end-line="552" selection-end-column="83" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ostiarius/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="255" column="10" lean-forward="false" selection-start-line="255" selection-start-column="4" selection-end-line="255" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -33,7 +75,7 @@
       <file leaf-file-name="detail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
+            <state relative-caret-position="17">
               <caret line="37" column="56" lean-forward="false" selection-start-line="37" selection-start-column="56" selection-end-line="37" selection-end-column="56" />
               <folding />
             </state>
@@ -43,8 +85,18 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Ostiarius_Website/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="523">
+            <state relative-caret-position="425">
               <caret line="88" column="5" lean-forward="true" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="camera.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/camera.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="714">
+              <caret line="50" column="47" lean-forward="false" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -53,7 +105,7 @@
       <file leaf-file-name="alert.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/alert.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
+            <state relative-caret-position="510">
               <caret line="30" column="56" lean-forward="false" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="56" />
               <folding />
             </state>
@@ -74,8 +126,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>500</find>
-      <find>user2</find>
       <find>mess</find>
       <find>favi</find>
       <find>over</find>
@@ -98,12 +148,14 @@
       <find>piS</find>
       <find>Got Alerted today</find>
       <find>update</find>
-      <find>update_main</find>
       <find>Date:</find>
       <find>Checkbox</find>
       <find>minimal</find>
       <find>action</find>
       <find>Horizontal Button Group</find>
+      <find>update_main</find>
+      <find>on Main</find>
+      <find>disa</find>
     </findStrings>
     <dirStrings>
       <dir>D:\SP Year 3\IOT\Assignment\CA2\IOT_CA2</dir>
@@ -137,7 +189,6 @@
         <option value="$PROJECT_DIR$/ostiarius/static/ostiarius/dist/css/style.css" />
         <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/500.html" />
         <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/404.html" />
-        <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/camera.html" />
         <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/push-notifi.html" />
         <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/login.html" />
         <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/mapping.html" />
@@ -154,7 +205,6 @@
         <option value="$PROJECT_DIR$/../../../../IOT/Assignment/CA2/iot_ca2/templates/index.html" />
         <option value="$PROJECT_DIR$/../../../../IOT/Assignment/CA2/iot_ca2/iot_ca2.py" />
         <option value="$PROJECT_DIR$/../../../../IOT/Assignment/CA2/iot_ca2/templates/base.html" />
-        <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/maintenance.html" />
         <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/alert.html" />
         <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/alert_report.html" />
         <option value="$PROJECT_DIR$/ostiarius/admin.py" />
@@ -162,9 +212,11 @@
         <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/base.html" />
         <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/maintenance_update_form.html" />
         <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/assets.html" />
-        <option value="$PROJECT_DIR$/ostiarius/views.py" />
         <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/index.html" />
         <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/detail.html" />
+        <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/camera.html" />
+        <option value="$PROJECT_DIR$/ostiarius/views.py" />
+        <option value="$PROJECT_DIR$/ostiarius/templates/ostiarius/maintenance.html" />
         <option value="$PROJECT_DIR$/Ostiarius_Website/settings.py" />
       </list>
     </option>
@@ -246,8 +298,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -566,13 +618,13 @@
     <frame x="-7" y="2" width="1932" height="1045" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30555555" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30876067" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33333334" sideWeight="0.51282054" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33333334" sideWeight="0.4871795" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33333334" sideWeight="0.4871795" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -769,13 +821,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/maintenance.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1462">
-          <caret line="86" column="98" lean-forward="false" selection-start-line="86" selection-start-column="98" selection-end-line="86" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/json/decoder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="421">
@@ -794,13 +839,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/camera.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="52" column="82" lean-forward="false" selection-start-line="52" selection-start-column="82" selection-end-line="52" selection-end-column="82" />
         </state>
       </provider>
     </entry>
@@ -825,24 +863,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/maintenance_update_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="80" lean-forward="false" selection-start-line="31" selection-start-column="80" selection-end-line="31" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/maintenance_insert_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="867">
           <caret line="51" column="26" lean-forward="false" selection-start-line="45" selection-start-column="20" selection-end-line="51" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/AdminLTE-2.4.0-rc/pages/UI/buttons.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-775">
-          <caret line="789" column="65" lean-forward="true" selection-start-line="789" selection-start-column="51" selection-end-line="789" selection-end-column="65" />
         </state>
       </provider>
     </entry>
@@ -861,14 +885,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ostiarius/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5831">
-          <caret line="355" column="22" lean-forward="false" selection-start-line="355" selection-start-column="22" selection-end-line="355" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/alert_report.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="507">
@@ -876,33 +892,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/index.html">
+    <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/alert.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="348" column="70" lean-forward="false" selection-start-line="348" selection-start-column="70" selection-end-line="348" selection-end-column="70" />
+        <state relative-caret-position="510">
+          <caret line="30" column="56" lean-forward="false" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/alert.html">
+    <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/camera.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="30" column="56" lean-forward="false" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="56" />
+        <state relative-caret-position="714">
+          <caret line="50" column="47" lean-forward="false" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
+        <state relative-caret-position="17">
           <caret line="37" column="56" lean-forward="false" selection-start-line="37" selection-start-column="56" selection-end-line="37" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ostiarius/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="255" column="10" lean-forward="false" selection-start-line="255" selection-start-column="4" selection-end-line="255" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="54" column="39" lean-forward="false" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/maintenance_update_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="76" column="26" lean-forward="true" selection-start-line="76" selection-start-column="26" selection-end-line="76" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/AdminLTE-2.4.0-rc/pages/UI/buttons.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="552" column="83" lean-forward="false" selection-start-line="552" selection-start-column="49" selection-end-line="552" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ostiarius/templates/ostiarius/maintenance.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="89" column="53" lean-forward="true" selection-start-line="89" selection-start-column="53" selection-end-line="89" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Ostiarius_Website/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
+        <state relative-caret-position="425">
           <caret line="88" column="5" lean-forward="true" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
           <folding />
         </state>

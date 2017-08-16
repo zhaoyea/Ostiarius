@@ -78,11 +78,19 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        <button class=".btn.btn-app" data-toggle="modal"
-                                                data-target="#maintain_{{ maintain.id }}"><i
-                                                class="fa fa-edit"></i>
-                                        </button>
-                                        <form role="form" action="{% url 'ostiarius:update_maintenance' %}" method="post">
+                                        {% if maintain.status %}
+                                            <button class=".btn.btn-app" data-toggle="modal"
+                                                    data-target="#maintain_{{ maintain.id }}"><i
+                                                    class="fa fa-edit"></i>
+                                            </button>
+                                        {% else %}
+                                            <button class="btn btn-block btn-default disabled" data-toggle="modal"
+                                                    data-target="#maintain_{{ maintain.id }}"><i
+                                                    class="fa fa-edit"></i>
+                                            </button>
+                                        {% endif %}
+                                        <form role="form" action="{% url 'ostiarius:update_maintenance' %}"
+                                              method="post">
                                             {% csrf_token %}
                                             {% include 'ostiarius/maintenance_update_form.html' %}
                                         </form>
